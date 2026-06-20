@@ -1,0 +1,18 @@
+{
+    "code": "cn_social",
+    "name": {
+        "zh-cn": "国内社交登录",
+        "en": "China Social Login"
+    },
+    "description": {
+        "zh-cn": "国内社交登录：微信、QQ、微博一键登录。基于核心 Laravel Socialite 流程，注册对应驱动并注入配置，复用核心 /social/{provider}/redirect 与 callback。",
+        "en": "China social login: WeChat, QQ, Weibo. Built on the core Laravel Socialite flow by registering providers and injecting config, reusing core /social/{provider}/redirect and callback."
+    },
+    "type": "social",
+    "version": "v1.0.0",
+    "icon": "bi-wechat",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

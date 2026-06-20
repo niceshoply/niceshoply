@@ -1,0 +1,18 @@
+{
+    "code": "membership",
+    "name": {
+        "zh-cn": "会员等级",
+        "en": "Membership"
+    },
+    "description": {
+        "zh-cn": "会员等级体系：按累计消费自动升级，不同等级享受不同折扣，结算时自动应用会员折扣。",
+        "en": "Membership tier system: auto-upgrade by cumulative spending, with per-level discounts applied automatically at checkout."
+    },
+    "type": "marketing",
+    "version": "v1.0.0",
+    "icon": "bi-award",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

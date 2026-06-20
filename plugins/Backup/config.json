@@ -1,0 +1,18 @@
+{
+    "code": "backup",
+    "name": {
+        "zh-cn": "数据备份",
+        "en": "Data Backup"
+    },
+    "description": {
+        "zh-cn": "数据备份：一键执行数据库 mysqldump 备份(自动 gzip 压缩)并存放于 storage/app/backups,后台查看/下载/删除备份文件,支持保留份数自动清理与 backup:run 命令(可加入 cron 定时备份)。",
+        "en": "Data backup: one-click MySQL mysqldump backup (gzip-compressed) stored under storage/app/backups; list/download/delete backups in admin, configurable retention auto-cleanup and a backup:run command (cron-ready)."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-database-down",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

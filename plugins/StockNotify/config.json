@@ -1,0 +1,18 @@
+{
+    "code": "stock_notify",
+    "name": {
+        "zh-cn": "到货与降价提醒",
+        "en": "Restock & Price-Drop Alerts"
+    },
+    "description": {
+        "zh-cn": "到货与降价提醒：会员对缺货/心仪商品登记提醒，当 SKU 补货或价格降到目标价时自动发送站内信；提供 stock:notify 命令与后台一键扫描。",
+        "en": "Restock & price-drop alerts: members subscribe to out-of-stock or wished SKUs and get an in-app message on restock or when price drops to target; ships stock:notify command + admin scan."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-bell",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

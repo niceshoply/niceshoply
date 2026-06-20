@@ -1,0 +1,194 @@
+@extends('console::layouts.app')
+@section('body-class', 'page-product-form')
+@section('title', __('console/menu.products'))
+@section('page-eyebrow', __('console/menu.products'))
+@section('page-subtitle', __('console/product.form_subtitle'))
+
+<x-console::form.right-btns formid="product-form" />
+
+@section('content')
+  <form class="needs-validation no-load" novalidate
+    action="{{ $product->id ? console_route('products.update', [$product->id]) : console_route('products.store') }}"
+    method="POST" id="product-form">
+    @csrf
+    @method($product->id ? 'PUT' : 'POST')
+
+    <div class="row">
+      <div class="col-12 col-md-12">
+        <div class="card mb-3">
+          <div class="card-body">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="basic-tab" data-bs-toggle="tab" data-bs-target="#basic-tab-pane"
+                  type="button" role="tab" aria-controls="basic-tab-pane"
+                  aria-selected="true">{{ __('console/product.basic_information') }}</button>
+              </li>
+              <li class="nav-item" role="presentation" id="bundle-items-tab-nav" style="display:none;">
+                <button class="nav-link" id="bundle-items-tab" data-bs-toggle="tab" data-bs-target="#bundle-items-tab-pane"
+                  type="button" role="tab" aria-controls="bundle-items-tab-pane"
+                  aria-selected="false">{{ __('console/product.bundle_items_tab') }}</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="translation-tab" data-bs-toggle="tab" data-bs-target="#translation-tab-pane"
+                  type="button" role="tab" aria-controls="translation-tab-pane"
+                  aria-selected="false">{{ __('console/product.product_description') }}</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="specification-tab" data-bs-toggle="tab"
+                  data-bs-target="#specification-tab-pane" type="button" role="tab"
+                  aria-controls="specification-tab-pane"
+                  aria-selected="false">{{ __('console/product.specification_attribute') }}</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="options-tab" data-bs-toggle="tab" data-bs-target="#options-tab-pane"
+                  type="button" role="tab" aria-controls="options-tab-pane"
+                  aria-selected="false">{{ __('console/product.product_options') }}</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="extra-tab" data-bs-toggle="tab" data-bs-target="#extra-tab-pane"
+                  type="button" role="tab" aria-controls="extra-tab-pane"
+                  aria-selected="false">{{ __('console/product.extend_information') }}</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="seo-tab" data-bs-toggle="tab" data-bs-target="#seo-tab-pane" type="button"
+                  role="tab" aria-controls="seo-tab-pane" aria-selected="false">{{ __('console/product.seo') }}</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="relation-tab" data-bs-toggle="tab" data-bs-target="#relation-tab-pane"
+                  type="button" role="tab" aria-controls="relation-tab-pane"
+                  aria-selected="false">{{ __('console/product.related_products') }}</button>
+              </li>
+              @hookinsert('console.product.edit.tab.nav.bottom')
+            </ul>
+
+            <div class="tab-content" id="myTabContent">
+              @include('console::products.panes.tab_pane_basic', $product)
+              <div class="tab-pane fade" id="bundle-items-tab-pane" role="tabpanel" aria-labelledby="bundle-items-tab">
+                @include('console::products.panes.tab_pane_bundle_items', $product)
+              </div>
+
+              @include('console::products.panes.tab_pane_content', $product)
+
+              @include('console::products.panes.tab_pane_specification', $product)
+
+              @include('console::products.panes.tab_pane_options', $product)
+
+              @include('console::products.panes.tab_pane_extra', $product)
+
+              @include('console::products.panes.tab_pane_seo', $product)
+
+              @include('console::products.panes.tab_pane_related', $product)
+
+              @hookinsert('console.product.edit.tab.pane.bottom')
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+@endsection
+
+@push('footer')
+  <script>
+    // Product form module
+    const ProductForm = {
+      // Initialize the module
+      init() {
+        this.preventEnterSubmit();
+        this.setupCategorySearch();
+        this.setupPriceTypeToggle();
+        this.setupTypeVariantLinkage();
+      },
+
+      // Prevent form submission on Enter key press
+      preventEnterSubmit() {
+        $('#product-form').on('keypress', function(e) {
+          if (e.which === 13) {
+            e.preventDefault();
+          }
+        });
+      },
+
+      // Setup category search and filtering
+      setupCategorySearch() {
+        $('.category-search input').on('input', function() {
+          const searchValue = $(this).val().trim();
+          const categoryItems = $('.category-select li');
+
+          categoryItems.each(function() {
+            const itemText = $(this).find('.name').text();
+
+            if (itemText.indexOf(searchValue) > -1 && searchValue !== '') {
+              $(this).show();
+              $(this).find('.name').html(itemText.replace(
+                searchValue,
+                '<span style="color: red;">' + searchValue + '</span>'
+              ));
+            } else if (searchValue === '') {
+              $(this).show();
+              $(this).find('.name').text(itemText);
+            } else {
+              $(this).hide();
+            }
+          });
+        });
+      },
+
+      // Setup price type toggle functionality
+      setupPriceTypeToggle() {
+        // Toggle price visibility when radio changes
+        $('input[name="price_type"]').on('change', function() {
+          const isMultiple = $(this).val() === 'multiple';
+          ProductForm.togglePriceVisibility(isMultiple);
+        });
+
+        // Set initial visibility state
+        this.togglePriceVisibility($('#price_type_multiple').is(':checked'));
+      },
+
+      // Toggle price-related elements visibility
+      togglePriceVisibility(isMultiple) {
+        $('#single_price_box').toggleClass('d-none', isMultiple);
+        $('#specifications_box').toggleClass('d-none', !isMultiple);
+      },
+
+      // Type and variant linkage
+      setupTypeVariantLinkage() {
+        $('#product-type').on('change', function() {
+          if ($(this).val() === 'bundle') {
+            // Bundle product only single variant
+            $('#price_type_single').prop('checked', true);
+            $('#price_type_multiple').prop('disabled', true);
+            ProductForm.togglePriceVisibility(false);
+          } else {
+            $('#price_type_multiple').prop('disabled', false);
+          }
+        }).trigger('change');
+      },
+
+      setupBundleTabToggle() {
+        function toggleBundleTab() {
+          if ($('#product-type').val() === 'bundle') {
+            $('#bundle-items-tab-nav').show();
+          } else {
+            $('#bundle-items-tab-nav').hide();
+            if ($('#bundle-items-tab').hasClass('active')) {
+              $('#basic-tab').click();
+            }
+          }
+        }
+        $('#product-type').on('change', toggleBundleTab);
+        toggleBundleTab();
+      },
+    };
+
+    // Initialize when document is ready
+    $(function() {
+      ProductForm.init();
+      ProductForm.setupBundleTabToggle();
+      
+      // Element Plus is initialized in tab_pane_extra.blade.php
+      // No need to initialize it here again
+    });
+  </script>
+@endpush

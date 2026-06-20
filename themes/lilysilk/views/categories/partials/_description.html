@@ -1,0 +1,8 @@
+{nice:if $category->fallbackName('content')}
+  <div class="ls-cat-description">
+    <div class="desc-title ls-tracking-wider">{{ __('front/category.content') }}</div>
+    <div class="desc-body">
+      {!! $category->fallbackName('content') !!}
+    </div>
+  </div>
+{/nice:if}

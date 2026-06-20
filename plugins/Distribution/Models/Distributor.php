@@ -1,0 +1,25 @@
+<?php
+/**
+ * Copyright (c) Since 2024 NiceShoply - All Rights Reserved
+ *
+ * @link       https://www.niceshoply.com
+ * @author     NiceShoply <team@niceshoply.com>
+ * @license    https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ */
+
+namespace Plugin\Distribution\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Distributor extends Model
+{
+    protected $table = 'distributors';
+
+    protected $guarded = [];
+
+    protected $casts = [
+        'total_commission'   => 'float',
+        'settled_commission' => 'float',
+        'active'             => 'boolean',
+    ];
+}

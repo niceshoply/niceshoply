@@ -1,0 +1,334 @@
+{nice:push name="header"}
+<div id="overlay"></div>
+{/nice:push}
+
+<div class="ls-filter-sidebar" id="filterSidebar">
+
+  <div class="ls-sidebar-section">
+    <div class="ls-sidebar-title ls-tracking-wider">{{ __('front/category.category') }}</div>
+    <ul class="ls-sidebar-list" id="filter-category">
+      {nice:foreach $categories as $key => $category}
+        <li class="ls-sidebar-item">
+          <div class="d-flex justify-content-between align-items-center">
+            <a href="{{ $category['url'] }}" class="ls-sidebar-link">{{ $category['name'] }}</a>
+            {nice:if $category['children']}
+              <button class="ls-toggle-btn collapsed" type="button"
+                      data-bs-toggle="collapse" data-bs-target="#ls-filter-collapse-{{ $key }}"
+                      aria-expanded="false"><i class="bi bi-chevron-down"></i></button>
+            {/nice:if}
+          </div>
+          {nice:if $category['children']}
+            <div id="ls-filter-collapse-{{ $key }}" class="collapse">
+              <ul class="ls-sidebar-sublist">
+                {nice:foreach $category['children'] as $child}
+                  <li>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <a href="{{ $child['url'] }}" class="ls-sidebar-link">{{ $child['name'] }}</a>
+                      {nice:if isset($child['children']) && $child['children']}
+                        <button class="ls-toggle-btn collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#ls-filter-collapse-{{ $key }}-{{ $loop->index }}"
+                                aria-expanded="false"><i class="bi bi-chevron-down"></i></button>
+                      {/nice:if}
+                    </div>
+                    {nice:if isset($child['children']) && $child['children']}
+                      <div id="ls-filter-collapse-{{ $key }}-{{ $loop->index }}" class="collapse">
+                        <ul class="ls-sidebar-sublist">
+                          {nice:foreach $child['children'] as $subChild}
+                            <li><a href="{{ $subChild['url'] }}" class="ls-sidebar-link">{{ $subChild['name'] }}</a></li>
+                          {/nice:foreach}
+                        </ul>
+                      </div>
+                    {/nice:if}
+                  </li>
+                {/nice:foreach}
+              </ul>
+            </div>
+          {/nice:if}
+        </li>
+      {/nice:foreach}
+    </ul>
+  </div>
+
+  <div class="ls-sidebar-section">
+    <div class="ls-sidebar-title ls-tracking-wider">{{ __('front/product.price') }}</div>
+    <div class="ls-price-filter">
+      <div class="d-flex gap-2 mb-3">
+        <div class="ls-price-input-wrap">
+          <label>{{ __('front/product.from') }}</label>
+          <input type="number" class="ls-price-input" id="minPrice" placeholder="0" value="{{ $price_filters['min_price'] }}">
+        </div>
+        <div class="ls-price-input-wrap">
+          <label>{{ __('front/product.to') }}</label>
+          <input type="number" class="ls-price-input" id="maxPrice" placeholder="1000" value="{{ $price_filters['max_price'] }}">
+        </div>
+      </div>
+
+      <div class="dual-range-slider">
+        <div class="slider-track"></div>
+        <div class="slider-range"></div>
+        <div class="slider-thumb slider-thumb-min" data-thumb="min"></div>
+        <div class="slider-thumb slider-thumb-max" data-thumb="max"></div>
+      </div>
+
+      <button type="button" class="ls-btn ls-btn-black" style="width:100%;height:40px;font-size:11px;padding:0;" onclick="filterByPrice()">
+        {{ __('front/product.filter') }}
+      </button>
+    </div>
+  </div>
+
+  {nice:if isset($brands) && count($brands) > 0}
+    <div class="ls-sidebar-section">
+      <div class="ls-sidebar-title ls-tracking-wider">{{ __('front/product.brand') }}</div>
+      {nice:foreach $brands as $brand}
+        <label class="ls-checkbox-item">
+          <input class="brand-checkbox" type="checkbox" value="{{ $brand['id'] }}"
+                 id="brand-{{ $brand['id'] }}" {{ $brand['selected'] ? 'checked' : '' }}>
+          <span>{{ $brand['name'] }}</span>
+        </label>
+      {/nice:foreach}
+    </div>
+  {/nice:if}
+
+  {nice:if isset($attributes) && count($attributes) > 0}
+    {nice:foreach $attributes as $attribute}
+      <div class="ls-sidebar-section">
+        <div class="ls-sidebar-title ls-tracking-wider">{{ $attribute['name'] }}</div>
+        {nice:foreach $attribute['values'] as $value}
+          <label class="ls-checkbox-item">
+            <input class="attribute-checkbox" type="checkbox"
+                   value="{{ $value['id'] }}"
+                   data-attribute-id="{{ $attribute['id'] }}"
+                   id="attribute-{{ $attribute['id'] }}-{{ $value['id'] }}"
+                   {{ $value['selected'] ? 'checked' : '' }}>
+            <span>{{ $value['name'] }}</span>
+          </label>
+        {/nice:foreach}
+      </div>
+    {/nice:foreach}
+  {/nice:if}
+
+  <div class="ls-sidebar-section">
+    <div class="ls-sidebar-title ls-tracking-wider">{{ __('front/product.availability') }}</div>
+    <label class="ls-checkbox-item">
+      <input class="availability-checkbox" type="checkbox" value="in_stock"
+             id="availability-in-stock" {{ $availability['in_stock'] ? 'checked' : '' }}>
+      <span>{{ __('front/product.in_stock') }}</span>
+    </label>
+    <label class="ls-checkbox-item">
+      <input class="availability-checkbox" type="checkbox" value="out_of_stock"
+             id="availability-out-of-stock" {{ $availability['out_of_stock'] ? 'checked' : '' }}>
+      <span>{{ __('front/product.out_of_stock') }}</span>
+    </label>
+  </div>
+
+  <button type="button" class="ls-btn ls-btn-outline" style="width:100%;height:40px;font-size:11px;padding:0;" onclick="clearAllFilters()">
+    <i class="bi bi-x-circle me-2"></i>{{ __('front/product.clear_filters') }}
+  </button>
+</div>
+
+{nice:push name="footer"}
+<script>
+  class FilterSidebar {
+    constructor() {
+      this.maxPrice = 1000;
+      this.init();
+    }
+
+    init() {
+      this.initDualRangeSlider();
+      this.bindEvents();
+      this.highlightActiveCategory();
+    }
+
+    getUrlParams() {
+      const url = new URL(window.location);
+      const params = new URLSearchParams(url.search);
+      return { url, params };
+    }
+
+    updateUrl(params) {
+      const { url } = this.getUrlParams();
+      url.search = params.toString();
+      window.location.href = url.toString();
+    }
+
+    updateFilter(paramName, values, isNested = false) {
+      const { params } = this.getUrlParams();
+      if (isNested) {
+        const keysToRemove = [];
+        for (let key of params.keys()) {
+          if (key.startsWith(`${paramName}[`)) keysToRemove.push(key);
+        }
+        keysToRemove.forEach(key => params.delete(key));
+      } else {
+        params.delete(paramName);
+      }
+      if (values && (Array.isArray(values) ? values.length > 0 : Object.keys(values).length > 0)) {
+        if (isNested) {
+          Object.keys(values).forEach(key => {
+            if (values[key].length > 0) params.set(`${paramName}[${key}]`, values[key].join(','));
+          });
+        } else {
+          params.set(paramName, Array.isArray(values) ? values.join(',') : values);
+        }
+      }
+      this.updateUrl(params);
+    }
+
+    initDualRangeSlider() {
+      const slider = document.querySelector('.dual-range-slider');
+      if (!slider) return;
+      const minThumb = slider.querySelector('.slider-thumb-min');
+      const maxThumb = slider.querySelector('.slider-thumb-max');
+      const sliderRange = slider.querySelector('.slider-range');
+      const minInput = document.getElementById('minPrice');
+      const maxInput = document.getElementById('maxPrice');
+      if (!minThumb || !maxThumb || !sliderRange || !minInput || !maxInput) return;
+
+      const urlParams = new URLSearchParams(window.location.search);
+      let minValue = parseInt(urlParams.get('min_price')) || 0;
+      let maxValue = parseInt(urlParams.get('max_price')) || this.maxPrice;
+      minValue = Math.max(0, Math.min(minValue, this.maxPrice));
+      maxValue = Math.max(minValue, Math.min(maxValue, this.maxPrice));
+      minInput.value = minValue;
+      maxInput.value = maxValue;
+      this.updateSliderDisplay(minValue, maxValue, minThumb, maxThumb, sliderRange);
+      this.bindDragEvents(minThumb, maxThumb, sliderRange, minInput, maxInput, slider);
+      this.bindInputEvents(minInput, maxInput, minThumb, maxThumb, sliderRange);
+    }
+
+    updateSliderDisplay(minValue, maxValue, minThumb, maxThumb, sliderRange) {
+      const minPercent = (minValue / this.maxPrice) * 100;
+      const maxPercent = (maxValue / this.maxPrice) * 100;
+      minThumb.style.left = minPercent + '%';
+      maxThumb.style.left = maxPercent + '%';
+      sliderRange.style.left = minPercent + '%';
+      sliderRange.style.right = (100 - maxPercent) + '%';
+    }
+
+    bindDragEvents(minThumb, maxThumb, sliderRange, minInput, maxInput, slider) {
+      let isDragging = false, currentThumb = null;
+      const startDrag = (e, thumb) => {
+        isDragging = true; currentThumb = thumb;
+        document.addEventListener('mousemove', onDrag);
+        document.addEventListener('mouseup', stopDrag);
+        e.preventDefault();
+      };
+      const onDrag = (e) => {
+        if (!isDragging || !currentThumb) return;
+        const rect = slider.getBoundingClientRect();
+        const percent = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+        const value = Math.round((percent / 100) * this.maxPrice);
+        let minValue = parseInt(minInput.value), maxValue = parseInt(maxInput.value);
+        if (currentThumb === minThumb) { minValue = Math.min(value, maxValue); minInput.value = minValue; }
+        else { maxValue = Math.max(value, minValue); maxInput.value = maxValue; }
+        this.updateSliderDisplay(minValue, maxValue, minThumb, maxThumb, sliderRange);
+      };
+      const stopDrag = () => { isDragging = false; currentThumb = null; document.removeEventListener('mousemove', onDrag); document.removeEventListener('mouseup', stopDrag); };
+      minThumb.addEventListener('mousedown', (e) => startDrag(e, minThumb));
+      maxThumb.addEventListener('mousedown', (e) => startDrag(e, maxThumb));
+      minThumb.addEventListener('touchstart', (e) => { e.clientX = e.touches[0].clientX; startDrag(e, minThumb); });
+      maxThumb.addEventListener('touchstart', (e) => { e.clientX = e.touches[0].clientX; startDrag(e, maxThumb); });
+      document.addEventListener('touchmove', (e) => { if (isDragging) { e.clientX = e.touches[0].clientX; onDrag(e); } });
+      document.addEventListener('touchend', stopDrag);
+    }
+
+    bindInputEvents(minInput, maxInput, minThumb, maxThumb, sliderRange) {
+      const update = () => {
+        let minValue = parseInt(minInput.value) || 0, maxValue = parseInt(maxInput.value) || this.maxPrice;
+        minValue = Math.max(0, Math.min(minValue, this.maxPrice));
+        maxValue = Math.max(minValue, Math.min(maxValue, this.maxPrice));
+        minInput.value = minValue; maxInput.value = maxValue;
+        this.updateSliderDisplay(minValue, maxValue, minThumb, maxThumb, sliderRange);
+      };
+      minInput.addEventListener('input', update); maxInput.addEventListener('input', update);
+      minInput.addEventListener('blur', update); maxInput.addEventListener('blur', update);
+    }
+
+    filterByPrice() {
+      const minPrice = $('#minPrice').val(), maxPrice = $('#maxPrice').val();
+      const { params } = this.getUrlParams();
+      params.delete('min_price'); params.delete('max_price');
+      if (minPrice) params.set('min_price', minPrice);
+      if (maxPrice) params.set('max_price', maxPrice);
+      this.updateUrl(params);
+    }
+
+    handleBrandFilter() {
+      const selected = [];
+      $('.brand-checkbox:checked').each(function() { selected.push($(this).val()); });
+      this.updateFilter('brands', selected);
+    }
+
+    handleAttributeFilter(attributeId) {
+      const { params } = this.getUrlParams();
+      const selected = [];
+      $(`.attribute-checkbox[data-attribute-id="${attributeId}"]:checked`).each(function() { selected.push($(this).val()); });
+      params.delete(`attributes[${attributeId}]`);
+      if (selected.length > 0) params.set(`attributes[${attributeId}]`, selected.join(','));
+      this.updateUrl(params);
+    }
+
+    handleAvailabilityFilter() {
+      const selected = [];
+      $('.availability-checkbox:checked').each(function() { selected.push($(this).val()); });
+      this.updateFilter('availability', selected);
+    }
+
+    clearAllFilters() {
+      const { params } = this.getUrlParams();
+      params.delete('min_price'); params.delete('max_price'); params.delete('brands'); params.delete('availability');
+      const keysToRemove = [];
+      for (let key of params.keys()) { if (key.startsWith('attributes[')) keysToRemove.push(key); }
+      keysToRemove.forEach(key => params.delete(key));
+      this.updateUrl(params);
+    }
+
+    toggleSidebar() {
+      if ($(window).width() < 768) {
+        $('#filterSidebar').addClass('open');
+        $('#overlay').show();
+      }
+    }
+
+    highlightActiveCategory() {
+      const currentPath = window.location.pathname;
+      $('#filter-category a').each(function() {
+        const linkPath = new URL($(this).attr('href'), window.location.origin).pathname;
+        if (linkPath === currentPath) {
+          $(this).addClass('active');
+          $(this).parents('li').each(function() {
+            const collapseTarget = $(this).find('[data-bs-toggle="collapse"]').first().attr('data-bs-target');
+            if (collapseTarget) {
+              $(collapseTarget).addClass('show');
+              $(this).find('[data-bs-toggle="collapse"]').first().removeClass('collapsed').attr('aria-expanded', 'true');
+            }
+          });
+        }
+      });
+    }
+
+    bindEvents() {
+      $(document).on('change', '.brand-checkbox', () => this.handleBrandFilter());
+      $(document).on('change', '.attribute-checkbox', (e) => this.handleAttributeFilter($(e.target).data('attribute-id')));
+      $(document).on('change', '.availability-checkbox', () => this.handleAvailabilityFilter());
+      $('#toggleFilterSidebar').on('click', () => this.toggleSidebar());
+      $('#overlay').on('click', () => { $('#filterSidebar').removeClass('open'); $('#overlay').hide(); });
+      $(document).on('click', (event) => {
+        if ($(window).width() < 768 && !$(event.target).closest('#filterSidebar, #toggleFilterSidebar').length) {
+          $('#filterSidebar').removeClass('open'); $('#overlay').hide();
+        }
+      });
+      $(window).resize(() => {
+        if ($(window).width() >= 768) { $('#filterSidebar').removeClass('open'); $('#overlay').hide(); }
+      });
+    }
+  }
+
+  let filterSidebar;
+  function toggleSidebar() { filterSidebar.toggleSidebar(); }
+  function filterByPrice() { filterSidebar.filterByPrice(); }
+  function clearAllFilters() { filterSidebar.clearAllFilters(); }
+  $(document).ready(function() { filterSidebar = new FilterSidebar(); });
+</script>
+{/nice:push}

@@ -1,0 +1,311 @@
+<?php
+/**
+ * Copyright (c) Since 2024 NiceShoply - All Rights Reserved
+ *
+ * @link       https://www.niceshoply.com
+ * @author     NiceShoply <team@niceshoply.com>
+ * @license    https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ */
+
+namespace NiceShoply\Console\Controllers;
+
+use Exception;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use NiceShoply\Common\Models\Product;
+use NiceShoply\Common\Repositories\AttributeRepo;
+use NiceShoply\Common\Repositories\BrandRepo;
+use NiceShoply\Common\Repositories\ProductRepo;
+use NiceShoply\Common\Repositories\TaxClassRepo;
+use NiceShoply\Common\Repositories\WeightClassRepo;
+use NiceShoply\Common\Resources\SkuListItem;
+use NiceShoply\Console\Requests\ProductRequest;
+use NiceShoply\Console\Resources\ProductNameResource;
+use Throwable;
+
+class ProductController extends BaseController
+{
+    /**
+     * @param  Request  $request
+     * @return mixed
+     * @throws Exception
+     */
+    public function index(Request $request): mixed
+    {
+        $filters = $request->all();
+
+        $data = [
+            'criteria'        => ProductRepo::getCriteria(),
+            'sortOptions'     => ProductRepo::getSortOptions(),
+            'products'        => ProductRepo::getInstance()->list($filters),
+            'categoryOptions' => ProductRepo::getCategoryOptions(),
+            'stats'           => $this->indexStats(),
+        ];
+
+        return nice_view('console::products.index', $data);
+    }
+
+    /**
+     * 商品列表页顶部统计卡数据（轻量聚合，避免逐 SKU 库存扫描）。
+     *
+     * @return array<string, int>
+     */
+    protected function indexStats(): array
+    {
+        $total  = Product::query()->count();
+        $active = Product::query()->where('active', 1)->count();
+        $sales  = (int) Product::query()->sum('sales');
+
+        return [
+            'total'    => $total,
+            'active'   => $active,
+            'inactive' => $total - $active,
+            'sales'    => $sales,
+        ];
+    }
+
+    /**
+     * Product creation page.
+     *
+     * @return mixed
+     * @throws Exception
+     */
+    public function create(): mixed
+    {
+        return $this->form(new Product);
+    }
+
+    /**
+     * @param  ProductRequest  $request
+     * @return RedirectResponse
+     * @throws Throwable
+     */
+    public function store(ProductRequest $request): RedirectResponse
+    {
+        try {
+            $data    = $request->all();
+            $product = ProductRepo::getInstance()->create($data);
+
+            return redirect(console_route('products.index', ['sort' => 'updated_at', 'order' => 'desc']))
+                ->with('instance', $product)
+                ->with('success', console_trans('common.saved_success'));
+        } catch (Exception $e) {
+            return redirect(console_route('products.index'))
+                ->withInput()
+                ->withErrors(['error' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param  Product  $product
+     * @return mixed
+     * @throws Exception
+     */
+    public function edit(Product $product): mixed
+    {
+        return $this->form($product);
+    }
+
+    /**
+     * 处理产品选项数据，为Vue3组件准备JSON格式数据
+     *
+     * @param  $product
+     * @return array
+     */
+    private function prepareProductOptionsData(Product $product): array
+    {
+        $existingProductOptions = [];
+        $existingOptionValues   = [];
+
+        if ($product->id) {
+            // Prepare existing product option data - use correct relationships
+            if ($product->productOptions && $product->productOptions->count() > 0) {
+                foreach ($product->productOptions as $productOption) {
+                    $existingProductOptions[] = [
+                        'option_id'           => $productOption->option_id,
+                        'name'                => $productOption->option->getLocalizedName(),
+                        'type'                => $productOption->option->type,
+                        'option_values_count' => $productOption->option->optionValues->count(),
+                        'required'            => $productOption->option->required,
+                        'position'            => $productOption->position,
+                    ];
+                }
+            }
+
+            // Prepare existing option value configuration data
+            if ($product->productOptionValues && $product->productOptionValues->count() > 0) {
+                foreach ($product->productOptionValues as $productOptionValue) {
+                    $existingOptionValues[] = [
+                        'option_id'        => $productOptionValue->option_id,
+                        'option_value_id'  => $productOptionValue->option_value_id,
+                        'price_adjustment' => $productOptionValue->price_adjustment,
+                        'stock_quantity'   => $productOptionValue->quantity,
+                    ];
+                }
+            }
+        }
+
+        return [
+            'existingProductOptions' => $existingProductOptions,
+            'existingOptionValues'   => $existingOptionValues,
+        ];
+    }
+
+    /**
+     * @param  $product
+     * @return mixed
+     * @throws Exception
+     */
+    public function form($product): mixed
+    {
+        // Preload related product relationships
+        if ($product->id) {
+            $product->load([
+                'relations.relationProduct.translation',
+                'productOptions.option.optionValues',
+                'productOptionValues.option',
+                'productOptionValues.optionValue',
+            ]);
+        }
+
+        $skus = SkuListItem::collection($product->skus)->jsonSerialize();
+
+        $attributeData = AttributeRepo::getInstance()->getAttributesWithValues();
+
+        $categories = ProductRepo::getCategoryOptions();
+
+        // Process complete data for selected related products
+        $selectedRelatedProducts = [];
+        if ($product->id && $product->relations) {
+            $selectedRelatedProducts = ProductNameResource::collection(
+                $product->relations->pluck('relationProduct')
+            )->toArray(request());
+        }
+
+        // Prepare product option data
+        $productOptionsData = $this->prepareProductOptionsData($product);
+
+        $data = [
+            'product'                 => $product,
+            'skus'                    => $skus,
+            'categories'              => $categories,
+            'brands'                  => BrandRepo::getInstance()->all()->toArray(),
+            'tax_classes'             => TaxClassRepo::getInstance()->all()->toArray(),
+            'weightClasses'           => WeightClassRepo::getInstance()->withActive()->all()->toArray(),
+            'attribute_count'         => $product->productAttributes->count(),
+            'all_attributes'          => $attributeData,
+            'selectedRelatedProducts' => $selectedRelatedProducts,
+            'existingProductOptions'  => $productOptionsData['existingProductOptions'],
+            'existingOptionValues'    => $productOptionsData['existingOptionValues'],
+        ];
+
+        return nice_view('console::products.form', $data);
+    }
+
+    /**
+     * @param  ProductRequest  $request
+     * @param  Product  $product
+     * @return RedirectResponse
+     * @throws Throwable
+     */
+    public function update(ProductRequest $request, Product $product): RedirectResponse
+    {
+        try {
+            $data = $request->all();
+            ProductRepo::getInstance()->update($product, $data);
+
+            return redirect(console_route('products.index', ['sort' => 'updated_at', 'order' => 'desc']))
+                ->with('instance', $product)
+                ->with('success', console_trans('common.updated_success'));
+        } catch (Exception $e) {
+            return redirect(console_route('products.edit', $product))
+                ->withInput()
+                ->withErrors(['error' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param  Product  $product
+     * @return RedirectResponse
+     */
+    public function destroy(Product $product): RedirectResponse
+    {
+        try {
+            ProductRepo::getInstance()->destroy($product);
+
+            return back()->with('success', console_trans('common.deleted_success'));
+        } catch (Exception $e) {
+            return back()->withErrors(['error' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param  Product  $product
+     * @return RedirectResponse
+     */
+    public function copy(Product $product): RedirectResponse
+    {
+        try {
+            ProductRepo::getInstance()->copy($product);
+
+            return back()->with('success', console_trans('common.saved_success'));
+        } catch (Exception $e) {
+            return back()->withErrors(['error' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * Bulk update products
+     *
+     * @param  Request  $request
+     * @return mixed
+     */
+    public function bulkUpdate(Request $request): mixed
+    {
+        try {
+            $action = $request->input('action');
+            $ids    = $request->input('ids', []);
+            $data   = $request->input('data', []);
+
+            // Validate required parameters
+            if (empty($action) || empty($ids)) {
+                return json_fail(__('console/common.invalid_parameters'));
+            }
+
+            // Validate action type
+            $allowedActions = ['price', 'categories', 'quantity', 'publish', 'unpublish'];
+            if (! in_array($action, $allowedActions)) {
+                return json_fail(__('console/common.invalid_action'));
+            }
+
+            $result = ProductRepo::getInstance()->bulkUpdate($ids, $action, $data);
+
+            return json_success(__('console/product.bulk_update_success', ['count' => $result['count']]));
+        } catch (Exception $e) {
+            return json_fail($e->getMessage());
+        }
+    }
+
+    /**
+     * Bulk destroy products
+     *
+     * @param  Request  $request
+     * @return mixed
+     */
+    public function bulkDestroy(Request $request): mixed
+    {
+        try {
+            $ids = $request->input('ids', []);
+
+            if (empty($ids)) {
+                return json_fail(__('console/common.select_items'));
+            }
+
+            $deletedCount = ProductRepo::getInstance()->bulkDestroy($ids);
+
+            return json_success(__('console/product.bulk_delete_success', ['count' => $deletedCount]));
+        } catch (Exception $e) {
+            return json_fail($e->getMessage());
+        }
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "code": "lucky_draw",
+    "name": {
+        "zh-cn": "抽奖转盘",
+        "en": "Lucky Draw"
+    },
+    "description": {
+        "zh-cn": "抽奖转盘：配置奖品(谢谢参与/积分/优惠券)与中奖权重、库存，按每日抽奖次数限制让会员抽奖。中积分自动入账(复用 Points)，中券自动发放到券包(复用 Coupon/CouponCenter 券池)，含中奖记录与统计。前台抽奖 API。",
+        "en": "Lucky draw: configure prizes (thanks/points/coupon) with weights and stock, limit draws per day per member. Points are credited via Points; coupons issued into the claim pool; with draw records and stats. Storefront draw API."
+    },
+    "type": "marketing",
+    "version": "v1.0.0",
+    "icon": "bi-dice-5",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

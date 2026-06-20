@@ -1,0 +1,308 @@
+/*
+ * ============================================================
+ * 【文件说明】分类商品列表页样式文件
+ * 【对应模板】resources/views/categories.blade.php（商品分类/搜索结果列表页）
+ * ============================================================
+ *
+ * 【关键 CSS 类】
+ *   body.page-categories                - 分类页 body 作用域
+ *   .top-order-wrap                     - 顶部排序/视图切换工具栏（带底部分隔线）
+ *     .right .order-item                - 排序选项容器（含下拉选择和视图图标）
+ *       .form-select                    - 排序下拉框（去除边框）
+ *       .order-icon                     - 视图切换图标（网格/列表），active 时灰色背景
+ *   .product-grid-item .wishlist-container - 商品卡片左上角收藏按钮（hover 时显示）
+ *   .product-grid-item .add-wishlist    - 收藏按钮样式（半透明黑色背景）
+ *   .filter-sidebar（第一个定义）       - 筛选侧边栏基础样式（移动端 fixed 右侧抽屉）
+ *     .filter-sidebar-item              - 单个筛选项区块（含标题和内容）
+ *       .price-range                    - 价格区间筛选区域
+ *         .price-slider                 - 双滑块价格轨道容器
+ *           .slider-track               - 价格轨道背景条（橙色 #ff6b35）
+ *           input[type="range"]         - 滑块原生输入，自定义样式（橙色圆形拇指）
+ *         .price-inputs                 - 价格最小/最大值手动输入区
+ *       #filter-category                - 分类手风琴筛选组件
+ *         .accordion-title              - 分类手风琴行（含链接和展开按钮）
+ *
+ * 【移动端行为】
+ *   768px 以下，.filter-sidebar 以 fixed 定位从右侧滑入（translateX 动画）
+ *
+ * 【注意】
+ *   本文件中 .filter-sidebar 的样式与 filter-sidebar.scss 中的样式共同生效，
+ *   两者会合并，filter-sidebar.scss 提供更完整的版本。
+ *
+ * 【自定义建议】
+ *   - 价格滑块颜色（#ff6b35 橙色）可修改为 $primary 使其与主题色一致
+ *   - .add-wishlist 按钮的背景色可按需调整（当前半透明黑色）
+ * ============================================================
+ */
+
+body.page-categories {
+  .top-order-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 26px;
+
+    .right {
+      display: flex;
+      align-items: center;
+
+      @media (max-width: 768px) {
+        justify-content: space-between;
+        width: 100%;
+      }
+
+      .order-item {
+        display: flex;
+        align-items: center;
+        border-right: 1px solid #eee;
+        padding-right: 10px;
+        margin-right: 10px;
+
+        span {
+          color: #777;
+          width: 100%;
+        }
+
+        &:last-child {
+          border-right: none;
+          padding-right: 0;
+          margin-right: 0;
+        }
+
+        .form-select {
+          border: none;
+          padding-top: 0;
+          padding-bottom: 0;
+        }
+
+        .order-icon {
+          color: #333;
+          font-size: 20px;
+          margin-left: 10px;
+          padding: 0 6px;
+
+          &.active {
+            background-color: #eee;
+          }
+        }
+      }
+    }
+  }
+}
+
+.product-grid-item {
+  .wishlist-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 2;
+    display: none;
+  }
+
+  .image:hover .wishlist-container {
+    display: block;
+  }
+
+  .add-wishlist {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+
+    i {
+      margin-right: 5px;
+    }
+  }
+}
+
+.filter-sidebar {
+  
+  .filter-sidebar-item {
+    margin-bottom: 20px;
+
+    @media (min-width: 768px) {
+      margin-bottom: 40px;
+    }
+
+    .title {
+      font-weight: bold;
+      font-size: 20px;
+      margin-bottom: 14px;
+    }
+   // 价格筛选样式
+   .price-range {
+    .price-slider {
+      position: relative;
+      height: 40px;
+      margin-bottom: 15px;
+
+      .slider-track {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 6px;
+        background: #ff6b35;
+        border-radius: 3px;
+        transform: translateY(-50%);
+      }
+
+      input[type="range"] {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 6px;
+        background: transparent;
+        pointer-events: none;
+        appearance: none;
+        transform: translateY(-50%);
+
+        &::-webkit-slider-thumb {
+          appearance: none;
+          width: 20px;
+          height: 20px;
+          background: #ff6b35;
+          border-radius: 50%;
+          cursor: pointer;
+          pointer-events: auto;
+          border: 3px solid #fff;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+
+        &::-moz-range-thumb {
+          width: 20px;
+          height: 20px;
+          background: #ff6b35;
+          border-radius: 50%;
+          cursor: pointer;
+          pointer-events: auto;
+          border: 3px solid #fff;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+
+        &.slider-min {
+          z-index: 2;
+        }
+
+        &.slider-max {
+          z-index: 1;
+        }
+      }
+    }
+
+    .price-inputs {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 15px;
+
+      .price-input-group {
+        flex: 1;
+
+        label {
+          display: block;
+          font-size: 13px;
+          color: #6c757d;
+          margin-bottom: 6px;
+          font-weight: normal;
+        }
+
+        input {
+          width: 100%;
+          padding: 8px 10px;
+          border: 1px solid #ced4da;
+          border-radius: 4px;
+          font-size: 14px;
+          background: #fff;
+
+          &:focus {
+            outline: none;
+            border-color: #ff6b35;
+            box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.25);
+          }
+
+          &::placeholder {
+            color: #adb5bd;
+          }
+        }
+      }
+    }
+
+    .btn {
+      width: 100%;
+      background-color: #ff6b35;
+      border-color: #ff6b35;
+      font-size: 14px;
+      padding: 10px 16px;
+      font-weight: 500;
+
+      &:hover {
+        background-color: #e55a2b;
+        border-color: #e55a2b;
+      }
+
+      &:focus {
+        box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.25);
+      }
+    }
+  }
+
+    #filter-category {
+      > .accordion-item {
+        > .accordion-title {
+          padding: 4px 0;
+        }
+      }
+
+      .accordion-item {
+        border: none;
+
+        .accordion-title {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          min-height: 30px;
+
+          > a {
+            color: #222;
+          }
+
+          .accordion-button {
+            width: 30px;
+            height: 30px;
+            box-shadow: none;
+            background-color: transparent !important;
+
+            &::after {
+              --bs-accordion-btn-icon-width: .8rem;
+              opacity: .7;
+            }
+          }
+        }
+
+        .accordion-body {
+          padding: 0;
+          padding-left: 14px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 50%; 
+    height: 100%;
+    background: white;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 1050; 
+    padding-left: 20px;
+    padding-top: 20px;
+  }
+}

@@ -1,0 +1,18 @@
+{
+    "code": "wholesale",
+    "name": {
+        "zh-cn": "批发/阶梯价",
+        "en": "Wholesale / Tiered Pricing"
+    },
+    "description": {
+        "zh-cn": "批发阶梯价：为 SKU 设置「满 N 件单价更低」的多档阶梯价，结算时按购买数量自动取最优档位并以结算费用项抵扣差价，前台商详可展示阶梯价表。",
+        "en": "Wholesale tiered pricing: set multiple quantity tiers (lower unit price at higher qty) per SKU; checkout auto-applies the best tier as a discount fee, with a price table for product pages."
+    },
+    "type": "marketing",
+    "version": "v1.0.0",
+    "icon": "bi-boxes",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

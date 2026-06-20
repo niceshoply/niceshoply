@@ -1,0 +1,68 @@
+/*
+ * ============================================================
+ * 【文件说明】面包屑导航样式文件
+ * 【对应模板】resources/views/components/breadcrumb.blade.php（或各页面内嵌的面包屑区域）
+ * ============================================================
+ *
+ * 【关键 CSS 类】
+ *   .breadcrumb-wrap        - 面包屑外层容器，带背景图（breadcrumb-bg.jpg），
+ *                             背景图覆盖整个区域，桌面端有上下内边距
+ *   .breadcrumb-wrap .breadcrumb - 面包屑列表，水平左对齐排列
+ *   .breadcrumb-wrap li     - 每个面包屑项，大写字母显示（text-transform: uppercase）
+ *   .breadcrumb-wrap li a   - 面包屑链接，深色文字（#333），无下划线
+ *   .breadcrumb-wrap .home-icon - 首页图标（位于第一个面包屑项内）
+ *   li:not(:last-child)::after  - 面包屑分隔符（> 符号）
+ *
+ * 【自定义建议】
+ *   - 替换 background-image 中的 breadcrumb-bg.jpg 可更换面包屑背景图片
+ *   - 修改 li a color 可自定义链接颜色（当前为 #333 深灰色）
+ *   - 可将 text-transform: uppercase 改为 none 以关闭大写字母效果
+ *   - 分隔符 > 可改为其他符号（如 / 或 » 等）
+ * ============================================================
+ */
+
+.breadcrumb-wrap {
+  // 背景图
+  background-image: url('/images/icons/breadcrumb-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-bottom: 14px;
+
+  @media (min-width: 768px) {
+    padding: 20px 0;
+    margin-bottom: 30px;
+  }
+
+  .breadcrumb {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 0;
+
+    li {
+      font-size: 14px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      line-height: 1;
+
+      a {
+        text-decoration: none;
+        color: #333;
+      }
+
+      .home-icon {
+        margin-right: 4px;
+      }
+
+      &:not(:last-child) {
+        margin-right: 10px;
+        &::after {
+          content: '>';
+          margin: 0 10px;
+        }
+      }
+    }
+  }
+}

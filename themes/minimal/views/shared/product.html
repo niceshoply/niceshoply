@@ -1,0 +1,57 @@
+{nice:if $product->fallbackName()}
+  <div class="mn-product">
+    <div class="img-wrap">
+      {nice:hook "product.list_item.image.before"}
+
+      {-- Sale Badge --}
+      {nice:if $product->masterSku->origin_price && $product->masterSku->origin_price > $product->masterSku->getFinalPrice()}
+        {nice:php}
+          $discount = round((1 - $product->masterSku->getFinalPrice() / $product->masterSku->origin_price) * 100);
+        {/nice:php}
+        {nice:if $discount > 0}
+          <span class="mn-badge mn-badge-sale">-{{ $discount }}%</span>
+        {/nice:if}
+      {/nice:if}
+
+      {-- Wishlist --}
+      <div class="mn-wishlist add-wishlist" data-in-wishlist="{{ $product->hasFavorite() }}"
+           data-id="{{ $product->id }}" data-price="{{ $product->masterSku->price }}">
+        <i class="bi bi-heart{{ $product->hasFavorite() ? '-fill' : '' }}"></i>
+      </div>
+
+      {-- Image --}
+      <a href="{{ $product->url }}">
+        <img src="{{ $product->image_url }}" alt="{{ $product->fallbackName() }}">
+      </a>
+    </div>
+
+    <div class="info">
+      {nice:hook "product.list_item.name.after"}
+
+      <div class="name">
+        <a href="{{ $product->url }}">{{ $product->fallbackName() }}</a>
+      </div>
+
+      <div class="price">
+        {nice:if $product->masterSku->origin_price && $product->masterSku->origin_price > $product->masterSku->getFinalPrice()}
+          <span class="sale">{{ $product->masterSku->getFinalPriceFormat() }}</span>
+          <span class="old">{{ $product->masterSku->origin_price_format }}</span>
+        {nice:else}
+          {{ $product->masterSku->getFinalPriceFormat() }}
+        {/nice:if}
+      </div>
+
+      {-- Color Swatches --}
+      {nice:if $product->skus && $product->skus->count() > 1}
+        <div class="mn-swatches">
+          {nice:foreach $product->skus->take(4) as $sku}
+            <span class="mn-swatch {{ $loop->first ? 'active' : '' }}" style="background:{{ $sku->color ?? '#EEE' }};" title="{{ $sku->code }}"></span>
+          {/nice:foreach}
+          {nice:if $product->skus->count() > 4}
+            <span class="mn-swatch-more">+{{ $product->skus->count() - 4 }}</span>
+          {/nice:if}
+        </div>
+      {/nice:if}
+    </div>
+  </div>
+{/nice:if}

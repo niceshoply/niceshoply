@@ -1,0 +1,18 @@
+{
+    "code": "wechat_mp",
+    "name": {
+        "zh-cn": "公众号/小程序",
+        "en": "WeChat MP / Mini Program"
+    },
+    "description": {
+        "zh-cn": "微信公众号/小程序：基于 EasyWeChat 实现小程序一键登录(code2session 自动建会员并签发 token)、公众号服务端接入与关键词自动回复、JS-SDK 签名配置。需安装 EasyWeChat 并填入 AppID/Secret 等凭证。",
+        "en": "WeChat Official Account / Mini Program (EasyWeChat-based): mini-program one-tap login (code2session auto-creates a customer and issues a token), OA server access with keyword auto-reply, and JS-SDK signature config. Requires EasyWeChat and credentials."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-wechat",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

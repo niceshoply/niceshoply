@@ -1,0 +1,18 @@
+{
+    "code": "smart_recommend",
+    "name": {
+        "zh-cn": "智能推荐",
+        "en": "Smart Recommend"
+    },
+    "description": {
+        "zh-cn": "智能推荐：记录浏览足迹，提供「猜你喜欢/看了又看/买了又买/最近浏览」多坑位推荐 API。看了又看基于浏览共现、买了又买基于订单共现，并以销量热销兜底，个性化「猜你喜欢」按近期浏览品类聚合，前台直接调用。",
+        "en": "Smart recommendations: track browsing footprints and expose multi-slot APIs (for-you / viewed-also-viewed / bought-together / recently-viewed). Co-view and co-purchase based ranking with best-seller fallback, plus category-aware personalization."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-stars",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

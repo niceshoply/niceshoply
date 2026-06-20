@@ -1,0 +1,12 @@
+{
+    "code": "multi_currency",
+    "name": {"zh-cn": "多币种", "en": "Multi Currency"},
+    "description": {
+        "zh-cn": "多币种增强：复用核心 currencies 表，支持 HTTP 刷新汇率、地区默认币种映射、前台切换币种与金额换算 API。",
+        "en": "Multi-currency: reuses core currencies table, HTTP rate refresh, region defaults, storefront switch & convert APIs."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-currency-exchange",
+    "author": {"name": "NiceShoply", "email": "team@niceshoply.com"}
+}

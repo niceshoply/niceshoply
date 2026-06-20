@@ -1,0 +1,22 @@
+{nice:if $category->activeChildren && $category->activeChildren->count() > 0}
+  <div class="mn-subcategories">
+    <div class="mn-subcat-title">{{ __('front/category.subcategories') }}</div>
+    <div class="mn-subcat-grid">
+      {nice:foreach $category->activeChildren as $subcategory}
+        <a href="{{ $subcategory->url }}" class="mn-subcat-item">
+          {nice:if $subcategory->image}
+            <div class="subcat-img">
+              <img src="{{ image_resize($subcategory->image, 120, 120) }}" alt="{{ $subcategory->fallbackName('name') }}">
+            </div>
+          {/nice:if}
+          <div class="subcat-info">
+            <span class="subcat-name">{{ $subcategory->fallbackName('name') }}</span>
+            {nice:if $subcategory->products_count > 0}
+              <span class="subcat-count">{{ $subcategory->products_count }} {{ __('front/category.products_count') }}</span>
+            {/nice:if}
+          </div>
+        </a>
+      {/nice:foreach}
+    </div>
+  </div>
+{/nice:if}

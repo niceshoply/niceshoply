@@ -1,0 +1,25 @@
+<?php
+/**
+ * Copyright (c) Since 2024 NiceShoply - All Rights Reserved
+ *
+ * @link       https://www.niceshoply.com
+ * @author     NiceShoply <team@niceshoply.com>
+ * @license    https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ */
+
+return [
+    'add_to_cart' => 'в корзину',
+    'cart'        => 'корзина',
+    'cart_total'  => 'итого в корзине',
+    'continue'    => 'продолжить покупки',
+    'empty_cart'  => 'ваша корзина пуста',
+    'go_checkout' => 'перейти к оплате',
+    'price'       => 'цена',
+    'product'     => 'продукт',
+    'quantity'    => 'количество',
+    'select_all'  => 'выбира',
+    'selected'    => 'выбрано',
+    'subtotal'    => 'подсчет',
+    'total'       => 'итого',
+    'view_cart'   => 'Залезай в тележку',
+];

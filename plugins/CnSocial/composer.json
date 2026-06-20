@@ -1,0 +1,8 @@
+{
+  "require": {
+    "socialiteproviders/weixin": "^4.1",
+    "socialiteproviders/weixin-web": "^4.1",
+    "socialiteproviders/qq": "^4.1",
+    "socialiteproviders/weibo": "^4.1"
+  }
+}

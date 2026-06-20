@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ front_locale_direction() }}">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="{{ front_route('home.index') }}">
+  <title>{nice:yield name="title" default=system_setting_locale('meta_title','LILYSILK - Premium Silk Fashion')}</title>
+  <meta name="description" content="{nice:yield name="description" default=system_setting_locale('meta_description','')}">
+  <meta name="keywords" content="{nice:yield name="keywords" default=system_setting_locale('meta_keywords','')}">
+  <meta name="generator" content="NiceShoply {{ niceshoply_version() }}">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta name="api-token" content="{{ session('front_api_token') }}">
+  <link rel="shortcut icon" href="{{ image_origin(system_setting('favicon', 'images/favicon.png')) }}">
+
+  {-- Google Fonts --}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  {-- Bootstrap & Core --}
+  <link rel="stylesheet" href="{{ build_asset('front/css/bootstrap.css') }}">
+  <script src="{{ build_asset('front/js/app.js') }}"></script>
+  <script src="{{ asset('vendor/jquery/jquery-3.7.1.min.js') }}"></script>
+  <script src="{{ asset('vendor/layer/3.5.1/layer.js') }}"></script>
+  <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <link rel="stylesheet" href="{{ build_asset('front/css/app.css') }}">
+
+  {-- Theme CSS --}
+  <link rel="stylesheet" href="{{ theme_css('theme') }}">
+
+  <script>
+    const urls = {
+      front_api: '{{ route('api.home.base') }}',
+      front_base: '{{ front_route('home.index') }}',
+      front_upload: '{{ front_root_route('upload.images') }}',
+      front_cart_add: '{{ front_route('carts.store') }}',
+      front_cart_mini: '{{ front_route('carts.mini') }}',
+      front_cart: '{{ front_route('carts.index') }}',
+      front_checkout: '{{ front_route('checkout.index') }}',
+      front_login: '{{ front_route('login.index') }}',
+      front_favorites: '{{ account_route('favorites.index') }}',
+      front_favorite_cancel: '{{ account_route('favorites.cancel') }}',
+    };
+
+    const config = {
+      isLogin: !!{{ current_customer()->id ?? 'null' }},
+      currency: {
+        code: '{{ current_currency_code() }}',
+        symbol_left: '{{ current_currency()?->symbol_left ?? "$" }}',
+        symbol_right: '{{ current_currency()?->symbol_right ?? "" }}',
+        decimal_place: {{ current_currency()?->decimal_place ?? 2 }},
+        rate: {{ current_currency()?->value ?? 1 }}
+      }
+    };
+
+    const asset_url = '{{ asset('') }}';
+  </script>
+  {nice:stack name="header"}
+  {nice:hook "front.layout.app.head.bottom"}
+</head>
+
+<body class="lilysilk-theme {nice:yield name="body-class"}">
+  {nice:if !request('iframe')}
+    <x-front-header />
+  {/nice:if}
+
+  <div class="m-0 p-0" id="appContent">
+    {nice:yield name="content"}
+  </div>
+
+  {nice:if !request('iframe')}
+    <x-front-footer />
+  {/nice:if}
+
+  {nice:if !request('iframe')}
+    {nice:include "components.mini-cart"}
+  {/nice:if}
+
+  {nice:stack name="footer"}
+</body>
+
+</html>

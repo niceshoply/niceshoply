@@ -1,0 +1,14 @@
+# =============================================================================
+# NiceShoply 计划任务（Crontab 样例）
+# 对应《NiceShoply改进任务清单》§4.2
+# -----------------------------------------------------------------------------
+# 安装方式：
+#   crontab -u www-data -e
+# 然后加入下面这一行（将 /path/to 替换为真实部署路径）。
+#
+# Laravel 调度器只需这一条 cron，其余定时任务在 routes/console.php /
+# bootstrap/app.php 的 schedule 中声明，由 schedule:run 统一驱动：
+#   - order:complete          每日 02:00 自动完成订单
+#   - warehouse:stock-warning 每小时低库存预警
+# =============================================================================
+* * * * * cd /path/to/niceshoply && php artisan schedule:run >> /dev/null 2>&1

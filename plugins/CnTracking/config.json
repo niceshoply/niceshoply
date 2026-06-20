@@ -1,0 +1,18 @@
+{
+    "code": "cn_tracking",
+    "name": {
+        "zh-cn": "物流轨迹",
+        "en": "Logistics Tracking"
+    },
+    "description": {
+        "zh-cn": "国内物流轨迹查询：对接快递鸟 / 快递100，输入快递公司与运单号即可返回标准化的物流轨迹，含签名与状态归一化。",
+        "en": "China logistics tracking: integrates Kdniao / Kuaidi100. Query traces by carrier code and waybill number, returns normalized tracking timeline with provider signing."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-truck",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

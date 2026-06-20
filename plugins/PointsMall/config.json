@@ -1,0 +1,18 @@
+{
+    "code": "points_mall",
+    "name": {
+        "zh-cn": "积分商城",
+        "en": "Points Mall"
+    },
+    "description": {
+        "zh-cn": "积分商城：用积分兑换实物/虚拟商品或优惠券，支持兑换库存、每人限兑、积分+现金混合兑换，兑换记录与发货管理，扣分通过积分插件完成。",
+        "en": "Points mall: redeem points for goods/coupons with stock & per-user limits, points+cash combos, redemption records and fulfillment; points are deducted via the Points plugin."
+    },
+    "type": "marketing",
+    "version": "v1.0.0",
+    "icon": "bi-gift",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

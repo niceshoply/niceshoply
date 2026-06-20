@@ -1,0 +1,18 @@
+{
+    "code": "group_buy",
+    "name": {
+        "zh-cn": "拼团",
+        "en": "Group Buy"
+    },
+    "description": {
+        "zh-cn": "拼团活动：按 SKU 设置拼团价与成团人数，支持开团/参团、限时成团与自动失败。成团价在结算时按差价自动抵扣。",
+        "en": "Group buy: set per-SKU group price and required size. Supports open/join, time-limited success and auto-fail. Group price gap is auto-deducted at checkout."
+    },
+    "type": "marketing",
+    "version": "v1.0.0",
+    "icon": "bi-people",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

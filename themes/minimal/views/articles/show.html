@@ -1,0 +1,114 @@
+{nice:extends layout="app"}
+{nice:section name="body-class" value="page-news-details"}
+
+@section('title', \NiceShoply\Common\Libraries\MetaInfo::getInstance($article)->getTitle())
+@section('description', \NiceShoply\Common\Libraries\MetaInfo::getInstance($article)->getDescription())
+@section('keywords', \NiceShoply\Common\Libraries\MetaInfo::getInstance($article)->getKeywords())
+
+{nice:section name="content"}
+
+  <div class="mn-container">
+    <div class="mn-breadcrumb">
+      <a href="{{ front_route('home.index') }}">{{ __('front/common.home') }}</a>
+      <span class="sep">/</span>
+      <a href="{{ front_route('articles.index') }}">{{ __('front/article.articles') }}</a>
+      <span class="sep">/</span>
+      <span class="current">{{ $article->translation->title }}</span>
+    </div>
+
+    {nice:hook "article.show.top"}
+
+    <div class="mn-article-layout">
+      <div class="mn-article-main">
+        <article>
+          <h1 class="mn-article-title">{{ $article->translation->title }}</h1>
+
+          <div class="mn-article-meta">
+            <span><i class="bi bi-clock"></i> {{ $article->created_at->format('Y-m-d') }}</span>
+            {nice:if $article->author}
+              <span><i class="bi bi-person"></i> {{ $article->author }}</span>
+            {/nice:if}
+            <span><i class="bi bi-eye"></i> {{ $article->viewed }}</span>
+            {nice:if $article->catalog->translation ?? ''}
+              <span><i class="bi bi-folder"></i> {{ $article->catalog->translation->title }}</span>
+            {/nice:if}
+          </div>
+
+          {nice:if $article->tags->count()}
+            <div class="mn-article-tags">
+              {nice:foreach $article->tags as $tag}
+                <a href="{{ $tag->url }}" class="mn-tag">{{ $tag->translation->name }}</a>
+              {/nice:foreach}
+            </div>
+          {/nice:if}
+
+          <div class="mn-article-body">
+            {nice:hook "article.show.content.before"}
+            {!! $article->translation->content !!}
+            {nice:hook "article.show.content.after"}
+          </div>
+        </article>
+
+        {nice:if isset($relatedProducts) && $relatedProducts->count()}
+          <div class="mn-related-products">
+            <div class="mn-section-eyebrow" style="text-align:left;">{{ __('front/article.related_products') }}</div>
+            <div class="row gx-3 gy-4">
+              {nice:foreach $relatedProducts as $product}
+                <div class="col-6 col-md-3">
+                  {nice:include "shared.product"}
+                </div>
+              {/nice:foreach}
+            </div>
+          </div>
+        {/nice:if}
+      </div>
+
+      <aside class="mn-article-sidebar">
+        <div class="mn-sidebar-section">
+          <div class="mn-search-box">
+            <input type="text" class="mn-search-input" value="{{ request('keyword') }}" placeholder="{{ __('front/article.keyword') }}">
+            <button class="mn-search-btn"><i class="bi bi-search"></i></button>
+          </div>
+        </div>
+
+        {nice:if isset($catalogs) && $catalogs}
+          <div class="mn-sidebar-section">
+            <div class="mn-sidebar-title">{{ __('front/article.news_classification') }}</div>
+            <ul class="mn-sidebar-list">
+              {nice:foreach $catalogs as $catalog}
+                <li><a href="{{ $catalog->url }}" class="mn-sidebar-link">{{ $catalog->translation?->title ?? '' }}</a></li>
+              {/nice:foreach}
+            </ul>
+          </div>
+        {/nice:if}
+
+        {nice:if isset($relatedArticles) && $relatedArticles->count()}
+          <div class="mn-sidebar-section">
+            <div class="mn-sidebar-title">{{ __('front/article.related') }}</div>
+            <ul class="mn-sidebar-list">
+              {nice:foreach $relatedArticles as $ra}
+                <li><a href="{{ $ra->url }}" class="mn-sidebar-link">{{ $ra->translation?->title ?? '' }}</a></li>
+              {/nice:foreach}
+            </ul>
+          </div>
+        {/nice:if}
+      </aside>
+    </div>
+
+    {nice:hook "article.show.bottom"}
+  </div>
+
+{/nice:section}
+
+{nice:push name="footer"}
+  <script>
+    $(function () {
+      $('.mn-search-btn').click(function () {
+        var keyword = $(this).siblings('.mn-search-input').val();
+        if (keyword) { window.location.href = inno.updateQueryStringParameter(window.location.href, 'keyword', keyword); return; }
+        window.location.href = inno.removeURLParameters(window.location.href, 'keyword');
+      });
+      $('.mn-search-input').keydown(function (e) { if (e.keyCode === 13) $(this).siblings('.mn-search-btn').trigger('click'); });
+    });
+  </script>
+{/nice:push}

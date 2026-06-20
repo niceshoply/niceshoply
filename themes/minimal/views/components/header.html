@@ -1,0 +1,152 @@
+{nice:hook "layout.header.top"}
+
+{-- Announcement Bar --}
+<div class="mn-announcement">
+  {{ __('front/common.free_shipping_text', ['amount' => system_setting('free_shipping_amount', '$99'), 'default' => 'COMPLIMENTARY SHIPPING ON ORDERS OVER :amount']) }}
+</div>
+
+<header id="appHeader" class="mn-header">
+  {-- Desktop --}
+  <div class="mn-header-inner header-desktop mn-container">
+    {-- Left: search + lang --}
+    <div class="mn-header-left">
+      <form action="{{ front_route('products.index') }}" method="get" class="d-flex align-items-center">
+        <button type="submit" class="mn-icon-link" aria-label="{{ __('front/common.search') }}">
+          <i class="bi bi-search"></i>
+        </button>
+      </form>
+
+      {nice:if $currentLocale && locales()->isNotEmpty()}
+        <div class="mn-dropdown dropdown">
+          <a class="mn-lang dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown">
+            {{ strtoupper($currentLocale->code) }}
+          </a>
+          <div class="dropdown-menu">
+            {nice:foreach locales() as $locale}
+              <a class="dropdown-item" href="{{ front_route('locales.switch', ['code' => $locale->code]) }}">
+                {{ $locale->name }}
+              </a>
+            {/nice:foreach}
+          </div>
+        </div>
+      {/nice:if}
+      {nice:hook "layouts.header.currency.after"}
+    </div>
+
+    {-- Center: logo --}
+    <a href="{{ front_route('home.index') }}" class="mn-logo">
+      {nice:if system_setting('front_logo')}
+        <img src="{{ image_origin(system_setting('front_logo')) }}" alt="{{ config('app.name') }}" style="max-height:30px;">
+      {nice:else}
+        {{ config('app.name', 'MINIMAL') }}
+      {/nice:if}
+    </a>
+
+    {-- Right: account / wishlist / cart --}
+    <div class="mn-header-right">
+      <div class="mn-dropdown dropdown">
+        <a class="mn-icon-link dropdown-toggle" href="{{ front_route('account.index') }}" data-bs-toggle="dropdown" aria-label="{{ __('front/account.account') }}">
+          <i class="bi bi-person"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-end">
+          {nice:if $customer}
+            <a href="{{ front_route('account.index') }}" class="dropdown-item">{{ __('front/account.account') }}</a>
+            <a href="{{ front_route('account.orders.index') }}" class="dropdown-item">{{ __('front/account.orders') }}</a>
+            <a href="{{ front_route('account.favorites.index') }}" class="dropdown-item">{{ __('front/account.favorites') }}</a>
+            <a href="{{ front_route('account.logout') }}" class="dropdown-item">{{ __('front/account.logout') }}</a>
+          {nice:else}
+            <a href="{{ front_route('login.index') }}" class="dropdown-item">{{ __('front/common.login') }}</a>
+            <a href="{{ front_route('register.index') }}" class="dropdown-item">{{ __('front/common.register') }}</a>
+          {/nice:if}
+        </div>
+      </div>
+
+      <a href="{{ account_route('favorites.index') }}" class="mn-icon-link" aria-label="{{ __('front/account.favorites') }}">
+        <i class="bi bi-heart"></i>
+        {nice:if $favTotal > 0}<span class="mn-icon-quantity">{{ $favTotal }}</span>{/nice:if}
+      </a>
+
+      <a href="javascript:void(0)" class="mn-icon-link header-cart-icon" data-bs-toggle="offcanvas" data-bs-target="#miniCart" aria-controls="miniCart" aria-label="{{ __('front/common.cart') }}">
+        <i class="bi bi-bag"></i>
+        <span class="mn-icon-quantity">0</span>
+      </a>
+      {nice:hook "layouts.header.cart.after"}
+    </div>
+  </div>
+
+  {-- Desktop Nav --}
+  <nav class="mn-nav header-desktop">
+    @hookupdate('layouts.header.menu.pc')
+    {nice:foreach $headerMenus as $menu}
+      {nice:if $menu['name']}
+        <a href="{{ $menu['url'] }}" class="{{ (request()->route() && equal_url($menu['url'])) ? 'active' : '' }}">
+          {{ $menu['name'] }}
+        </a>
+      {/nice:if}
+    {/nice:foreach}
+    @endhookupdate
+  </nav>
+
+  {-- Mobile --}
+  <div class="mn-header-mobile mn-container">
+    <button class="mn-burger" data-bs-toggle="offcanvas" data-bs-target="#mobile-menu-offcanvas" aria-label="Menu">
+      <i class="bi bi-list"></i>
+    </button>
+    <a href="{{ front_route('home.index') }}" class="mn-logo" style="font-size:18px;">
+      {nice:if system_setting('front_logo')}
+        <img src="{{ image_origin(system_setting('front_logo')) }}" alt="{{ config('app.name') }}" style="max-height:24px;">
+      {nice:else}
+        {{ config('app.name', 'MINIMAL') }}
+      {/nice:if}
+    </a>
+    <a href="javascript:void(0)" class="mn-icon-link header-cart-icon" data-bs-toggle="offcanvas" data-bs-target="#miniCart">
+      <i class="bi bi-bag"></i>
+      <span class="mn-icon-quantity">0</span>
+    </a>
+
+    {-- Mobile Offcanvas --}
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="mobile-menu-offcanvas">
+      <div class="offcanvas-header">
+        <form action="{{ front_route('products.index') }}" method="get" class="mn-search-box w-100">
+          <input type="text" class="mn-search-input" name="keyword" placeholder="{{ __('front/common.search') }}" value="{{ request('keyword') }}">
+          <button type="submit" class="mn-search-btn"><i class="bi bi-search"></i></button>
+        </form>
+        <button type="button" class="btn-close ms-2" data-bs-dismiss="offcanvas"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div class="accordion accordion-flush" id="menu-accordion">
+          <div class="accordion-item">
+            <a class="nav-link {{ (request()->route() && equal_route_name('home.index')) ? 'active' : '' }} d-block py-2" href="{{ front_route('home.index') }}">{{ __('front/common.home') }}</a>
+          </div>
+          @hookupdate('layouts.header.menu.mobile')
+          {nice:foreach $headerMenus as $key => $menu}
+            {nice:if $menu['name']}
+              <div class="accordion-item">
+                <div class="d-flex justify-content-between align-items-center">
+                  <a class="nav-link d-block py-2" href="{{ $menu['url'] }}">{{ $menu['name'] }}</a>
+                  {nice:if isset($menu['children']) && $menu['children']}
+                    <span class="collapsed" data-bs-toggle="collapse" data-bs-target="#mn-menu-{{ $key }}"><i class="bi bi-chevron-down"></i></span>
+                  {/nice:if}
+                </div>
+                {nice:if isset($menu['children']) && $menu['children']}
+                  <div class="accordion-collapse collapse" id="mn-menu-{{ $key }}" data-bs-parent="#menu-accordion">
+                    <ul class="nav flex-column ps-3">
+                      {nice:foreach $menu['children'] as $child}
+                        {nice:if $child['name']}
+                          <li class="nav-item"><a class="nav-link py-1" href="{{ $child['url'] }}">{{ $child['name'] }}</a></li>
+                        {/nice:if}
+                      {/nice:foreach}
+                    </ul>
+                  </div>
+                {/nice:if}
+              </div>
+            {/nice:if}
+          {/nice:foreach}
+          @endhookupdate
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+{nice:hook "layout.header.bottom"}

@@ -1,0 +1,93 @@
+/*
+ * ============================================================
+ * 【文件说明】首页文章/新闻模块（博客列表项）样式
+ * 【对应模板】resources/views/components/module-news.blade.php（首页新闻/博客卡片组件）
+ * ============================================================
+ *
+ * 【关键 CSS 类】
+ *   .blog-item                    - 单篇文章卡片容器，底部有间距
+ *   .blog-item .image             - 文章封面图容器，hover 时有阴影和图片放大效果
+ *   .blog-item .image img         - 封面图片，hover 时轻微放大（scale 1.02）
+ *   .blog-item .blog-item-info    - 文章信息区域（分类、标题、作者）
+ *     .blog-catalog               - 文章分类标签，使用 $primary 主题色，加粗
+ *     .blog-title                 - 文章标题，桌面端 18px，移动端 14px
+ *     .blog-title a               - 标题链接，hover 时颜色变为 $primary
+ *     .author-wrap                - 作者信息区，含作者名和发布日期
+ *       .blog-author              - 作者名（灰色 #777）
+ *
+ * 【自定义建议】
+ *   - .blog-catalog 颜色直接使用 $primary 变量，修改主题色后自动生效
+ *   - 可修改 .image hover 的 box-shadow 调整封面图悬停阴影效果
+ *   - 如需更改文章卡片整体布局（如改为横向列表），可在此扩展
+ * ============================================================
+ */
+
+.blog-item {
+  margin-bottom: 10px;
+
+  @media (min-width: 768px) {
+    margin-bottom: 30px;
+  }
+
+  .image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    transition: box-shadow 0.3s ease-in-out;
+
+    &:hover {
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+      display: block;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    &:hover img {
+      transform: scale(1.02);
+    }
+  }
+
+  .blog-item-info {
+    .blog-catalog {
+      font-weight: bold;
+      color: $primary;
+      margin-bottom: 4px;
+    }
+
+    .blog-title {
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 10px;
+
+      @media (min-width: 768px) {
+        font-size: 18px;
+      }
+
+      a {
+        color: #333;
+        text-decoration: none;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: $primary;
+        }
+      }
+    }
+
+    .author-wrap {
+      display: flex;
+      align-items: center;
+      color: #777;
+
+      .blog-author {
+        margin-right: 20px;
+      }
+    }
+  }
+}

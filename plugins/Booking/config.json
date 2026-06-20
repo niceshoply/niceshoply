@@ -1,0 +1,18 @@
+{
+    "code": "booking",
+    "name": {
+        "zh-cn": "预约/服务下单",
+        "en": "Booking / Appointments"
+    },
+    "description": {
+        "zh-cn": "预约/服务下单：为服务类商品配置可预约时段、单时段容量与营业时间，会员在前台选择日期时段提交预约，后台审核确认/完成/取消，支持容量校验防超约。",
+        "en": "Booking/appointments: configure bookable time slots, per-slot capacity and business hours for service products; members pick a date/time to book; admin confirms/completes/cancels with capacity checks to prevent overbooking."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-calendar2-week",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

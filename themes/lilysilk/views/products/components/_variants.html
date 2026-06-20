@@ -1,0 +1,90 @@
+{nice:if is_array($variants) && count($variants)}
+  <div class="ls-variant-box product-variant-box">
+    @hookupdate('front.products.show.variants.value')
+    {nice:foreach $variants as $key => $variant}
+      <div class="ls-variant-group product-variant">
+        <div class="ls-variant-label">
+          {{ $variant['name'][front_locale_code()] ?? ($variant['name'][setting_locale_code()] ?? '-') }}
+        </div>
+        <div class="ls-variant-values variant-values">
+          {nice:foreach $variant['values'] as $vk => $value}
+            <div class="ls-variant-value variant-value-name" data-variant="{{ $key }}" data-value="{{ $vk }}">
+              {nice:if isset($value['image']) && !empty($value['image'])}
+                <img src="{{ image_resize($value['image'], 30, 30) }}" alt="{{ $value['name'][front_locale_code()] ?? ($value['name'][setting_locale_code()] ?? '-') }}" class="variant-value-image">
+              {/nice:if}
+              <span class="variant-text">{{ $value['name'][front_locale_code()] ?? ($value['name'][setting_locale_code()] ?? '-') }}</span>
+            </div>
+          {/nice:foreach}
+        </div>
+      </div>
+    {/nice:foreach}
+    @endhookupdate
+  </div>
+{/nice:if}
+
+{nice:push name="footer"}
+  <script>
+    let skus = @json($skus ?? []);
+
+    if ($('.product-variant-box').length) {
+      let masterSku = @json($sku);
+
+      masterSku.variants.forEach((variant, i) => {
+        $('.product-variant-box .product-variant').eq(i).find('.variant-values .variant-value-name').eq(variant).addClass('active');
+      });
+
+      updateVariantStatus();
+
+      function updateVariantStatus() {
+        $('.product-variant-box .product-variant').each((variant_index, el) => {
+          $(el).find('.variant-values .variant-value-name').each((value_index, value) => {
+            let masterSkuVariants = masterSku.variants.slice(0);
+            masterSkuVariants[variant_index] = value_index;
+            let sku = skus.find(sku => sku.variants.join('') === masterSkuVariants.join(''));
+            if (sku && sku.quantity > 0) {
+              $(value).removeClass('disabled');
+            } else {
+              $(value).addClass('disabled');
+            }
+          });
+        });
+
+        if (masterSku.quantity * 1 <= 0) {
+          $('.ls-add-to-cart .add-cart, .ls-add-to-cart .wish-btn').addClass('disabled');
+        } else {
+          $('.ls-add-to-cart .add-cart, .ls-add-to-cart .wish-btn').removeClass('disabled');
+        }
+      }
+
+      $('.product-variant-box .variant-value-name').click(function () {
+        const variant = $(this).data('variant');
+        const value = $(this).data('value');
+        let variants = masterSku.variants.slice(0);
+        variants[variant] = value;
+        masterSku = skus.find(sku => sku.variants.toString() === variants.toString());
+
+        $('.ls-pdp-info .product-price').first().contents().filter(function() { return this.nodeType === 3; }).first().replaceWith(masterSku.price_format);
+        $('.product-quantity').data('sku-id', masterSku.id);
+        $('.ls-features .sku-code-value').text(masterSku.code);
+
+        if (typeof window.updateBasePrice === 'function') {
+          window.updateBasePrice(masterSku.price);
+        }
+
+        if (masterSku.origin_image_url) {
+          $('.ls-pdp-main-image .main-image').attr('src', masterSku.origin_image_url);
+        }
+        history.pushState({}, '', inno.updateQueryStringParameter(window.location.href, 'sku_id', masterSku.id));
+
+        if (masterSku.quantity * 1 <= 0) {
+          $('.ls-add-to-cart .add-cart, .ls-add-to-cart .wish-btn').addClass('disabled');
+        } else {
+          $('.ls-add-to-cart .add-cart, .ls-add-to-cart .wish-btn').removeClass('disabled');
+        }
+
+        $(this).addClass('active').siblings().removeClass('active');
+        updateVariantStatus();
+      });
+    }
+  </script>
+{/nice:push}

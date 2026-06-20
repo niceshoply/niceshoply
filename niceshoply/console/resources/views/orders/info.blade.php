@@ -1,0 +1,503 @@
+@extends('console::layouts.app')
+@section('title', __('console/menu.orders'))
+
+@section('page-title-right')
+  <div class="title-right-btns">
+    <div class="status-wrap" id="status-app">
+      @foreach ($next_statuses as $status)
+        <button class="btn btn-primary ms-2" @click="edit('{{ $status['status'] }}')">{{ $status['name'] }}</button>
+      @endforeach
+      <a class="btn btn-success ms-2" href="{{ console_route('orders.printing', $order) }}"
+        target="_blank">{{ console_trans('order.print') }}</a>
+      @hookinsert('console.orders.info.print.after')
+      <el-dialog v-model="statusDialog" title="{{ __('console/order.status') }}" width="500">
+        <div class="mb-2">{{ __('console/order.comment') }}</div>
+        <textarea v-model="comment" class="form-control" placeholder="{{ __('console/order.comment') }}" rows="3"></textarea>
+        <template #footer>
+          <div class="dialog-footer">
+            <el-button @click="statusDialog = false">{{ __('console/common.close') }}</el-button>
+            <el-button type="primary" @click="submit">{{ __('console/common.btn_save') }}</el-button>
+          </div>
+        </template>
+      </el-dialog>
+    </div>
+  </div>
+@endsection
+
+@section('content')
+  <div class="card mb-4">
+    <div class="card-header">
+      <h5 class="card-title mb-0">{{ __('console/order.order_info') }}</h5>
+    </div>
+    <div class="card-body">
+      <div class="order-info-grid row g-2">
+        <div class="col-lg-3 col-md-4 d-flex">
+          <div class="fw-bold me-2">{{ __('console/order.number') }}:</div>
+          <p class="mb-0">{{ $order->number }}</p>
+        </div>
+        <div class="col-lg-3 col-md-4 d-flex">
+          <div class="fw-bold me-2">{{ __('console/order.customer_name') }}:</div>
+          <p class="mb-0">{{ $order->customer_name ?? ($order->customer->name ?? '') }}</p>
+        </div>
+        <div class="col-lg-3 col-md-4 d-flex">
+          <div class="fw-bold me-2">{{ __('console/order.created_at') }}:</div>
+          <p class="mb-0">{{ $order->created_at }}</p>
+        </div>
+        <div class="col-lg-3 col-md-4 d-flex">
+          <div class="fw-bold me-2">{{ __('console/common.status') }}:</div>
+          <div>
+            <span class="badge bg-{{ $order->status_color }}">{{ $order->status_format }}</span>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 d-flex">
+          <div class="fw-bold me-2">{{ __('console/order.total') }}:</div>
+          <p class="mb-0">{{ $order->total_format }}</p>
+        </div>
+        <div class="col-lg-3 col-md-4 d-flex">
+          <div class="fw-bold me-2">{{ __('console/order.billing_method_name') }}:</div>
+          <p class="mb-0">{{ $order->billing_method_name }}</p>
+        </div>
+        <div class="col-lg-3 col-md-4 d-flex">
+          <div class="fw-bold me-2">{{ __('console/order.shipping_method_name') }}:</div>
+          <p class="mb-0">{{ $order->shipping_method_name }}</p>
+        </div>
+        <div class="col-lg-3 col-md-4 d-flex">
+          <div class="fw-bold me-2">{{ __('console/order.email') }}:</div>
+          <p class="mb-0">{{ $order->email }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  @hookinsert('console.orders.info.order_info.after')
+
+  <div class="card mb-4">
+    <div class="card-header">
+      <h5 class="card-title mb-0">{{ __('console/order.order_items') }}</h5>
+    </div>
+    <div class="card-body">
+      @hookupdate('console.orders.info.order_items')
+        <table class="table products-table align-middle">
+          <thead>
+            <tr>
+              <th>{{ __('console/common.id') }}</th>
+              <th>{{ __('console/order.product') }}</th>
+              <th>{{ __('console/order.sku_code') }}</th>
+              <th>{{ __('console/order.quantity') }}</th>
+              <th>{{ __('console/order.unit_price') }}</th>
+              <th>{{ __('console/order.subtotal') }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach ($order->items as $item)
+              <tr>
+                <td>{{ $item->id }}</td>
+                <td>
+                  <div class="product-item d-flex align-items-center">
+                    <div class="product-image wh-40 border"><img src="{{ $item->image }}" class="img-fluid">
+                    </div>
+                    <div class="product-info ms-2">
+                      <div class="name">{{ $item->name }}</div>
+                      @if ($item->productSku->variantLabel ?? '')
+                        <span class="small fst-italic">{{ $item->productSku->variantLabel }}</span>
+                      @endif
+                      @if ($item->item_type_label)
+                        <span class="badge bg-danger">{{ $item->item_type_label }}</span>
+                      @endif
+                    </div>
+                  </div>
+                </td>
+                <td>{{ $item->product_sku }}</td>
+                <td>{{ $item->quantity }}</td>
+                <td>{{ $item->price_format }}</td>
+                <td>{{ $item->subtotal_format }}</td>
+              </tr>
+            @endforeach
+            @foreach ($order->fees as $total)
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><strong>{{ $total->title }}</strong></td>
+                <td>{{ $total->value_format }}</td>
+              </tr>
+            @endforeach
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td><strong>{{ __('console/order.total') }}</strong></td>
+              <td>{{ $order->total_format }}</td>
+            </tr>
+          </tbody>
+        </table>
+      @endhookupdate
+    </div>
+  </div>
+
+  @hookinsert('console.orders.info.order_items.after')
+
+  <div class="card mb-4">
+    <div class="card-header">
+      <h5 class="card-title mb-0">{{ __('console/order.address') }}</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="address-card">
+            <div class="address-card-header mb-3">
+              <h5 class="address-card-title">{{ __('console/order.shipping_address') }}</h5>
+            </div>
+            <div class="address-card-body">
+              <p>{{ __('common/address.name') }}: {{ $order->shipping_customer_name }}</p>
+              <p>{{ __('common/address.phone') }}: {{ $order->shipping_telephone }}</p>
+              <p>{{ __('common/address.zipcode') }}: {{ $order->shipping_zipcode }}</p>
+              <p>{{ __('common/address.address_1') }}: {{ $order->shipping_address_1 }}</p>
+              @if ($order->shipping_address_2)
+                <p>{{ __('common/address.address_2') }}: {{ $order->shipping_address_2 }}</p>
+              @endif
+              <p>{{ __('common/address.region') }}: {{ $order->shipping_city }}, {{ $order->shipping_state }}
+                , {{ $order->shipping_country }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="address-card">
+            <div class="address-card-header mb-3">
+              <h5 class="address-card-title">{{ __('console/order.billing_address') }}</h5>
+            </div>
+            <div class="address-card-body">
+              <p>{{ __('common/address.name') }}: {{ $order->billing_customer_name }}</p>
+              <p>{{ __('common/address.phone') }}: {{ $order->billing_telephone }}</p>
+              <p>{{ __('common/address.zipcode') }}: {{ $order->billing_zipcode }}</p>
+              <p>{{ __('common/address.address_1') }}: {{ $order->billing_address_1 }}</p>
+              @if ($order->billing_address_2)
+                <p>{{ __('common/address.address_2') }}: {{ $order->billing_address_2 }} </p>
+              @endif
+              <p>{{ __('common/address.region') }}: {{ $order->billing_city }}, {{ $order->billing_state }}
+                , {{ $order->billing_country }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  @hookinsert('console.orders.info.addresses.after')
+
+  <div class="mt-4">
+    <div class="card mb-4">
+      <div class="card-header">
+        <h5 class="card-title mb-0">{{ __('front/checkout.order_comment') }}</h5>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 col-md-6 mb-4">
+            <h6 class="fs-5">{{ __('console/order.customer_remarks') }}</h6>
+            <p class="mb-0">{{ $order->comment }}</p>
+          </div>
+          <div class="col-12 col-md-6 mb-3">
+            <h6 class="fs-5">{{ __('console/order.administrator_remarks') }}</h6>
+            <p class="mb-0">{{ $order->admin_note }}</p>
+            <button class="btn btn-sm btn-primary mt-2" data-bs-toggle="modal">
+              {{ __('console/common.edit') }}
+            </button>
+
+            <div class="modal fade" id="admin_note" tabindex="-1" aria-labelledby="admin_noteLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border border-secondary rounded">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="admin_noteLabel">{{ __('console/order.administrator_remarks') }}</h4>
+                  </div>
+                  <div class="modal-body">
+                    <textarea class="form-control admin-comment-input" rows="5" data-order-id="{{ $order->id }}">{{ $order->admin_note }}</textarea>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                      data-bs-dismiss="modal">{{ __('console/order.close') }}</button>
+                    <button type="button" class="btn btn-primary"
+                      onclick="submitComment()">{{ __('console/order.submit') }}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  @hookinsert('console.orders.info.comment.after')
+
+  <div class="card mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h5 class="card-title mb-0">{{ __('console/order.shipping_information') }}</h5>
+      <button class="btn btn-sm btn-primary mt-2" id="addRow">{{ __('console/order.add') }}</button>
+    </div>
+    <div class="card-body">
+      <table class="table table-response align-middle table-bordered" id="logisticsTable">
+        <thead>
+          <tr>
+            <td>ID</td>
+            <th>{{ __('console/order.express_company') }}</th>
+            <th>{{ __('console/order.express_number') }}</th>
+            <th>{{ __('console/order.create_time') }}</th>
+            <th>{{ __('console/order.operation') }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach ($order->shipments as $shipment)
+            <tr>
+              <td data-title="id">{{ $shipment->id }}</td>
+              <td data-title="express_company">{{ $shipment->express_company }}</td>
+              <td data-title="express_number">{{ $shipment->express_number }}</td>
+              <td data-title="created_at">{{ $shipment->created_at }}</td>
+              <td>
+                <button class="btn btn-sm btn-primary deleteRow"
+                  onclick="deleteShipment('{{ $shipment->id }}')">{{ __('console/order.delete') }}</button>
+                <button class="btn btn-sm btn-primary viewRow"
+                  onclick="viewShipmentDetails('{{ $shipment->id }}')">{{ __('console/order.view') }}</button>
+              </td>
+            </tr>
+          @endforeach
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  @hookinsert('console.orders.info.shipping.after')
+
+  <div class="card mb-4">
+    <div class="card-header">
+      <h5 class="card-title mb-0">{{ __('console/order.history') }}</h5>
+    </div>
+    <div class="card-body">
+      <table class="table table-response align-middle">
+        <thead>
+          <tr>
+            <th>{{ __('console/order.status') }}</th>
+            <th>{{ __('console/order.comment') }}</th>
+            <th>{{ __('console/order.date_time') }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach ($order->histories->sortByDesc('id') as $history)
+            <tr>
+              <td>{{ $history->status }}</td>
+              <td>{{ $history->comment }}</td>
+              <td>{{ $history->created_at }}</td>
+            </tr>
+          @endforeach
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  @hookinsert('console.orders.info.history.after')
+
+  <div class="modal fade" id="newShipmentModal" tabindex="-1" aria-labelledby="newShipmentModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="newShipmentModalLabel">{{ __('console/order.shipment_information') }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <tbody>
+              <tr>
+                <th class="col-3">{{ __('console/order.time') }}</th>
+                <th class="col-9">{{ __('console/order.logistics_information') }}</th>
+              </tr>
+            </tbody>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary"
+            data-bs-dismiss="modal">{{ __('console/order.confirm') }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="editModal" tabindex="-1" aria-bs-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel">{{ __('console/order.edit_logistics_information') }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="logisticsCompany" class="form-label">{{ __('console/order.express_company') }}</label>
+              <select class="form-control" id="logisticsCompany">
+                @foreach (is_array(system_setting('logistics', [])) ? system_setting('logistics', []) : [] as $expressCompany)
+                  <option value="{{ $expressCompany['code'] }}">{{ $expressCompany['company'] }}</option>
+                @endforeach
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="trackingNumber" class="form-label">{{ __('console/order.express_number') }}</label>
+              <input type="text" class="form-control" id="trackingNumber">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary"
+            data-bs-dismiss="modal">{{ __('console/order.close') }}</button>
+          <button type="button" class="btn btn-primary"
+            onclick="submitEdit()">{{ __('console/order.save_changes') }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+@endsection
+
+@push('footer')
+  <script>
+    var admin_note = new bootstrap.Modal(document.getElementById('admin_note'));
+    document.querySelector('[data-bs-toggle="modal"]').addEventListener('click', function() {
+      admin_note.show();
+    });
+
+    $(document).ready(function() {
+
+      $('.admin-comment-input').on('keydown', function(event) {
+        if (event.keyCode === 13) {
+          event.preventDefault();
+          var comment = $(this).val();
+          var orderId = $(this).data('order-id');
+          var apiUrl = `${urls.console_api}/orders/${orderId}/notes`;
+          axios.post(apiUrl, {
+              admin_note: comment,
+            })
+            .then(function(res) {
+              inno.msg(res.message);
+              $('.admin-comment-input').val(res.data.admin_note);
+              window.location.reload()
+            })
+        }
+      });
+
+      $('#addRow').click(function() {
+        $('#editModal').modal('show');
+      });
+
+      $(document).on('click', '.deleteRow', function() {
+        $(this).closest('tr').remove();
+      });
+
+      window.viewShipmentDetails = function(shipmentId) {
+        axios.get(`${urls.console_api}/shipments/${shipmentId}/traces`)
+          .then(function(response) {
+            if (response.data && response.data.traces) {
+              const tbody = $('#newShipmentModal .modal-body table tbody').last();
+              tbody.empty();
+              response.data.traces.forEach(trace => {
+                const row = `<tr>
+                            <td>${trace.time}</td>
+                            <td>${trace.station}</td>
+                         </tr>`;
+                tbody.append(row);
+              });
+              var newShipmentModal = new bootstrap.Modal(document.getElementById('newShipmentModal'));
+              newShipmentModal.show();
+            }
+          })
+          .catch(function(error) {
+            inno.msg('{{ __('console/order.no_logistics_information') }}');
+          });
+      }
+    });
+
+    function submitComment() {
+      let elment = $('.admin-comment-input');
+      let comment = elment.val();
+      let orderId = elment.data('order-id');
+      let apiUrl = `${urls.console_api}/orders/${orderId}/notes`;
+      axios.post(apiUrl, {
+          admin_note: comment,
+        })
+        .then(function(res) {
+          inno.msg(res.message);
+          var admin_note = bootstrap.Modal.getInstance(document.getElementById('admin_note'));
+          if (admin_note) {
+            admin_note.hide();
+          }
+          $('.admin-comment-input').val(res.data.admin_note);
+          window.location.reload();
+        })
+    }
+
+    function submitEdit() {
+      const logisticsCompany = $('#logisticsCompany').val();
+      const trackingNumber = $('#trackingNumber').val();
+      const selectedCompanyName = $('#logisticsCompany option:selected').text();
+      const orderId = {{ $order->id }};
+      axios.post(`${urls.console_api}/orders/${orderId}/shipments`, {
+        express_code: logisticsCompany,
+        express_company: selectedCompanyName,
+        express_number: trackingNumber,
+      }).then(function(response) {
+        inno.msg('{{ __('console/order.add_successfully') }}');
+        $('#editModal').modal('hide');
+        window.location.reload();
+      }).catch(function(res) {
+        inno.msg('{{ __('console/order.add_failed!') }}');
+      });
+    }
+
+    function deleteShipment(shipmentId) {
+      const apiUrl = `${urls.console_api}/shipments/${shipmentId}`;
+      axios.delete(apiUrl)
+        .then(function(response) {
+          inno.msg('{{ __('console/order.delete_successfully') }}');
+          window.location.reload();
+        })
+    }
+
+    const {
+      createApp,
+      ref
+    } = Vue
+    const api = @json(console_route('orders.change_status', $order));
+    const statusApp = createApp({
+      setup() {
+        const statusDialog = ref(false)
+        const comment = ref('')
+        let status = '';
+
+        const edit = (code) => {
+          statusDialog.value = true
+          status = code
+        }
+
+        const submit = () => {
+          axios.put(api, {
+            status: status,
+            comment: comment.value
+          }).then(() => {
+            statusDialog.value = false
+            window.location.reload()
+          })
+        }
+
+        return {
+          edit,
+          submit,
+          comment,
+          statusDialog,
+        }
+      }
+    })
+    statusApp.use(ElementPlus);
+    statusApp.mount('#status-app');
+  </script>
+@endpush

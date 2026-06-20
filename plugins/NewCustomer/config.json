@@ -1,0 +1,18 @@
+{
+    "code": "new_customer",
+    "name": {
+        "zh-cn": "新人专享",
+        "en": "New Customer"
+    },
+    "description": {
+        "zh-cn": "新人专享：注册后自动发送欢迎站内信与新人券码；首单自动立减（满额可用、固定或折扣），通过结算费用项实现，无需手动核销。",
+        "en": "New customer perks: send a welcome message with a coupon code on registration; auto first-order discount (fixed or percent, with threshold) via a checkout fee."
+    },
+    "type": "marketing",
+    "version": "v1.0.0",
+    "icon": "bi-person-plus",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

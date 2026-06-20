@@ -1,0 +1,18 @@
+{
+    "code": "dashboard_bi",
+    "name": {
+        "zh-cn": "经营数据看板",
+        "en": "Business Dashboard"
+    },
+    "description": {
+        "zh-cn": "经营数据看板：在后台汇总销售额、订单数、客单价、新增会员与每日趋势曲线，展示订单状态分布与热销商品 TOP，支持选择最近 7/30/90 天区间，帮助商家快速掌握经营概况。",
+        "en": "Business dashboard: an admin overview of revenue, orders, AOV, new customers and daily trend lines, with order-status distribution and top-selling products, for the last 7/30/90 days."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-graph-up-arrow",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

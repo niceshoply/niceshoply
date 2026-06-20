@@ -1,0 +1,4327 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Admin\:\:whereIn\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Console/Commands/NormalizeLocales.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Locale\:\:whereIn\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Console/Commands/NormalizeLocales.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Setting\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Console/Commands/NormalizeLocales.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: niceshoply/common/src/Entities/ShippingEntity.php
+
+		-
+			message: '#^Property NiceShoply\\Common\\Libraries\\Currency\:\:\$currencies in empty\(\) is not falsy nor uninitialized\.$#'
+			identifier: empty.initializedProperty
+			count: 1
+			path: niceshoply/common/src/Libraries/Currency.php
+
+		-
+			message: '#^Call to an undefined static method PHPOpenSourceSaver\\JWTAuth\\Facades\\JWTAuth\:\:parseToken\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Middleware/JwtAuthenticate.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Admin\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Admin.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Admin\:\:\$roles\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Admin.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Announcement\:\:\$translations\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Models/Announcement.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Article\:\:\$slug\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Article.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Article\:\:\$tags\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Article.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Article\:\:\$translations\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Models/Article.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Attribute\:\:\$translations\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Models/Attribute.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Attribute\\Group\:\:\$translations\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Models/Attribute/Group.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Brand\:\:\$slug\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Brand.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Cart\\OptionValue\:\:\$price_adjustment\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Cart/OptionValue.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\CartItem\:\:\$optionValues\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/CartItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\CartItem\:\:\$price\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/CartItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\CartItem\:\:\$productSku\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/CartItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Catalog\:\:\$slug\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Catalog.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Catalog\:\:\$translations\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Models/Catalog.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Catalog\:\:find\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Catalog.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Category\:\:\$slug\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Category.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Category\:\:\$translations\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Models/Category.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Category\:\:find\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Category.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Customer\:\:\$balance\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Customer.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Customer\:\:\$from\.$#'
+			identifier: property.notFound
+			count: 3
+			path: niceshoply/common/src/Models/Customer.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Customer\:\:\$password\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Customer.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Customer\:\:\$transactions\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Customer.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Customer\\Group\:\:\$translations\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Models/Customer/Group.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Customer\\Transaction\:\:\$type\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Customer/Transaction.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Customer\\Withdrawal\:\:\$account_type\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Customer/Withdrawal.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Customer\\Withdrawal\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Customer/Withdrawal.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\LegalDocument\:\:\$translations\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Models/LegalDocument.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\MemberLevel\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/MemberLevel.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\MemberLevel\:\:\$translations\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Models/MemberLevel.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\NewsletterSubscriber\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 3
+			path: niceshoply/common/src/Models/NewsletterSubscriber.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\NewsletterSubscriber\:\:\$subscribed_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/NewsletterSubscriber.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\NewsletterSubscriber\:\:\$unsubscribed_at\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Models/NewsletterSubscriber.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Option\:\:\$type\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Models/Option.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Order\:\:\$currency_code\.$#'
+			identifier: property.notFound
+			count: 3
+			path: niceshoply/common/src/Models/Order.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Order\:\:\$currency_value\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Order.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Order\:\:\$customer_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Order.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Order\:\:\$fees\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Order.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Order\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Order.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Order\:\:\$items\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Order.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Order\:\:\$number\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Order.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Order\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Models/Order.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Order\:\:\$total\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Order.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Order\\Fee\:\:\$order\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Order/Fee.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Order\\Fee\:\:\$value\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Order/Fee.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Order\\History\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Order/History.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Order\\Item\:\:\$item_type\.$#'
+			identifier: property.notFound
+			count: 3
+			path: niceshoply/common/src/Models/Order/Item.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Order\\Item\:\:\$order\.$#'
+			identifier: property.notFound
+			count: 3
+			path: niceshoply/common/src/Models/Order/Item.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Order\\Item\:\:\$price\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Models/Order/Item.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Order\\Item\:\:\$quantity\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Order/Item.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Order\\Item\:\:\$review\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Order/Item.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Order\\Item\:\:\$subtotal\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Order/Item.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Order\\OptionValue\:\:\$option_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Order/OptionValue.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Order\\OptionValue\:\:\$option_value_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Order/OptionValue.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Order\\OptionValue\:\:\$price_adjustment\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Order/OptionValue.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Order\\OptionValue\:\:\$weight_adjustment\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Order/OptionValue.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Order\\Payment\:\:\$amount\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Order/Payment.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Order\\Payment\:\:\$handling_fee\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Order/Payment.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Order\\Payment\:\:\$order\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Models/Order/Payment.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Order\\Payment\:\:\$paid\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Models/Order/Payment.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\OrderReturn\:\:\$email\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/OrderReturn.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\OrderReturn\:\:\$opened\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/OrderReturn.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\OrderReturn\:\:\$payments\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/OrderReturn.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\OrderReturn\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Models/OrderReturn.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\OrderReturn\\History\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/OrderReturn/History.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Page\:\:\$slug\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Page.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Page\:\:\$translations\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Models/Page.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\PluginCoordination\:\:\$exclusive_mode\.$#'
+			identifier: property.notFound
+			count: 3
+			path: niceshoply/common/src/Models/PluginCoordination.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Product\:\:\$active\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Models/Product.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Product\:\:\$brand_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Product.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Product\:\:\$categories\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Product.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Product\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Product.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Product\:\:\$favorites\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Product.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Product\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Product.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Product\:\:\$price\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Product.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Product\:\:\$productAttributes\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Product.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Product\:\:\$sales\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Product.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Product\:\:\$skus\.$#'
+			identifier: property.notFound
+			count: 3
+			path: niceshoply/common/src/Models/Product.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Product\:\:\$slug\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Product.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Product\:\:\$spu_code\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Product.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Product\:\:\$translations\.$#'
+			identifier: property.notFound
+			count: 4
+			path: niceshoply/common/src/Models/Product.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Product\:\:\$variables\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Product.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Product\\OptionValue\:\:\$price_adjustment\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Product/OptionValue.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Product\\OptionValue\:\:\$quantity\.$#'
+			identifier: property.notFound
+			count: 3
+			path: niceshoply/common/src/Models/Product/OptionValue.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Product\\OptionValue\:\:\$subtract_stock\.$#'
+			identifier: property.notFound
+			count: 3
+			path: niceshoply/common/src/Models/Product/OptionValue.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Product\\OptionValue\:\:\$weight_adjustment\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Product/OptionValue.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Product\\Sku\:\:\$image\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Product/Sku.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Product\\Sku\:\:\$origin_price\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Product/Sku.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Product\\Sku\:\:\$price\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Product/Sku.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Product\\Sku\:\:\$product\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Product/Sku.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Product\\Sku\:\:\$variant_label\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Product/Sku.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Promotion\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Promotion.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Promotion\:\:\$translations\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Models/Promotion.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Review\:\:\$active\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Review.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Review\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Review.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Tag\:\:\$slug\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Tag.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Tag\:\:\$translations\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Models/Tag.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Visit\\ConversionDaily\:\:\$cart_to_checkout_rate\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Visit/ConversionDaily.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Visit\\ConversionDaily\:\:\$checkout_to_order_rate\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Visit/ConversionDaily.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Visit\\ConversionDaily\:\:\$order_to_payment_rate\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Visit/ConversionDaily.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Visit\\ConversionDaily\:\:\$overall_conversion_rate\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Visit/ConversionDaily.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Visit\\Visit\:\:\$device_type\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Models/Visit/Visit.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Visit\\Visit\:\:\$session_id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: niceshoply/common/src/Models/Visit/Visit.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Visit\\Visit\:\:\$visitEvents\.$#'
+			identifier: property.notFound
+			count: 3
+			path: niceshoply/common/src/Models/Visit/Visit.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Visit\\VisitEvent\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 3
+			path: niceshoply/common/src/Models/Visit/Visit.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Visit\\VisitEvent\:\:\$event_type\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Models/Visit/VisitEvent.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Warehouse\:\:\$address_1\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Warehouse.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Warehouse\:\:\$address_2\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Warehouse.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Warehouse\:\:\$city\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Warehouse.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Warehouse\:\:\$country\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Warehouse.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Warehouse\:\:\$country_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Warehouse.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Warehouse\:\:\$latitude\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Warehouse.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Warehouse\:\:\$longitude\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Warehouse.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Warehouse\:\:\$serviceAreas\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Models/Warehouse.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Warehouse\:\:\$state\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Warehouse.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Warehouse\:\:\$state_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Warehouse.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Warehouse\:\:\$zipcode\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Warehouse.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Warehouse\\Stock\:\:\$quantity\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Warehouse/Stock.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\Warehouse\\Stock\:\:\$reserved_quantity\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Models/Warehouse/Stock.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Models\\WeightClass\:\:\$code\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Models/WeightClass.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: niceshoply/common/src/Repositories/BaseRepo.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Cart\\OptionValue\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Repositories/Cart/OptionValueRepo.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Cart\\OptionValue\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 6
+			path: niceshoply/common/src/Repositories/Cart/OptionValueRepo.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: niceshoply/common/src/Repositories/Category/TreeRepo.php
+
+		-
+			message: '#^Variable \$options might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: niceshoply/common/src/Repositories/CategoryRepo.php
+
+		-
+			message: '#^Function fire_hook_filter invoked with 3 parameters, 2 required\.$#'
+			identifier: arguments.count
+			count: 1
+			path: niceshoply/common/src/Repositories/CustomerRepo.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: niceshoply/common/src/Repositories/MailRepo.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\NewsletterSubscriber\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Repositories/NewsletterRepo.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\NewsletterSubscriber\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 3
+			path: niceshoply/common/src/Repositories/NewsletterRepo.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\OptionValue\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 4
+			path: niceshoply/common/src/Repositories/OptionValueRepo.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\OrderItemOption\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Repositories/Order/ItemRepo.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Common\\Repositories\\Order\\OptionValueRepo\:\:getOptionValuesByOrderItem\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/common/src/Repositories/Order/OptionValueRepo.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Order\\OptionValue\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Repositories/Order/OptionValueRepo.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Order\\OptionValue\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 4
+			path: niceshoply/common/src/Repositories/Order/OptionValueRepo.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: niceshoply/common/src/Repositories/Product/BundleRepo.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: niceshoply/common/src/Repositories/Product/FilterRepo.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Product\\Option\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Repositories/Product/OptionRepo.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Product\\Option\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 5
+			path: niceshoply/common/src/Repositories/Product/OptionRepo.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Option\:\:find\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Repositories/Product/OptionValueRepo.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Product\\Option\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Repositories/Product/OptionValueRepo.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Product\\Option\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Repositories/Product/OptionValueRepo.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Product\\OptionValue\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Repositories/Product/OptionValueRepo.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Product\\OptionValue\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 10
+			path: niceshoply/common/src/Repositories/Product/OptionValueRepo.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Product\\Relation\:\:insert\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 2
+			path: niceshoply/common/src/Repositories/Product/RelationRepo.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Product\\Relation\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Repositories/Product/RelationRepo.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: niceshoply/common/src/Repositories/Product/VariantRepo.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Category\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Repositories/ProductRepo.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Product\:\:whereIn\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 2
+			path: niceshoply/common/src/Repositories/ProductRepo.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: niceshoply/common/src/Repositories/RoleRepo.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: niceshoply/common/src/Repositories/SmsRepo.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: niceshoply/common/src/Repositories/SpecialPageRepo.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\WeightClass\:\:orderBy\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Repositories/WeightClassRepo.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\WeightClass\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Repositories/WeightClassRepo.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\AddressListItem\:\:\$address_1\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/AddressListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\AddressListItem\:\:\$address_2\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/AddressListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\AddressListItem\:\:\$city\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/AddressListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\AddressListItem\:\:\$city_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/AddressListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\AddressListItem\:\:\$country_id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Resources/AddressListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\AddressListItem\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/AddressListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\AddressListItem\:\:\$customer_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/AddressListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\AddressListItem\:\:\$default\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/AddressListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\AddressListItem\:\:\$email\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/AddressListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\AddressListItem\:\:\$guest_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/AddressListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\AddressListItem\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/AddressListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\AddressListItem\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/AddressListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\AddressListItem\:\:\$phone\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/AddressListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\AddressListItem\:\:\$state\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/AddressListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\AddressListItem\:\:\$state_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/AddressListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\AddressListItem\:\:\$zipcode\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/AddressListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ArticleListItem\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ArticleListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ArticleName\:\:\$active\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ArticleName.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ArticleName\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ArticleName.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ArticleName\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ArticleName.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ArticleName\:\:\$image\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ArticleName.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ArticleName\:\:\$slug\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ArticleName.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Common\\Resources\\ArticleName\:\:fallbackName\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ArticleName.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\AttributeGroupSimple\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/AttributeGroupSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\AttributeSimple\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/AttributeSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\AttributeValueSimple\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/AttributeValueSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\BrandName\:\:\$active\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/BrandName.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\BrandName\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/BrandName.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\BrandName\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/BrandName.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\BrandName\:\:\$slug\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/BrandName.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\BrandSimple\:\:\$active\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/BrandSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\BrandSimple\:\:\$first\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/BrandSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\BrandSimple\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/BrandSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\BrandSimple\:\:\$logo\.$#'
+			identifier: property.notFound
+			count: 5
+			path: niceshoply/common/src/Resources/BrandSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\BrandSimple\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/BrandSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\BrandSimple\:\:\$slug\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/BrandSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\BrandSimple\:\:\$url\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/BrandSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CartListItem\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CartListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CartListItem\:\:\$is_stock_enough\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CartListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CartListItem\:\:\$item_type\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CartListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CartListItem\:\:\$item_type_label\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CartListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CartListItem\:\:\$optionValues\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CartListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CartListItem\:\:\$price\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CartListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CartListItem\:\:\$product\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CartListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CartListItem\:\:\$productSku\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CartListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CartListItem\:\:\$quantity\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CartListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CartListItem\:\:\$reference\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CartListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CartListItem\:\:\$selected\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CartListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CartListItem\:\:\$subtotal\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CartListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CatalogName\:\:\$active\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CatalogName.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CatalogName\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CatalogName.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CatalogName\:\:\$slug\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CatalogName.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Common\\Resources\\CatalogName\:\:fallbackName\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CatalogName.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CatalogSimple\:\:\$children\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CatalogSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CatalogSimple\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CatalogSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CatalogSimple\:\:\$url\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CatalogSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CategoryFrontend\:\:\$active\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CategoryFrontend.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CategoryFrontend\:\:\$children\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CategoryFrontend.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CategoryFrontend\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CategoryFrontend.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CategoryFrontend\:\:\$image\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CategoryFrontend.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CategoryFrontend\:\:\$slug\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CategoryFrontend.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CategoryFrontend\:\:\$url\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CategoryFrontend.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CategoryName\:\:\$active\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CategoryName.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CategoryName\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CategoryName.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CategoryName\:\:\$image\.$#'
+			identifier: property.notFound
+			count: 3
+			path: niceshoply/common/src/Resources/CategoryName.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CategoryName\:\:\$slug\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CategoryName.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CategoryName\:\:\$translation\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CategoryName.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CategorySimple\:\:\$active\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CategorySimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CategorySimple\:\:\$children\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CategorySimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CategorySimple\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CategorySimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CategorySimple\:\:\$image\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CategorySimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CategorySimple\:\:\$slug\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CategorySimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CategorySimple\:\:\$url\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CategorySimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CheckoutSimple\:\:\$billing_address_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CheckoutSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CheckoutSimple\:\:\$billing_method_code\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Resources/CheckoutSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CheckoutSimple\:\:\$comment\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CheckoutSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CheckoutSimple\:\:\$customer_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CheckoutSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CheckoutSimple\:\:\$guest_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CheckoutSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CheckoutSimple\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CheckoutSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CheckoutSimple\:\:\$reference\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CheckoutSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CheckoutSimple\:\:\$shipping_address_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CheckoutSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CheckoutSimple\:\:\$shipping_method_code\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Resources/CheckoutSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CountrySimple\:\:\$code\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CountrySimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CountrySimple\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CountrySimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CountrySimple\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CountrySimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CurrencyItem\:\:\$active\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CurrencyItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CurrencyItem\:\:\$code\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CurrencyItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CurrencyItem\:\:\$decimal_place\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CurrencyItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CurrencyItem\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CurrencyItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CurrencyItem\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CurrencyItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CurrencyItem\:\:\$symbol_left\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CurrencyItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CurrencyItem\:\:\$symbol_right\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CurrencyItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CurrencyItem\:\:\$value\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CurrencyItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CustomerDetail\:\:\$avatar\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CustomerDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CustomerDetail\:\:\$email\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CustomerDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CustomerDetail\:\:\$has_password\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CustomerDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CustomerDetail\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Resources/CustomerDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CustomerDetail\:\:\$locale\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CustomerDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CustomerDetail\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CustomerDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CustomerGroupSimple\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CustomerGroupSimple.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Common\\Resources\\CustomerGroupSimple\:\:fallbackName\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CustomerGroupSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CustomerSimple\:\:\$avatar\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CustomerSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CustomerSimple\:\:\$email\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CustomerSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CustomerSimple\:\:\$has_password\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CustomerSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CustomerSimple\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CustomerSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CustomerSimple\:\:\$locale\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CustomerSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\CustomerSimple\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/CustomerSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\FavoriteItem\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Resources/FavoriteItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\FavoriteItem\:\:\$product\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/FavoriteItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$billing_address_1\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$billing_address_2\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$billing_address_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$billing_calling_code\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$billing_city\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$billing_country\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$billing_country_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$billing_customer_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$billing_method_code\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$billing_method_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$billing_state\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$billing_state_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$billing_telephone\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$billing_zipcode\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$calling_code\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$comment\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$currency_code\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$currency_value\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$customer_group_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$customer_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$customer_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$deleted_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$email\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$fees\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$histories\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$ip\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$items\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$locale\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$number\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$shipments\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$shipping_address_1\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$shipping_address_2\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$shipping_address_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$shipping_calling_code\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$shipping_city\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$shipping_country\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$shipping_country_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$shipping_customer_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$shipping_method_code\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$shipping_method_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$shipping_state\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$shipping_state_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$shipping_telephone\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$shipping_zipcode\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$status_format\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$telephone\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$total\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$total_format\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderDetail\:\:\$user_agent\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderFeeSimple\:\:\$code\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderFeeSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderFeeSimple\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderFeeSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderFeeSimple\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderFeeSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderFeeSimple\:\:\$order_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderFeeSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderFeeSimple\:\:\$reference\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderFeeSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderFeeSimple\:\:\$title\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderFeeSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderFeeSimple\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderFeeSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderFeeSimple\:\:\$value\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderFeeSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderFeeSimple\:\:\$value_format\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderFeeSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderHistory\:\:\$comment\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderHistory.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderHistory\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderHistory.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderHistory\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderHistory.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderHistory\:\:\$notify\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderHistory.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderHistory\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderHistory.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderHistory\:\:\$status_format\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderHistory.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderItemSimple\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderItemSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderItemSimple\:\:\$deleted_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderItemSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderItemSimple\:\:\$has_review\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderItemSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderItemSimple\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderItemSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderItemSimple\:\:\$image\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderItemSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderItemSimple\:\:\$item_type\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderItemSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderItemSimple\:\:\$item_type_label\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderItemSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderItemSimple\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderItemSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderItemSimple\:\:\$optionValues\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderItemSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderItemSimple\:\:\$order_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderItemSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderItemSimple\:\:\$order_number\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderItemSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderItemSimple\:\:\$price\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderItemSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderItemSimple\:\:\$price_format\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderItemSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderItemSimple\:\:\$product_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderItemSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderItemSimple\:\:\$product_sku\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderItemSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderItemSimple\:\:\$quantity\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderItemSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderItemSimple\:\:\$reference\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderItemSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderItemSimple\:\:\$subtotal\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderItemSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderItemSimple\:\:\$subtotal_format\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderItemSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderItemSimple\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderItemSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderItemSimple\:\:\$variant_label\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderItemSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderReturnHistory\:\:\$comment\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderReturnHistory.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderReturnHistory\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderReturnHistory.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderReturnHistory\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderReturnHistory.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderReturnHistory\:\:\$notify\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderReturnHistory.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderReturnHistory\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderReturnHistory.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderReturnHistory\:\:\$status_format\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderReturnHistory.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderShipment\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderShipment.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderShipment\:\:\$delivered_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderShipment.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderShipment\:\:\$express_code\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderShipment.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderShipment\:\:\$express_company\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderShipment.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderShipment\:\:\$express_number\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderShipment.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderShipment\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderShipment.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderShipment\:\:\$shipped_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderShipment.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderShipment\:\:\$warehouse_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderShipment.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderShipment\:\:\$warehouse_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderShipment.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderSimple\:\:\$admin_note\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderSimple\:\:\$billing_address_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderSimple\:\:\$calling_code\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderSimple\:\:\$comment\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderSimple\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderSimple\:\:\$currency_code\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderSimple\:\:\$currency_value\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderSimple\:\:\$customer_group_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderSimple\:\:\$customer_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderSimple\:\:\$customer_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderSimple\:\:\$deleted_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderSimple\:\:\$email\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderSimple\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderSimple\:\:\$ip\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderSimple\:\:\$items\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderSimple\:\:\$locale\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderSimple\:\:\$number\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderSimple\:\:\$shipping_address_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderSimple\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderSimple\:\:\$status_format\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderSimple\:\:\$telephone\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderSimple\:\:\$total\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderSimple\:\:\$total_format\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderSimple\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\OrderSimple\:\:\$user_agent\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/OrderSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\PageName\:\:\$active\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/PageName.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\PageName\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/PageName.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\PageName\:\:\$slug\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/PageName.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\PageName\:\:\$translation\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/PageName.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\PageSimple\:\:\$active\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/PageSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\PageSimple\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/PageSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\PageSimple\:\:\$url\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/PageSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ProductDetail\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Resources/ProductDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ProductDetail\:\:\$images\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ProductDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ProductDetail\:\:\$masterSku\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ProductDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ProductDetail\:\:\$relationProducts\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ProductDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ProductDetail\:\:\$sales\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ProductDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ProductDetail\:\:\$skus\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ProductDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ProductDetail\:\:\$slug\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ProductDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ProductDetail\:\:\$translation\.$#'
+			identifier: property.notFound
+			count: 3
+			path: niceshoply/common/src/Resources/ProductDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ProductDetail\:\:\$url\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ProductDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ProductDetail\:\:\$variables\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ProductDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ProductDetail\:\:\$viewed\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ProductDetail.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Common\\Resources\\ProductDetail\:\:groupedAttributes\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ProductDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ProductName\:\:\$active\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ProductName.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ProductName\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ProductName.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ProductName\:\:\$slug\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ProductName.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ProductName\:\:\$translation\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ProductName.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ProductSimple\:\:\$active\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ProductSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ProductSimple\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Resources/ProductSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ProductSimple\:\:\$masterSku\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ProductSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ProductSimple\:\:\$sales\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ProductSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ProductSimple\:\:\$slug\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ProductSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ProductSimple\:\:\$url\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ProductSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ProductSimple\:\:\$viewed\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ProductSimple.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Common\\Resources\\ProductSimple\:\:fallbackName\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: niceshoply/common/src/Resources/ProductSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\RegionDetail\:\:\$active\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/RegionDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\RegionDetail\:\:\$description\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/RegionDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\RegionDetail\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/RegionDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\RegionDetail\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/RegionDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\RegionDetail\:\:\$position\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/RegionDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ReviewListItem\:\:\$active\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ReviewListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ReviewListItem\:\:\$content\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ReviewListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ReviewListItem\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ReviewListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ReviewListItem\:\:\$customer\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ReviewListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ReviewListItem\:\:\$dislike\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ReviewListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ReviewListItem\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ReviewListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ReviewListItem\:\:\$like\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ReviewListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ReviewListItem\:\:\$order_item_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ReviewListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ReviewListItem\:\:\$product_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ReviewListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ReviewListItem\:\:\$rating\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ReviewListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ReviewListItem\:\:\$reply\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ReviewListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ReviewListItem\:\:\$reply_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ReviewListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ReviewListItem\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ReviewListItem.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Common\\Resources\\ReviewListItem\:\:hasImages\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ReviewListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ShipmentItemResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ShipmentItemResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ShipmentItemResource\:\:\$order_item_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ShipmentItemResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ShipmentItemResource\:\:\$quantity\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ShipmentItemResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ShipmentItemResource\:\:\$shipment_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ShipmentItemResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\ShipmentItemResource\:\:\$sku_code\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/ShipmentItemResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\SkuListItem\:\:\$code\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/SkuListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\SkuListItem\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/SkuListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\SkuListItem\:\:\$is_default\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/SkuListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\SkuListItem\:\:\$model\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/SkuListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\SkuListItem\:\:\$origin_price\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/SkuListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\SkuListItem\:\:\$origin_price_format\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/SkuListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\SkuListItem\:\:\$position\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/SkuListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\SkuListItem\:\:\$product_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/SkuListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\SkuListItem\:\:\$product_image_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/SkuListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\SkuListItem\:\:\$quantity\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/SkuListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\SkuListItem\:\:\$variants\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/SkuListItem.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Common\\Resources\\SkuListItem\:\:getFinalPrice\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/SkuListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\SkuSimple\:\:\$code\.$#'
+			identifier: property.notFound
+			count: 2
+			path: niceshoply/common/src/Resources/SkuSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\SkuSimple\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/SkuSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\SkuSimple\:\:\$model\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/SkuSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\SkuSimple\:\:\$origin_price\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/SkuSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\SkuSimple\:\:\$origin_price_format\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/SkuSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\SkuSimple\:\:\$product\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/SkuSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\SkuSimple\:\:\$product_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/SkuSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\SkuSimple\:\:\$quantity\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/SkuSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\SkuSimple\:\:\$variant_label\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/SkuSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\SkuSimple\:\:\$variants\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/SkuSimple.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Common\\Resources\\SkuSimple\:\:getFinalPrice\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/SkuSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\StateItem\:\:\$code\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/StateItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\StateItem\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/StateItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\StateItem\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/StateItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\StockMovementResource\:\:\$admin_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/StockMovementResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\StockMovementResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/StockMovementResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\StockMovementResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/StockMovementResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\StockMovementResource\:\:\$note\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/StockMovementResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\StockMovementResource\:\:\$quantity\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/StockMovementResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\StockMovementResource\:\:\$reference_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/StockMovementResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\StockMovementResource\:\:\$reference_type\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/StockMovementResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\StockMovementResource\:\:\$sku_code\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/StockMovementResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\StockMovementResource\:\:\$type\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/StockMovementResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\StockMovementResource\:\:\$warehouse_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/StockMovementResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\StockTransferResource\:\:\$admin_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/StockTransferResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\StockTransferResource\:\:\$completed_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/StockTransferResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\StockTransferResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/StockTransferResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\StockTransferResource\:\:\$from_warehouse_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/StockTransferResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\StockTransferResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/StockTransferResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\StockTransferResource\:\:\$note\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/StockTransferResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\StockTransferResource\:\:\$number\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/StockTransferResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\StockTransferResource\:\:\$shipped_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/StockTransferResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\StockTransferResource\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/StockTransferResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\StockTransferResource\:\:\$to_warehouse_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/StockTransferResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\TagListItem\:\:\$active\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/TagListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\TagListItem\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/TagListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\TagListItem\:\:\$position\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/TagListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\TagListItem\:\:\$slug\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/TagListItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\TagSimple\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/TagSimple.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\TaxRateDetail\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/TaxRateDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\TaxRateDetail\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/TaxRateDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\TaxRateDetail\:\:\$rate\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/TaxRateDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\TaxRateDetail\:\:\$type\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/TaxRateDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\WarehouseResource\:\:\$active\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/WarehouseResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\WarehouseResource\:\:\$address_1\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/WarehouseResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\WarehouseResource\:\:\$address_2\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/WarehouseResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\WarehouseResource\:\:\$city\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/WarehouseResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\WarehouseResource\:\:\$code\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/WarehouseResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\WarehouseResource\:\:\$contact_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/WarehouseResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\WarehouseResource\:\:\$contact_phone\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/WarehouseResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\WarehouseResource\:\:\$country\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/WarehouseResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\WarehouseResource\:\:\$country_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/WarehouseResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\WarehouseResource\:\:\$created_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/WarehouseResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\WarehouseResource\:\:\$description\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/WarehouseResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\WarehouseResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/WarehouseResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\WarehouseResource\:\:\$is_default\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/WarehouseResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\WarehouseResource\:\:\$latitude\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/WarehouseResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\WarehouseResource\:\:\$longitude\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/WarehouseResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\WarehouseResource\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/WarehouseResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\WarehouseResource\:\:\$priority\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/WarehouseResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\WarehouseResource\:\:\$state\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/WarehouseResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\WarehouseResource\:\:\$state_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/WarehouseResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\WarehouseResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/WarehouseResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\WarehouseResource\:\:\$zipcode\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/WarehouseResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\WarehouseStockResource\:\:\$available_quantity\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/WarehouseStockResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\WarehouseStockResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/WarehouseStockResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\WarehouseStockResource\:\:\$low_stock_threshold\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/WarehouseStockResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\WarehouseStockResource\:\:\$product_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/WarehouseStockResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\WarehouseStockResource\:\:\$quantity\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/WarehouseStockResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\WarehouseStockResource\:\:\$reserved_quantity\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/WarehouseStockResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\WarehouseStockResource\:\:\$sku_code\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/WarehouseStockResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\WarehouseStockResource\:\:\$sku_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/WarehouseStockResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\WarehouseStockResource\:\:\$updated_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/WarehouseStockResource.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Common\\Resources\\WarehouseStockResource\:\:\$warehouse_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/common/src/Resources/WarehouseStockResource.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 2
+			path: niceshoply/common/src/Services/BaseService.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Cart\\OptionValue\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Services/CartService.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Cart\\OptionValue\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Services/CartService.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Option\:\:find\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Services/CartService.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\OptionValue\:\:find\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Services/CartService.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Product\\OptionValue\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Services/CartService.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Product\\Sku\:\:find\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 2
+			path: niceshoply/common/src/Services/CartService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: niceshoply/common/src/Services/CartService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: niceshoply/common/src/Services/Checkout/BaseService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: niceshoply/common/src/Services/Checkout/BillingService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: niceshoply/common/src/Services/Checkout/ShippingService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 2
+			path: niceshoply/common/src/Services/CheckoutService.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Visit\\VisitEvent\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Services/EventTrackingService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: niceshoply/common/src/Services/Fee/BaseService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: niceshoply/common/src/Services/FilterSidebarService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: niceshoply/common/src/Services/NewsletterService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: niceshoply/common/src/Services/OrderService.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\PluginCoordination\:\:pluck\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Services/PluginCoordinationService.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\PluginCoordination\:\:updateOrCreate\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Services/PluginCoordinationService.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\PluginCoordination\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 2
+			path: niceshoply/common/src/Services/PluginCoordinationService.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Option\:\:find\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Services/ProductOptionService.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Option\:\:whereIn\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Services/ProductOptionService.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Product\\Option\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Services/ProductOptionService.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Product\\OptionValue\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Services/ProductOptionService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: niceshoply/common/src/Services/ProductOptionService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: niceshoply/common/src/Services/ShippingTraceService.php
+
+		-
+			message: '#^Variable \$gateway on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.variable
+			count: 1
+			path: niceshoply/common/src/Services/SmsService.php
+
+		-
+			message: '#^Variable \$data on left side of \?\? is never defined\.$#'
+			identifier: nullCoalesce.variable
+			count: 1
+			path: niceshoply/common/src/Services/StateMachineService.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Visit\\Visit\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Services/VisitEnrichService.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Visit\\ConversionDaily\:\:updateOrCreate\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Services/VisitStatisticsService.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Visit\\ConversionDaily\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Services/VisitStatisticsService.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Visit\\ConversionDaily\:\:whereBetween\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Services/VisitStatisticsService.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Visit\\VisitDaily\:\:updateOrCreate\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Services/VisitStatisticsService.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Visit\\VisitDaily\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Services/VisitStatisticsService.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Visit\\VisitDaily\:\:whereBetween\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Services/VisitStatisticsService.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Visit\\Visit\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Services/VisitTrackingService.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Visit\\Visit\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/common/src/Services/VisitTrackingService.php
+
+		-
+			message: '#^Call to an undefined static method PHPOpenSourceSaver\\JWTAuth\\Facades\\JWTAuth\:\:setToken\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/console/src/Middleware/GlobalConsoleData.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: niceshoply/console/src/Repositories/BaseRepo.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: niceshoply/console/src/Repositories/MenuSearchRepo.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: niceshoply/console/src/Repositories/RouteRepo.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Console\\Requests\\ArticleRequest\:\:\$article\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/console/src/Requests/ArticleRequest.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Console\\Requests\\BrandRequest\:\:\$brand\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/console/src/Requests/BrandRequest.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Console\\Requests\\CatalogRequest\:\:\$catalog\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/console/src/Requests/CatalogRequest.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Console\\Requests\\CategoryRequest\:\:\$category\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/console/src/Requests/CategoryRequest.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Console\\Requests\\CountryRequest\:\:\$country\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/console/src/Requests/CountryRequest.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Console\\Requests\\CustomerRequest\:\:\$customer\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/console/src/Requests/CustomerRequest.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Console\\Requests\\PageRequest\:\:\$page\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/console/src/Requests/PageRequest.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Console\\Requests\\ProductRequest\:\:\$product\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/console/src/Requests/ProductRequest.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Console\\Requests\\ProductRequest\:\:\$skus\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/console/src/Requests/ProductRequest.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Console\\Requests\\ProductRequest\:\:\$type\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/console/src/Requests/ProductRequest.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Console\\Requests\\ProductRequest\:\:\$variants\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/console/src/Requests/ProductRequest.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Console\\Requests\\StateRequest\:\:\$state\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/console/src/Requests/StateRequest.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Console\\Requests\\TagRequest\:\:\$tag\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/console/src/Requests/TagRequest.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Console\\Requests\\WeightClassRequest\:\:\$code\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/console/src/Requests/WeightClassRequest.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Console\\Resources\\ArticleNameResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/console/src/Resources/ArticleNameResource.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Console\\Resources\\PluginDetail\:\:checkActive\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/console/src/Resources/PluginDetail.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Console\\Resources\\PluginDetail\:\:checkInstalled\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/console/src/Resources/PluginDetail.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Console\\Resources\\PluginDetail\:\:getAuthor\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/console/src/Resources/PluginDetail.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Console\\Resources\\PluginDetail\:\:getCode\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: niceshoply/console/src/Resources/PluginDetail.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Console\\Resources\\PluginDetail\:\:getDirName\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/console/src/Resources/PluginDetail.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Console\\Resources\\PluginDetail\:\:getEditUrl\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/console/src/Resources/PluginDetail.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Console\\Resources\\PluginDetail\:\:getIcon\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/console/src/Resources/PluginDetail.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Console\\Resources\\PluginDetail\:\:getLocaleDescription\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/console/src/Resources/PluginDetail.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Console\\Resources\\PluginDetail\:\:getLocaleName\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/console/src/Resources/PluginDetail.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Console\\Resources\\PluginDetail\:\:getPath\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/console/src/Resources/PluginDetail.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Console\\Resources\\PluginDetail\:\:getType\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: niceshoply/console/src/Resources/PluginDetail.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Console\\Resources\\PluginDetail\:\:getVersion\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/console/src/Resources/PluginDetail.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Console\\Resources\\ProductNameResource\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/console/src/Resources/ProductNameResource.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: niceshoply/console/src/Services/BaseService.php
+
+		-
+			message: '#^Class NiceShoply\\Front\\Controllers\\Account\\PrivacyController not found\.$#'
+			identifier: class.notFound
+			count: 5
+			path: niceshoply/front/routes/web.php
+
+		-
+			message: '#^Variable \$callingCode in empty\(\) always exists and is not falsy\.$#'
+			identifier: empty.variable
+			count: 1
+			path: niceshoply/front/src/Controllers/Account/EditController.php
+
+		-
+			message: '#^Call to an undefined static method PHPOpenSourceSaver\\JWTAuth\\Facades\\JWTAuth\:\:setToken\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/front/src/Middleware/GlobalFrontData.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: niceshoply/front/src/Repositories/FooterMenuRepo.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: niceshoply/front/src/Repositories/HeaderMenuRepo.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: niceshoply/front/src/Repositories/HomeRepo.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: niceshoply/front/src/Services/BaseService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: niceshoply/front/src/Services/PaymentService.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Plugin\\Resources\\Checkout\\PaymentMethodItem\:\:\$plugin\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/plugin/src/Resources/Checkout/PaymentMethodItem.php
+
+		-
+			message: '#^Access to an undefined property NiceShoply\\Plugin\\Resources\\Checkout\\ShippingMethodItem\:\:\$plugin\.$#'
+			identifier: property.notFound
+			count: 1
+			path: niceshoply/plugin/src/Resources/Checkout/ShippingMethodItem.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Plugin\\Resources\\PluginResource\:\:checkInstalled\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/plugin/src/Resources/PluginResource.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Plugin\\Resources\\PluginResource\:\:getAuthor\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/plugin/src/Resources/PluginResource.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Plugin\\Resources\\PluginResource\:\:getCode\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/plugin/src/Resources/PluginResource.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Plugin\\Resources\\PluginResource\:\:getDirName\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/plugin/src/Resources/PluginResource.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Plugin\\Resources\\PluginResource\:\:getEditUrl\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/plugin/src/Resources/PluginResource.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Plugin\\Resources\\PluginResource\:\:getEnabled\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/plugin/src/Resources/PluginResource.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Plugin\\Resources\\PluginResource\:\:getFirstLetter\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/plugin/src/Resources/PluginResource.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Plugin\\Resources\\PluginResource\:\:getIconUrl\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/plugin/src/Resources/PluginResource.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Plugin\\Resources\\PluginResource\:\:getLocaleDescription\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/plugin/src/Resources/PluginResource.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Plugin\\Resources\\PluginResource\:\:getLocaleName\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/plugin/src/Resources/PluginResource.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Plugin\\Resources\\PluginResource\:\:getMenuUrl\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/plugin/src/Resources/PluginResource.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Plugin\\Resources\\PluginResource\:\:getPath\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/plugin/src/Resources/PluginResource.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Plugin\\Resources\\PluginResource\:\:getPriority\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/plugin/src/Resources/PluginResource.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Plugin\\Resources\\PluginResource\:\:getType\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/plugin/src/Resources/PluginResource.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Plugin\\Resources\\PluginResource\:\:getTypeFormat\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/plugin/src/Resources/PluginResource.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Plugin\\Resources\\PluginResource\:\:getVersion\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/plugin/src/Resources/PluginResource.php
+
+		-
+			message: '#^Call to an undefined method NiceShoply\\Plugin\\Resources\\PluginResource\:\:hasSeeders\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: niceshoply/plugin/src/Resources/PluginResource.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: niceshoply/plugin/src/Services/PluginService.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\NewsletterSubscriber\:\:count\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/restapi/src/ConsoleApiControllers/NewsletterController.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\NewsletterSubscriber\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/restapi/src/ConsoleApiControllers/NewsletterController.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\NewsletterSubscriber\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/restapi/src/ConsoleApiControllers/NewsletterController.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Customer\\Transaction\:\:create\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: niceshoply/restapi/src/FrontApiControllers/WalletController.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/AiAssistant/Services/AiAssistantService.php
+
+		-
+			message: '#^Access to an undefined property Plugin\\AiImageStudio\\Models\\AiImage\:\:\$path\.$#'
+			identifier: property.notFound
+			count: 1
+			path: plugins/AiImageStudio/Models/AiImage.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/AiImageStudio/Services/AiImageService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/AiMarketing/Services/AiMarketingService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/Alipay/Services/AlipayService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/AnalyticsAds/Services/AnalyticsService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/Backup/Services/BackupService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/BalancePay/Services/BalancePayService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/Bargain/Services/BargainService.php
+
+		-
+			message: '#^Access to an undefined property Plugin\\Booking\\Models\\BookingService\:\:\$open_weekdays\.$#'
+			identifier: property.notFound
+			count: 1
+			path: plugins/Booking/Models/BookingService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/Booking/Services/BookingService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/Bundle/Services/BundleService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/BuyXGetY/Services/BxgyService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/Captcha/Services/CaptchaService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/CartRecovery/Services/CartRecoveryService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/CartRule/Services/CartRuleService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/CnTracking/Services/TrackingService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/Coupon/Services/CouponService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/CouponCenter/Services/CouponCenterService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/DashboardBi/Services/DashboardService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/Distribution/Services/DistributionService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/EmailMarketing/Services/EmailMarketingService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/Ewaybill/Services/EWaybillService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/FlashSale/Services/FlashSaleService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/FreightInsurance/Services/FreightInsuranceService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/GiftCard/Services/GiftCardService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/GlobalIm/Services/GlobalImService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/GlobalPay/Services/GlobalPayService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/GroupBuy/Services/GroupBuyService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/ImageGuard/Services/ImageGuardService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/Invoice/Services/InvoiceService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/LiveChat/Services/LiveChatService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/LuckyDraw/Services/LuckyDrawService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/MarketingFlow/Services/MarketingFlowService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/Membership/Services/MembershipService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/MultiCurrency/Services/MultiCurrencyService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/MultiWarehouse/Services/WarehouseService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/NewCustomer/Services/NewCustomerService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/NotifyCenter/Services/NotifyService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/NotifyCenter/Services/SmsService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/OfflineRedeem/Services/RedeemService.php
+
+		-
+			message: '#^Array has 2 duplicate keys with value ''autoplay'' \(''autoplay'', ''autoplay''\)\.$#'
+			identifier: array.duplicateKey
+			count: 1
+			path: plugins/PageBuilder/Lang/en/editor.php
+
+		-
+			message: '#^Array has 2 duplicate keys with value ''enter_button_text'' \(''enter_button_text'', ''enter_button_text''\)\.$#'
+			identifier: array.duplicateKey
+			count: 1
+			path: plugins/PageBuilder/Lang/en/editor.php
+
+		-
+			message: '#^Array has 2 duplicate keys with value ''image_height_tip'' \(''image_height_tip'', ''image_height_tip''\)\.$#'
+			identifier: array.duplicateKey
+			count: 1
+			path: plugins/PageBuilder/Lang/en/editor.php
+
+		-
+			message: '#^Array has 2 duplicate keys with value ''autoplay'' \(''autoplay'', ''autoplay''\)\.$#'
+			identifier: array.duplicateKey
+			count: 1
+			path: plugins/PageBuilder/Lang/zh-cn/editor.php
+
+		-
+			message: '#^Array has 2 duplicate keys with value ''enter_button_text'' \(''enter_button_text'', ''enter_button_text''\)\.$#'
+			identifier: array.duplicateKey
+			count: 1
+			path: plugins/PageBuilder/Lang/zh-cn/editor.php
+
+		-
+			message: '#^Array has 2 duplicate keys with value ''image_height_tip'' \(''image_height_tip'', ''image_height_tip''\)\.$#'
+			identifier: array.duplicateKey
+			count: 1
+			path: plugins/PageBuilder/Lang/zh-cn/editor.php
+
+		-
+			message: '#^Variable \$value on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.variable
+			count: 1
+			path: plugins/PageBuilder/Services/DesignService.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Page\:\:find\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: plugins/PageBuilder/Services/PageBuilderService.php
+
+		-
+			message: '#^Call to an undefined static method NiceShoply\\Common\\Models\\Page\:\:where\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: plugins/PageBuilder/Services/PageBuilderService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/Points/Services/PointService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/PointsMall/Services/PointsMallService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/PopupNotice/Services/NoticeService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/Presale/Services/PresaleService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/PrintCenter/Services/PrintService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/PrivacyConsent/Services/PrivacyConsentService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/ProductFeed/Services/ProductFeedService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/ProductIo/Services/ProductIOService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/ProductQa/Services/ProductQAService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/PurchaseOrder/Services/PurchaseOrderService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/Recharge/Services/RechargeService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/Referral/Services/ReferralService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/ReturnLogistics/Services/ReturnLogisticsService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/ReviewAftersale/Services/AftersaleService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/ReviewAftersale/Services/ReviewService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/RiskControl/Services/RiskControlService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/SearchPlus/Services/SearchService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/SeoMaster/Services/SeoService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/SignIn/Services/SignInService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/SmartRecommend/Services/RecommendService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/SmsMarketing/Services/SmsMarketingService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/StockNotify/Services/StockNotifyService.php
+
+		-
+			message: '#^Anonymous function has an unused use \$sku\.$#'
+			identifier: closure.unusedUse
+			count: 1
+			path: plugins/Subscription/Services/SubscriptionService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/Subscription/Services/SubscriptionService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/TaxEngine/Services/TaxEngineService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/TranslatorAi/Services/TranslatorService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/UnionPay/Services/UnionPayService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/VirtualGoods/Services/VirtualGoodsService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/WechatMp/Services/WechatMpService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/WechatPay/Services/WechatPayService.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: plugins/Wholesale/Services/WholesaleService.php

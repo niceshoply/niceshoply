@@ -1,0 +1,18 @@
+{
+    "code": "multi_warehouse",
+    "name": {
+        "zh-cn": "多仓库存",
+        "en": "Multi Warehouse"
+    },
+    "description": {
+        "zh-cn": "多仓库存：管理多个仓库及 SKU 分仓库存，支持库存调拨、同步汇总到 SKU 总库存、就近分仓推荐 API。适用于多地域发货与库存分仓管理。",
+        "en": "Multi-warehouse inventory: manage warehouses and per-SKU stock, transfers, sync totals to SKU quantity, and nearest-warehouse allocation API for regional fulfillment."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-building",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

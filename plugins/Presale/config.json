@@ -1,0 +1,18 @@
+{
+    "code": "presale",
+    "name": {
+        "zh-cn": "预售定金",
+        "en": "Pre-Sale"
+    },
+    "description": {
+        "zh-cn": "预售活动：为 SKU 配置预售价、定金与定金膨胀(可抵金额)、预售时段与发货日期；预售期内购买自动按预售价并叠加定金膨胀抵扣，前台展示预售信息。",
+        "en": "Pre-sale: configure presale price, deposit and deposit-expansion (creditable amount), presale window and ship date per SKU; during presale, apply presale price plus deposit-expansion discount, with storefront presale info."
+    },
+    "type": "marketing",
+    "version": "v1.0.0",
+    "icon": "bi-hourglass-split",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

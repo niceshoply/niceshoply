@@ -1,0 +1,18 @@
+{
+    "code": "invoice",
+    "name": {
+        "zh-cn": "电子发票",
+        "en": "E-Invoice"
+    },
+    "description": {
+        "zh-cn": "电子发票申请与管理：会员对已付款订单申请开票（个人/企业抬头、税号、内容、邮箱），后台审核开具并回填发票文件/号码，支持驳回。",
+        "en": "E-invoice requests & management: members request invoices for paid orders (personal/company title, tax No., email); admin issues, fills invoice file/number, or rejects."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-receipt",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

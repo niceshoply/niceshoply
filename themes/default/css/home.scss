@@ -1,0 +1,66 @@
+/*
+ * ============================================================
+ * 【文件说明】首页专属样式文件
+ * 【对应模板】resources/views/home.blade.php
+ * ============================================================
+ *
+ * 【关键 CSS 类】
+ *   body.page-home                  - 首页 body 作用域，样式均限定在首页内
+ *   .module-title-wrap              - 首页各模块（商品、新闻等）的标题区块容器
+ *     .module-title                 - 模块大标题，居中展示，桌面端 2rem，移动端 1.4rem
+ *     .module-sub-title             - 模块副标题，浅灰色说明文字，最大宽 840px
+ *   .module-line                    - 模块间分隔间距容器，桌面端 40px，移动端 20px
+ *
+ * 【使用说明】
+ *   首页各内容模块（轮播图、商品Tab、文章列表等）复用以上标题结构，
+ *   通过 .module-title-wrap 统一控制模块标题样式。
+ *
+ * 【自定义建议】
+ *   - 修改 .module-title 的 font-size 可调整首页模块标题大小
+ *   - 修改 .module-sub-title 的 color（#768088）可更改副标题颜色
+ *   - 可在 body.page-home 内追加首页专属的 Banner、活动区块等样式
+ * ============================================================
+ */
+
+body.page-home {
+  .module-title-wrap {
+    margin-bottom: 30px;
+
+    .module-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: .7rem;
+      position: relative;
+      color: #222;
+
+      @media (max-width: 768px) {
+        font-size: 1.4rem;
+        margin-bottom: .2rem;
+      }
+    }
+
+    .module-sub-title {
+      text-align: center;
+      font-size: 1rem;
+      color: #768088;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.4;
+      max-width: 840px;
+
+      @media (max-width: 768px) {
+        font-size: .87rem;
+      }
+    }
+  }
+
+  .module-line {
+    margin-bottom: 20px;
+
+    @media (min-width: 768px) {
+      margin-bottom: 40px;
+    }
+  }
+}
+

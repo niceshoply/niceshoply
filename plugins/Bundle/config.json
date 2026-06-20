@@ -1,0 +1,18 @@
+{
+    "code": "bundle",
+    "name": {
+        "zh-cn": "套装组合",
+        "en": "Product Bundle"
+    },
+    "description": {
+        "zh-cn": "套装组合销售：配置「指定商品组合 + 套装价」，当购物车包含套装内全部商品(满足数量)时，自动以负向费用项抵扣差价(原价合计 - 套装价)，结算实时生效。支持多套装、启用开关。",
+        "en": "Bundle deals: define a set of products with a bundle price; when the cart contains all bundle items (meeting quantities), the price gap (normal total - bundle price) is auto-applied as a discount fee at checkout. Supports multiple bundles and an on/off switch."
+    },
+    "type": "marketing",
+    "version": "v1.0.0",
+    "icon": "bi-box-seam",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

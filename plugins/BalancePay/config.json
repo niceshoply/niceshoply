@@ -1,0 +1,18 @@
+{
+    "code": "balance_pay",
+    "name": {
+        "zh-cn": "余额支付",
+        "en": "Balance Pay"
+    },
+    "description": {
+        "zh-cn": "余额支付：会员使用账户余额(钱包)直接支付订单，确认即扣减余额并标记订单已支付，写入消费流水；余额不足提示去充值。",
+        "en": "Balance Pay: members pay orders directly with their wallet balance; confirming deducts balance, marks the order paid and logs a consumption transaction."
+    },
+    "type": "billing",
+    "version": "v1.0.0",
+    "icon": "bi-wallet2",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

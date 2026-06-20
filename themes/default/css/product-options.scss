@@ -1,0 +1,224 @@
+/*
+ * ============================================================
+ * 【文件说明】商品附加选项组件样式（独立版本）
+ * 【对应模板】商品详情页中的 product-options 组件（如 Vue 组件或 Blade 片段）
+ * ============================================================
+ *
+ * 【说明】
+ *   本文件定义的 .product-options-box 是商品附加选项的独立组件样式（与 page-product.scss
+ *   中的 .product-options 类似，但作用域不同，本文件为全局可复用版本）。
+ *   适用于在购物车页或弹窗中二次配置商品选项的场景。
+ *
+ * 【关键 CSS 类】
+ *   .product-options-box              - 选项区域外层容器
+ *   .options-title                    - 选项区标题（16px，深色）
+ *   .product-option-group             - 单个选项组
+ *     .product-option-group.error     - 错误状态：标题变红，values 区域显示红框
+ *     .option-group-title             - 选项组标题（14px，含必填标识 .text-danger）
+ *     .option-values                  - 选项值列表容器（flex 换行）
+ *   .option-value-item                - 单个选项值按钮
+ *     .option-value-item:hover        - 悬停：蓝色边框+阴影
+ *     .option-value-item.selected     - 已选中：蓝色背景+边框
+ *     .option-image-container         - 选项图片容器（30x30px）
+ *       .option-value-image           - 选项图片（cover 填充）
+ *     .option-content                 - 选项文字内容区
+ *       .option-text                  - 选项名称（14px）
+ *       .option-price-adjustment      - 价格调整金额（绿色，自动加括号）
+ *     .option-checkbox                - 右上角已选勾（默认隐藏，选中时显示）
+ *
+ * 【响应式】
+ *   768px 以下：减小内边距、字体、图片尺寸，更紧凑排列
+ *
+ * 【深色模式支持】
+ *   通过 prefers-color-scheme: dark 媒体查询，在系统深色模式下自动切换为深色背景
+ *
+ * 【自定义建议】
+ *   - 选中颜色（#0d6efd 蓝色）可改为 $primary 以与主题色保持一致
+ *   - 深色模式下选中背景色 #1e3a5f 可按需调整
+ * ============================================================
+ */
+
+// Product options styles
+.product-options-box {
+  margin: 20px 0;
+  
+  .options-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .product-option-group {
+    margin-bottom: 20px;
+    
+    &.error {
+      .option-group-title {
+        color: #dc3545;
+      }
+      
+      .option-values {
+        border: 1px solid #dc3545;
+        border-radius: 4px;
+        padding: 10px;
+      }
+    }
+    
+    .option-group-title {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 10px;
+      color: #555;
+      
+      .text-danger {
+        margin-left: 2px;
+      }
+    }
+    
+    .option-values {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    
+    .option-value-item {
+      display: flex;
+      align-items: center;
+      padding: 8px 12px;
+      border: 1px solid #dee2e6;
+      border-radius: 6px;
+      background: #fff;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      min-height: 40px;
+      position: relative;
+      
+      &:hover {
+        border-color: #0d6efd;
+        box-shadow: 0 2px 4px rgba(13, 110, 253, 0.15);
+      }
+      
+      &.selected {
+        border-color: #0d6efd;
+        background: #e7f1ff;
+        color: #0d6efd;
+        
+        .option-checkbox {
+          opacity: 1;
+        }
+      }
+      
+      .option-image-container {
+        width: 30px;
+        height: 30px;
+        border-radius: 4px;
+        overflow: hidden;
+        margin-right: 8px;
+        flex-shrink: 0;
+        
+        .option-value-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+      
+      .option-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        
+        .option-text {
+          font-size: 14px;
+          line-height: 1.2;
+          margin-bottom: 2px;
+        }
+        
+        .option-price-adjustment {
+          font-size: 12px;
+          color: #28a745;
+          font-weight: 500;
+          
+          &:before {
+            content: '(';
+          }
+          
+          &:after {
+            content: ')';
+          }
+        }
+      }
+      
+      .option-checkbox {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        width: 16px;
+        height: 16px;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+        pointer-events: none;
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .product-options-box {
+    .option-values {
+      gap: 8px;
+    }
+    
+    .option-value-item {
+      padding: 6px 10px;
+      min-height: 36px;
+      
+      .option-content {
+        .option-text {
+          font-size: 13px;
+        }
+        
+        .option-price-adjustment {
+          font-size: 11px;
+        }
+      }
+      
+      .option-image-container {
+        width: 24px;
+        height: 24px;
+        margin-right: 6px;
+      }
+    }
+  }
+}
+
+// Dark theme support
+@media (prefers-color-scheme: dark) {
+  .product-options-box {
+    .options-title {
+      color: #f8f9fa;
+    }
+    
+    .option-group-title {
+      color: #dee2e6;
+    }
+    
+    .option-value-item {
+      background: #343a40;
+      border-color: #495057;
+      color: #f8f9fa;
+      
+      &:hover {
+        border-color: #0d6efd;
+        background: #495057;
+      }
+      
+      &.selected {
+        background: #1e3a5f;
+        border-color: #0d6efd;
+        color: #79c0ff;
+      }
+    }
+  }
+}

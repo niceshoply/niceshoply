@@ -1,0 +1,158 @@
+/*
+ * ============================================================
+ * 【文件说明】购物车页面样式文件
+ * 【对应模板】resources/views/cart.blade.php
+ * ============================================================
+ *
+ * 【关键 CSS 类】
+ *   body.page-cart                  - 购物车页 body 作用域
+ *   .products-table                 - 购物车商品表格
+ *     .product-item                 - 商品信息区（flex 横向排列）
+ *     .product-name                 - 商品名称（深色，hover 下划线+主题色）
+ *     .td-image                     - 图片单元格（桌面端 70px，手机端 100px）
+ *     .product-image                - 商品图片容器（手机端 90x90，桌面端 50x50）
+ *     .quantity-wrap                - 数量加减组件（尺寸比全局版本小）
+ *   移动端隐藏：thead、.td-price、.td-subtotal（隐藏价格列）
+ *   .mb-price                       - 移动端显示的价格（桌面端隐藏）
+ *   .cart-data                      - 购物车右侧汇总面板（浅灰背景）
+ *     .title                        - "订单汇总"等标题（20px 加粗）
+ *     .cart-data-list               - 费用明细列表
+ *       li:last-child span:last-child - 总价（加粗，$price 红色，24px）
+ *
+ * 【自定义建议】
+ *   - .cart-data 背景色（#F8F9FA）可改为白色或其他颜色
+ *   - 总价颜色使用 $price 变量，修改 _variables.scss 即可
+ *   - 移动端表格布局可通过调整各 td 的 display 属性定制
+ * ============================================================
+ */
+
+body.page-cart {
+  .products-table {
+    .product-item {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .product-name {
+      color: #222;
+      a {
+        color: inherit;
+
+        &:hover {
+          text-decoration: underline;
+          color: $primary;
+        }
+      }
+    }
+
+    .td-image {
+      width: 100px;
+      padding: 0;
+
+      @media (min-width: 768px) {
+        width: 70px;
+      }
+    }
+
+    .product-image {
+      width: 90px;
+      height: 90px;
+
+      @media (min-width: 768px) {
+        margin-right: 10px;
+        width: 50px;
+        height: 50px;
+      }
+
+      img {
+        max-height: 100%;
+      }
+    }
+
+    .quantity-wrap {
+      height: 27px;
+      width: 90px;
+
+      > div {
+        font-size: 14px;
+      }
+
+      @media (min-width: 768px) {
+        height: 40px;
+        width: 120px;
+        > div {
+          font-size: 18px;
+        }
+      }
+
+      input {
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      tr {
+        position: relative;
+      }
+
+      thead, .td-price, .td-subtotal {
+        display: none;
+      }
+
+      .td-product-check {
+        padding-left: 0;
+      }
+
+      .td-product-info {
+        width: 100%;
+        padding: 20px 0 20px 10px;
+      }
+
+      .td-delete {
+        padding-right: 0;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .mb-price {
+        display: none;
+      }
+    }
+  }
+
+  .cart-data {
+    background-color: #F8F9FA;
+    padding: 26px;
+
+    .title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .cart-data-list {
+      list-style: none;
+      padding: 0;
+
+      > li {
+        border-bottom: 1px solid #eee;
+        padding: 16px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 15px;
+
+        &:last-child {
+          border-bottom: none;
+          > span {
+            &:last-child {
+              font-weight: bold;
+              color: $price;
+              font-size: 24px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

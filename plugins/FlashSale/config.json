@@ -1,0 +1,18 @@
+{
+    "code": "flash_sale",
+    "name": {
+        "zh-cn": "限时秒杀",
+        "en": "Flash Sale"
+    },
+    "description": {
+        "zh-cn": "限时秒杀活动：按 SKU 设置秒杀价与时段，活动期间结算自动按秒杀价抵扣差价，支持限量。",
+        "en": "Time-limited flash sales: set per-SKU sale price and time window. The price gap is auto-deducted at checkout during the active window, with optional quantity limits."
+    },
+    "type": "marketing",
+    "version": "v1.0.0",
+    "icon": "bi-lightning-charge",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

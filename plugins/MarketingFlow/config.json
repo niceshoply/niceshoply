@@ -1,0 +1,18 @@
+{
+    "code": "marketing_flow",
+    "name": {
+        "zh-cn": "营销自动化",
+        "en": "Marketing Flow"
+    },
+    "description": {
+        "zh-cn": "营销自动化：基于事件触发的自动化旅程。监听注册成功/下单成功/支付成功等事件，按规则(可设延时)自动给会员发送站内信触达，支持立即或定时(marketing:flow 命令)执行，含触达任务记录与统计。复用通知中心通道。",
+        "en": "Marketing automation: event-triggered journeys. Listens to register/order-placed/order-paid events and sends member notifications by rule (with optional delay), executed immediately or via the marketing:flow command, with job logs and stats. Reuses Notify Center."
+    },
+    "type": "marketing",
+    "version": "v1.0.0",
+    "icon": "bi-diagram-3",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

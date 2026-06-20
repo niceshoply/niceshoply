@@ -1,0 +1,244 @@
+/*
+ * ============================================================
+ * 【文件说明】用户个人中心页面样式文件
+ * 【对应模板】resources/views/account.blade.php（及所有用户中心子页面）
+ * ============================================================
+ *
+ * 【关键 CSS 类】
+ *
+ * — 通用卡片（用户中心所有页面共用）—
+ *   .account-card-box                   - 内容卡片容器（带边框，移动端 16px 内边距，桌面端 30px）
+ *   .account-card-title                 - 卡片主标题（字号 16px/20px，加粗）
+ *   .account-card-sub-title             - 卡片副标题（16px 加粗）
+ *
+ * — 账户主页 —
+ *   body.page-account                   - 个人中心 body 作用域
+ *   .account-info .account-data         - 账户数据统计区域（带分隔线，顶部间距 50px）
+ *     .account-item-data                - 单项数据（居中）
+ *       .value                          - 数值（2rem 加粗）
+ *   .account-info .no-order             - 无订单空状态提示（灰色背景）
+ *
+ * — 侧边导航栏 —
+ *   .account-sidebar                    - 左侧用户信息+导航栏容器（带边框）
+ *   .account-user                       - 用户头像+姓名区（带底部分隔线）
+ *     .profile                          - 头像圆形容器（60x60px，圆形边框）
+ *     .account-name .name               - 用户显示名称（0.9rem）
+ *   .account-links                      - 导航链接列表
+ *     li.active a                       - 当前选中的菜单项（$primary 左侧竖线标记）
+ *     a                                 - 导航链接（灰色，hover 深色，flex 带图标）
+ *       i                               - 菜单图标（20px，#222 深色）
+ *
+ * — 通用表格 —
+ *   .account-table-box                  - 用户中心表格容器（th/td 无左右内边距）
+ *
+ * 【自定义建议】
+ *   - .account-links li.active a 的左侧竖线使用 $primary 颜色
+ *   - 侧边栏宽度由 Bootstrap Grid 的 col 比例控制
+ *   - 可为 .account-sidebar 添加 sticky 定位使其固定在屏幕左侧（长页面时）
+ * ============================================================
+ */
+
+// ============================================================
+// 【文件说明】用户中心通用页面样式文件
+// 【对应模板】
+//   views/account/ 目录下所有页面（home、orders、addresses、edit 等）
+//   views/shared/account-sidebar.blade.php — 侧边栏局部模板
+// ============================================================
+//
+// 【关键 CSS 类】
+//
+// — 通用卡片容器 —
+//   .account-card-box          - 用户中心各功能页的主内容卡片（带边框 #ECF0F4）
+//                                桌面端最小高度 621px，内边距 16px（移动）/ 30px（桌面）
+//   .account-card-title        - 卡片标题区域（底部 30px margin，字号 16px/20px 加粗）
+//   .account-card-sub-title    - 卡片副标题区域（底部 16px margin，字号 16px 加粗）
+//
+// — 用户中心首页（body.page-account）—
+//   .account-info              - 账户信息容器
+//   .account-data              - 数据统计区域（带上下分隔线，上下 margin 50px）
+//   .account-item-data         - 单项统计数据（居中显示）
+//     .value                   - 数值（2rem 加粗）
+//     .title                   - 标签说明文字
+//   .no-order                  - 无订单空状态（灰色背景 #f6f6f6）
+//
+// — 侧边栏导航（.account-sidebar）—
+//   .account-sidebar           - 左侧导航栏容器（带边框 #e8eef3，底部 20px margin）
+//   .account-user              - 用户头像 + 名称区（带底部分隔线）
+//     .profile                 - 头像圆形容器（60×60px，圆形边框，overflow hidden）
+//     .account-name .name      - 用户名称（0.9rem）
+//   .account-links             - 导航链接列表（无 list-style）
+//     li.active a              - 当前激活菜单（$primary 左侧竖线标记，文字变深色）
+//     a                        - 导航链接（灰色 #7C818B，左侧 2px 透明竖线占位）
+//     a i                      - 菜单图标（深色，20px，右侧 20px margin）
+//
+// — 表格 —
+//   .account-table-box         - 用户中心通用表格（th/td 无左右内边距，th 无底部边框）
+//
+// 【自定义建议】
+//   - 修改激活菜单竖线颜色：li.active a 的 border-left-color（使用 $primary）
+//   - 修改侧边栏最小高度：调整 .account-card-box 的 min-height 值
+//   - 若需侧边栏折叠（移动端汉堡菜单），在 .account-links 上添加 collapse 类和切换按钮
+//   - 卡片内边距统一管理：修改 .account-card-box 的 padding 同步影响所有用户中心页
+// ============================================================
+
+.account-card-box {
+  border: 1px solid #ECF0F4;
+  padding: 16px;
+
+  @media (min-width: 992px) {
+    min-height: 621px;
+  }
+
+  @media (min-width: 768px) {
+    padding: 30px;
+  }
+
+  .account-card-title {
+    margin-bottom: 30px;
+
+    span {
+      font-size: 16px;
+      font-weight: bold;
+
+      @media (min-width: 768px) {
+        font-size: 20px;
+      }
+    }
+  }
+
+  .account-card-sub-title {
+    margin-bottom: 16px;
+
+    span {
+      font-size: 16px;
+      font-weight: bold;
+    }
+  }
+}
+
+body.page-account {
+  .account-info {
+    .account-data {
+      border-bottom: 1px solid #ECF0F4;
+      margin-bottom: 50px;
+      padding-bottom: 50px;
+      margin-top: 50px;
+
+      .account-item-data {
+        text-align: center;
+
+        .value {
+          font-size: 2rem;
+          font-weight: bold;
+        }
+
+        .title {
+          // color: #000;
+        }
+      }
+    }
+
+    .no-order {
+      background-color: #f6f6f6;
+      font-size: 1rem;
+
+      a {
+        color: #457C46;
+      }
+    }
+  }
+}
+
+.account-sidebar {
+  border: 1px solid #e8eef3;
+  margin-bottom: 20px;
+
+  .account-user {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #e8eef3;
+    margin: 16px;
+    padding-bottom: 20px;
+
+    @media (min-width: 768px) {
+      margin: 30px;
+      padding-bottom: 30px;
+    }
+
+    .profile {
+      width: 60px;
+      height: 60px;
+      flex: 0 0 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #e8eef3;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: 14px;
+    }
+
+    .account-name {
+      .name {
+        font-size: .9rem;
+      }
+    }
+  }
+
+  .account-links {
+    list-style: none;
+    padding-left: 0;
+    li {
+      &.active {
+        a {
+          color: #222;
+          border-left: 2px solid $primary;
+        }
+      }
+
+      a {
+        color: #7C818B;
+        padding: 6px 10px 6px 18px;
+        margin: 20px 0;
+        border-left: 2px solid transparent;
+        display: flex;
+        font-weight: bold;
+        align-items: center;
+        font-size: 1rem;
+        line-height: 1;
+
+        @media (min-width: 768px) {
+          padding: 6px 10px 6px 30px;
+          margin: 26px 0;
+        }
+
+        &:hover {
+          color: #222;
+        }
+
+        i {
+          color: #222;
+          font-size: 20px;
+          margin-right: 20px;
+        }
+      }
+    }
+  }
+}
+
+.account-table-box {
+  th, td {
+    padding: 10px 0;
+  }
+
+  th {
+    border-bottom: none;
+    font-size: 14px;
+  }
+
+  tr:last-child {
+    td {
+      border-bottom: none;
+    }
+  }
+}

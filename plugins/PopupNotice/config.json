@@ -1,0 +1,18 @@
+{
+    "code": "popup_notice",
+    "name": {
+        "zh-cn": "营销弹窗与公告",
+        "en": "Popup & Announcement"
+    },
+    "description": {
+        "zh-cn": "营销弹窗与公告：后台配置首页/全站弹窗与顶部公告条，支持图片/链接/定时投放，前台自动注入，弹窗按天去重(本地存储)。",
+        "en": "Marketing popups & announcement bar: configure homepage/site-wide popups and a top bar with image/link/scheduling; auto-injected to storefront, popups deduped per day via local storage."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-megaphone",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

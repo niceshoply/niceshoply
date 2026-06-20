@@ -1,0 +1,41 @@
+/*
+ * ============================================================
+ * 【文件说明】阿里 iconfont 图标字体引入文件
+ * 【对应模板】所有使用 .iconfont 类的模板页面
+ * ============================================================
+ *
+ * 【文件作用】
+ *   引入自定义 iconfont 图标字体，配合 .iconfont 类和具体图标类名使用。
+ *   字体文件存放在 /vendor/iconfont/ 目录下，支持 woff/ttf/svg 格式兼容。
+ *
+ * 【关键 CSS 类】
+ *   .iconfont - 图标字体基础类，使用时配合具体图标字符（如 &#xe600; 或 :before 伪元素）
+ *
+ * 【字体文件格式说明】
+ *   - woff   - 现代浏览器优先使用
+ *   - ttf    - 兼容性备选格式
+ *   - svg    - 旧版 iOS Safari 兼容（一般不再需要）
+ *   URL 中的 t 参数为版本戳（用于缓存破坏），更新图标后需修改此参数
+ *
+ * 【自定义建议】
+ *   - 如需添加新图标，在阿里图标库项目中下载新版字体文件并替换 /vendor/iconfont/ 下的文件
+ *   - 同时更新 URL 中的 t 版本戳（如 t=新时间戳）以强制浏览器刷新缓存
+ *   - 若全站改用 Bootstrap Icons（已引入），可考虑逐步减少 iconfont 的使用
+ * ============================================================
+ */
+
+@font-face {
+  font-family: 'iconfont';
+  src: url('/vendor/iconfont/iconfont.woff?t=da7sdjkashd789das') format('woff'),
+  url('/vendor/iconfont/iconfont.ttf?t=da7sdjkashd789das') format('truetype'),
+  url('/vendor/iconfont/iconfont.svg#iconfont') format('svg');
+}
+
+.iconfont {
+  font-family: "iconfont";
+  font-size: 1rem;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}

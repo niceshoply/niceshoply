@@ -1,0 +1,87 @@
+/*
+ * ============================================================
+ * 【文件说明】订单页面样式文件
+ * 【对应模板】resources/views/order.blade.php（订单列表页）
+ *           resources/views/order-info.blade.php（订单详情页）
+ * ============================================================
+ *
+ * 【关键 CSS 类】
+ *
+ * — 订单列表页 —
+ *   body.page-order                       - 订单列表页 body 作用域
+ *   body.page-order .account-card-title   - 页面标题卡片
+ *   body.page-order .tabs-plus            - 状态筛选 Tab（全部/待付款/已完成等）
+ *   body.page-order .order_return         - 退货申请区域（左内边距 20px）
+ *   body.page-order .table-responsive     - 订单表格（顶部间距 50px）
+ *
+ * — 订单详情页 —
+ *   body.page-order-info                  - 订单详情页 body 作用域
+ *   .products-table                       - 订单商品明细表格（无左右内边距）
+ *   .product-item                         - 商品行（flex 横向排列）
+ *     .product-image                      - 商品图片（50x50px，带圆角边框）
+ *       .icon-quantity                    - 数量角标（$primary 背景，圆形）
+ *
+ * 【自定义建议】
+ *   - .icon-quantity 使用 $primary 变量，修改主题色即可
+ *   - 可在 .tabs-plus 的 active tab 样式中自定义颜色（继承 global.scss 中的定义）
+ * ============================================================
+ */
+
+body.page-order {
+  .account-card-title {
+    margin-bottom: 16px;
+  }
+
+  .tabs-plus {
+    margin-bottom: 16px;
+  }
+   .order_return{
+    padding-left:20px !important;
+   }
+  .table-responsive{
+    margin-top: 50px;
+  }
+}
+
+
+body.page-order-info {
+  .products-table {
+    td,th {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .product-item {
+      display: flex;
+      align-items: center;
+
+      .product-image {
+        width: 50px;
+        height: 50px;
+        margin-right: 14px;
+        border: 1px solid #e3e3e3;
+        border-radius: 4px;
+        position: relative;
+
+        .icon-quantity {
+          position: absolute;
+          top: -5px;
+          right: -10px;
+          background-color: $primary;
+          color: #fff;
+          font-size: 9px;
+          border-radius: 50%;
+          width: 18px;
+          height: 18px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        img {
+          max-height: 100%;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+<form action="{{ account_route('reviews.store') }}" method="POST" class="mn-review-form">
+  @csrf
+  {nice:if isset($order)}
+    <input type="hidden" name="order_number" value="">
+    <input type="hidden" name="order_item_id" value="">
+    <input type="hidden" name="product_sku" value="">
+  {nice:else}
+    <input type="hidden" name="product_id" value="{{ $product->id ?? '' }}">
+  {/nice:if}
+
+  <div class="review-form-header">
+    <span class="review-form-label">{{ __('front/product.input_your_review') }}</span>
+    <div class="mn-rating">
+      <input type="radio" name="rating" value="5" id="r5" checked><label for="r5">&#9733;</label>
+      <input type="radio" name="rating" value="4" id="r4"><label for="r4">&#9733;</label>
+      <input type="radio" name="rating" value="3" id="r3"><label for="r3">&#9733;</label>
+      <input type="radio" name="rating" value="2" id="r2"><label for="r2">&#9733;</label>
+      <input type="radio" name="rating" value="1" id="r1"><label for="r1">&#9733;</label>
+    </div>
+  </div>
+
+  <textarea class="mn-review-textarea" name="content" rows="4" placeholder="{{ __('front/product.input_some_text_here') }}..."></textarea>
+
+  <div style="text-align:right;margin-top:12px;">
+    <button type="submit" class="mn-btn mn-btn-fill submit_review">{{ __('front/product.submit_review') }}</button>
+  </div>
+</form>

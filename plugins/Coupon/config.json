@@ -1,0 +1,18 @@
+{
+    "code": "coupon",
+    "name": {
+        "zh-cn": "优惠券",
+        "en": "Coupon"
+    },
+    "description": {
+        "zh-cn": "优惠券营销插件，支持满减券、折扣券、免运费券，按门槛/有效期/限领限用进行管理，结算时自动抵扣。",
+        "en": "Coupon marketing plugin supporting fixed/percent/free-shipping coupons with thresholds, validity windows and usage limits. Discount is applied automatically at checkout."
+    },
+    "type": "marketing",
+    "version": "v1.0.0",
+    "icon": "bi-ticket-perforated",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

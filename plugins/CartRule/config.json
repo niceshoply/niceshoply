@@ -1,0 +1,18 @@
+{
+    "code": "cart_rule",
+    "name": {
+        "zh-cn": "满减满赠",
+        "en": "Cart Rule"
+    },
+    "description": {
+        "zh-cn": "购物车满减规则，支持多档阶梯（满 X 减 Y / 满 X 打折），结算时自动匹配最优档位抵扣。",
+        "en": "Cart price rules supporting tiered thresholds (spend X get Y off / percentage off). The best matching tier is applied automatically at checkout."
+    },
+    "type": "marketing",
+    "version": "v1.0.0",
+    "icon": "bi-cart-check",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

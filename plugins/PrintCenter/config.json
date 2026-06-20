@@ -1,0 +1,18 @@
+{
+    "code": "print_center",
+    "name": {
+        "zh-cn": "单据打印",
+        "en": "Print Center"
+    },
+    "description": {
+        "zh-cn": "单据打印中心：按订单批量生成拣货单/发货单 HTML 打印页，含商品明细、收货地址与备注，支持浏览器一键打印。",
+        "en": "Print center: batch-generate picking lists and packing slips as printable HTML for orders, with line items and shipping address."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-printer",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

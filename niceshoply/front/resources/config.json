@@ -1,0 +1,17 @@
+{
+    "code": "default",
+    "name": {
+        "zh-cn": "NiceShoply 默认模板",
+        "en": "NiceShoply Default Theme"
+    },
+    "description": {
+        "zh-cn": "NiceShoply 默认模板",
+        "en": "NiceShoply Default Theme"
+    },
+    "version": "v1.0.0",
+    "icon": "/images/logo.png",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

@@ -1,0 +1,33 @@
+{nice:extends layout="app"}
+{nice:section name="body-class" value="page-news-details"}
+
+@section('title', \NiceShoply\Common\Libraries\MetaInfo::getInstance($page)->getTitle())
+@section('description', \NiceShoply\Common\Libraries\MetaInfo::getInstance($page)->getDescription())
+@section('keywords', \NiceShoply\Common\Libraries\MetaInfo::getInstance($page)->getKeywords())
+
+{nice:section name="content"}
+
+  {nice:if $page->show_breadcrumb}
+    <div class="ls-breadcrumb">
+      <a href="{{ front_route('home.index') }}">{{ __('front/common.home') }}</a>
+      <span class="separator">/</span>
+      <span class="current">{{ $page->translation->title }}</span>
+    </div>
+  {/nice:if}
+
+  {nice:hook "page.show.top"}
+
+  {nice:if isset($result)}
+    {!! $result !!}
+  {nice:else}
+    <div class="ls-page-content">
+      <h1 class="ls-page-title">{{ $page->translation->title }}</h1>
+      <div class="ls-page-body">
+        {!! $page->translation->content !!}
+      </div>
+    </div>
+  {/nice:if}
+
+  {nice:hook "page.show.bottom"}
+
+{/nice:section}

@@ -1,0 +1,225 @@
+{nice:extends layout="app"}
+{nice:section name="body-class" value="page-product"}
+
+@section('title', \NiceShoply\Common\Libraries\MetaInfo::getInstance($product)->getTitle())
+@section('description', \NiceShoply\Common\Libraries\MetaInfo::getInstance($product)->getDescription())
+@section('keywords', \NiceShoply\Common\Libraries\MetaInfo::getInstance($product)->getKeywords())
+
+{nice:push name="header"}
+  <script src="{{ asset('vendor/swiper/swiper-bundle.min.js') }}"></script>
+  <link rel="stylesheet" href="{{ asset('vendor/swiper/swiper-bundle.min.css') }}">
+  <script src="{{ asset('vendor/photoswipe/umd/photoswipe.umd.min.js') }}"></script>
+  <script src="{{ asset('vendor/photoswipe/umd/photoswipe-lightbox.umd.min.js') }}"></script>
+  <link rel="stylesheet" href="{{ asset('vendor/photoswipe/photoswipe.css') }}">
+  <script src="{{ asset('vendor/video-js/video.min.js') }}"></script>
+  <link href="{{ asset('vendor/video-js/video-js.css') }}" rel="stylesheet">
+{/nice:push}
+
+{nice:section name="content"}
+
+  <div class="mn-container">
+    <div class="mn-breadcrumb">
+      <a href="{{ front_route('home.index') }}">{{ __('front/common.home') }}</a>
+      <span class="sep">/</span>
+      {nice:if $product->categories->count()}
+        {nice:php} $mainCat = $product->categories->first(); {/nice:php}
+        <a href="{{ $mainCat->url }}">{{ $mainCat->fallbackName() }}</a>
+        <span class="sep">/</span>
+      {/nice:if}
+      <span class="current">{{ $product->fallbackName() }}</span>
+    </div>
+
+    {nice:hook "product.show.top"}
+
+    {-- ===== Main ===== --}
+    <div class="mn-pdp">
+      <div class="mn-pdp-gallery">
+        <div class="mn-pdp-thumbs">
+          {nice:if is_array($product->images)}
+            {nice:foreach $product->images as $key => $image}
+              <div class="thumb {{ $loop->first ? 'active' : '' }}" data-image="{{ image_resize($image, 600, 600) }}">
+                <img src="{{ image_resize($image, 100, 100) }}" alt="">
+              </div>
+            {/nice:foreach}
+          {/nice:if}
+        </div>
+
+        <div class="mn-pdp-main-image">
+          {nice:hook "front.product.show.image.before"}
+          <img src="{{ $product->image_url }}" class="main-image" alt="{{ $product->fallbackName() }}">
+          {nice:include "products.components._video"}
+        </div>
+      </div>
+
+      {-- Mobile swiper --}
+      <div class="d-lg-none w-100">
+        <div class="swiper" id="mn-mobile-product-swiper">
+          <div class="swiper-wrapper">
+            {nice:if is_array($product->images)}
+              {nice:foreach $product->images as $image}
+                <div class="swiper-slide">
+                  <img src="{{ image_resize($image, 600, 600) }}" style="width:100%;aspect-ratio:3/4;object-fit:cover;">
+                </div>
+              {/nice:foreach}
+            {/nice:if}
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+
+      <div class="mn-pdp-info">
+        <h1 class="product-title">{{ $product->fallbackName() }}</h1>
+
+        @hookupdate('front.product.show.price')
+        <div class="product-price">
+          {{ $sku['price_format'] }}
+          {nice:if $sku['origin_price']}
+            <span style="font-size:15px;color:var(--mn-muted);text-decoration:line-through;margin-left:8px;">{{ $sku['origin_price_format'] }}</span>
+          {/nice:if}
+        </div>
+        @endhookupdate
+
+        <div class="installment">
+          {{ __('front/product.installment_text', ['default' => 'or 4 interest-free payments of']) }}
+          {{ current_currency()?->symbol_left }}{{ number_format($sku['price'] / 4, 2) }}{{ current_currency()?->symbol_right }}
+        </div>
+
+        <div class="mn-info-divider"></div>
+
+        <div class="mn-worry-free">
+          <i class="bi bi-shield-check" style="font-size:18px;flex-shrink:0;"></i>
+          <span>{{ __('front/product.worry_free', ['default' => 'Worry-Free Delivery: guaranteed refund if your order is lost or damaged in transit.']) }}</span>
+        </div>
+
+        <div class="mn-info-divider"></div>
+
+        {nice:hook "product.detail.stock.after"}
+
+        {nice:include "products.components._variants"}
+        {nice:include "products.components._options"}
+
+        <div class="mn-info-divider"></div>
+
+        {nice:if !system_setting('disable_online_order')}
+          <div class="mn-add-to-cart mb-3">
+            <div class="mn-qty">
+              <button type="button" class="minus-btn"><i class="bi bi-dash"></i></button>
+              <input type="number" class="product-quantity" value="1" data-sku-id="{{ $sku['id'] }}">
+              <button type="button" class="plus-btn"><i class="bi bi-plus"></i></button>
+            </div>
+            <button class="mn-cart-btn add-cart" data-id="{{ $product->id }}" data-price="{{ $product->masterSku->price }}">
+              <i class="bi bi-bag"></i> {{ __('front/product.add_to_cart', ['default' => 'Add to Bag']) }}
+            </button>
+            <button class="mn-wish-btn add-wishlist" data-in-wishlist="{{ $product->hasFavorite() }}" data-id="{{ $product->id }}" data-price="{{ $product->masterSku->price }}">
+              <i class="bi bi-heart{{ $product->hasFavorite() ? '-fill' : '' }}"></i>
+            </button>
+          </div>
+        {/nice:if}
+
+        {nice:hook "product.detail.after"}
+
+        {nice:if $product->fallbackName('summary')}
+          <div class="mn-info-divider"></div>
+          <p style="font-size:14px;color:var(--mn-fg-soft);line-height:1.7;">{{ $product->fallbackName('summary') }}</p>
+        {/nice:if}
+
+        <ul class="mn-features">
+          <li><i class="bi bi-check2"></i> {{ __('front/product.sku_code') }}: <span class="sku-code-value">{{ $sku['code'] }}</span></li>
+          {nice:if $product->brand}
+            <li><i class="bi bi-check2"></i> {{ __('front/product.brand') }}: {{ $product->brand->name }}</li>
+          {/nice:if}
+          {nice:if $product->categories->count()}
+            <li><i class="bi bi-check2"></i> {{ __('front/product.category') }}: {{ $product->categories->pluck('name')->implode(', ') }}</li>
+          {/nice:if}
+          {nice:hook "product.detail.brand.after"}
+        </ul>
+      </div>
+    </div>
+
+    {-- ===== Detail Tabs ===== --}
+    <div class="mn-detail-tabs">
+      <div class="tab-nav">
+        <div class="tab-link active" data-bs-toggle="tab" data-bs-target="#mn-tab-desc">{{ __('front/product.description') }}</div>
+        {nice:if $attributes}
+          <div class="tab-link" data-bs-toggle="tab" data-bs-target="#mn-tab-attr">{{ __('front/product.attribute') }}</div>
+        {/nice:if}
+        <div class="tab-link" data-bs-toggle="tab" data-bs-target="#mn-tab-review">{{ __('front/product.review') }}</div>
+        <div class="tab-link" data-bs-toggle="tab" data-bs-target="#mn-tab-related">{{ __('front/product.related_product') }}</div>
+        {nice:hook "product.detail.tab.link.after"}
+      </div>
+
+      <div class="tab-content">
+        <div class="tab-pane fade show active" id="mn-tab-desc">
+          {nice:if $product->fallbackName('selling_point')}
+            {!! parsedown($product->fallbackName('selling_point')) !!}
+          {/nice:if}
+          {!! $product->fallbackName('content') !!}
+          {nice:hook "product.detail.description.after"}
+        </div>
+
+        {nice:if $attributes}
+          <div class="tab-pane fade" id="mn-tab-attr">
+            <table class="mn-attr-table">
+              {nice:foreach $attributes as $group}
+                <thead><tr><th colspan="2">{{ $group['attribute_group_name'] }}</th></tr></thead>
+                <tbody>
+                  {nice:foreach $group['attributes'] as $item}
+                    <tr><td>{{ $item['attribute'] }}</td><td>{{ $item['attribute_value'] }}</td></tr>
+                  {/nice:foreach}
+                </tbody>
+              {/nice:foreach}
+            </table>
+          </div>
+        {/nice:if}
+
+        <div class="tab-pane fade" id="mn-tab-review">
+          {nice:include "products.components._review_section"}
+        </div>
+
+        <div class="tab-pane fade" id="mn-tab-related">
+          <div class="row gx-3 gx-lg-4 gy-4">
+            {nice:foreach $related as $relatedItem}
+              <div class="col-6 col-md-4 col-lg-3">
+                {nice:include "shared.product" product=$relatedItem}
+              </div>
+            {/nice:foreach}
+          </div>
+        </div>
+        {nice:hook "product.detail.tab.pane.after"}
+      </div>
+    </div>
+
+    {nice:hook "product.show.bottom"}
+  </div>
+
+{/nice:section}
+
+{nice:push name="footer"}
+  <script>
+    $('.mn-pdp-thumbs .thumb').on('click mouseenter', function () {
+      $(this).addClass('active').siblings().removeClass('active');
+      const newSrc = $(this).data('image');
+      if (newSrc) { $('.mn-pdp-main-image .main-image').attr('src', newSrc); }
+    });
+
+    if ($('#mn-mobile-product-swiper').length) {
+      new Swiper('#mn-mobile-product-swiper', { slidesPerView: 1, pagination: { el: '.swiper-pagination', clickable: true } });
+    }
+
+    $('.plus-btn').on('click', function () { let $i = $(this).siblings('.product-quantity'); $i.val(parseInt($i.val()) + 1); });
+    $('.minus-btn').on('click', function () { let $i = $(this).siblings('.product-quantity'); if (parseInt($i.val()) > 1) $i.val(parseInt($i.val()) - 1); });
+
+    $('.add-cart').on('click', function () {
+      const quantity = $('.product-quantity').val();
+      const skuId = $('.product-quantity').data('sku-id');
+      const isBuyNow = false;
+      const productOptions = {};
+      $('.option-select').each(function () { const id = $(this).data('option-id'); const v = $(this).val(); if (v) productOptions[id] = [v]; });
+      $('.option-radio-item input[type="radio"]:checked').each(function () { productOptions[$(this).data('option-id')] = [$(this).val()]; });
+      $('.option-checkbox-item input[type="checkbox"]:checked').each(function () { const id = $(this).data('option-id'); if (!productOptions[id]) productOptions[id] = []; productOptions[id].push($(this).val()); });
+      inno.addCart({ skuId, quantity, isBuyNow, options: productOptions }, this, function (res) {});
+    });
+
+    $('.mn-detail-tabs .tab-link').on('click', function () { $(this).addClass('active').siblings().removeClass('active'); });
+  </script>
+{/nice:push}

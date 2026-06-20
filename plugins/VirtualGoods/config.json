@@ -1,0 +1,18 @@
+{
+    "code": "virtual_goods",
+    "name": {
+        "zh-cn": "虚拟商品/自动发卡",
+        "en": "Virtual Goods / Auto Delivery"
+    },
+    "description": {
+        "zh-cn": "虚拟商品自动发货：为指定 SKU 配置卡密池或固定内容(下载链接/兑换码)，订单支付成功后自动发放并站内信通知，支持卡密批量导入与发放记录、库存告警。",
+        "en": "Auto-delivery for virtual goods: configure a card-key pool or fixed content (download link/code) per SKU; on payment success the system delivers automatically and notifies the buyer, with bulk import, delivery logs and low-stock awareness."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-key",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

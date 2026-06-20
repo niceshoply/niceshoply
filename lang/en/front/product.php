@@ -1,0 +1,62 @@
+<?php
+/**
+ * Copyright (c) Since 2024 NiceShoply - All Rights Reserved
+ *
+ * @link       https://www.niceshoply.com
+ * @author     NiceShoply <team@niceshoply.com>
+ * @license    https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ */
+
+return [
+    'add_to_cart'                    => 'Add to Cart',
+    'add_wishlist'                   => 'Add to Wish List',
+    'apply'                          => 'Apply',
+    'attribute'                      => 'Attribute',
+    'availability'                   => 'Availability',
+    'brand'                          => 'Brand',
+    'bundle_includes'                => 'Bundle Includes',
+    'buy_now'                        => 'Buy Now',
+    'category'                       => 'Categories',
+    'clear_all_filters'              => 'Clear All Filters',
+    'clear_all_filters_confirm'      => 'Are you sure you want to clear all filters?',
+    'clear_filter'                   => 'Clear Filter',
+    'clear_filters'                  => 'Clear Filters',
+    'current_selection'              => 'Current Selection',
+    'custom_options'                 => 'Custom Options',
+    'default'                        => 'Default',
+    'description'                    => 'Description',
+    'filter'                         => 'Filter',
+    'from'                           => 'From',
+    'have_reviewed'                  => 'You have reviewed this product',
+    'in_stock'                       => 'In Stock',
+    'input_some_text_here'           => 'Input Review Here',
+    'input_your_review'              => 'Input Your Review',
+    'max_price'                      => 'Max Price',
+    'min_price'                      => 'Min Price',
+    'model'                          => 'Model',
+    'name_asc'                       => 'Name A-Z',
+    'name_desc'                      => 'Name Z-A',
+    'option_group_required'          => 'Option group \":name\" is required',
+    'optional'                       => 'Optional',
+    'out_of_stock'                   => 'Out of Stock',
+    'out_stock'                      => 'Out of Stock',
+    'please_login_first'             => 'Please Login to Leave a Review',
+    'please_select_required_options' => 'Please select all required options',
+    'price'                          => 'Price',
+    'price_adjustment'               => 'Price Adjustment',
+    'price_asc'                      => 'Price Low to High',
+    'price_desc'                     => 'Price High to Low',
+    'products'                       => 'Products',
+    'related_product'                => 'Related',
+    'required_option'                => 'Required',
+    'review'                         => 'Review',
+    'sku_code'                       => 'SKU Code',
+    'sort_by'                        => 'Sort By',
+    'submit_review'                  => 'Submit Review',
+    'to'                             => 'To',
+    'total_price'                    => 'Total Price',
+    'view_details'                   => 'View Details',
+    'view_more_products'             => 'View More Products',
+    'visit_order_to_review'          => 'View Order to Add a Review',
+    'your_review'                    => 'Your Review',
+];

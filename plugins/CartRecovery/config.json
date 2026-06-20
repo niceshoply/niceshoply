@@ -1,0 +1,18 @@
+{
+    "code": "cart_recovery",
+    "name": {
+        "zh-cn": "购物车挽回",
+        "en": "Cart Recovery"
+    },
+    "description": {
+        "zh-cn": "购物车挽回：扫描闲置弃购的购物车，自动通过站内信/短信召回会员并附召回券码；提供 cart:recover 命令(可加入 cron)与后台一键扫描。",
+        "en": "Abandoned cart recovery: scans idle carts and reminds members via in-app/SMS with a recovery coupon code; ships a cart:recover command (cron-ready) plus one-click admin scan."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-cart-x",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

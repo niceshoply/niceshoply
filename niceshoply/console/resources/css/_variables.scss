@@ -1,0 +1,18 @@
+$primary: #d50000;
+$price: #d50000;
+$console-primary: #d50000;
+
+.console-text-primary {
+    color: $primary !important;
+}
+.console-item-active {
+    color: $primary !important;
+}
+.console-item-active-border {
+    color: $primary !important;
+    border-bottom: 2px solid rgba($primary,1) !important;
+}
+.console-item-hover {
+    color: $primary;
+    background-color: rgba($primary,0.2) !important;
+}

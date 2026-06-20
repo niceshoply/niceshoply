@@ -1,0 +1,18 @@
+{
+    "code": "wechat_pay",
+    "name": {
+        "zh-cn": "微信支付",
+        "en": "WeChat Pay"
+    },
+    "description": {
+        "zh-cn": "微信支付插件，App 端通过 WebView 打开 H5 收银台完成支付。",
+        "en": "WeChat Pay plugin; mobile App opens H5 checkout in WebView."
+    },
+    "type": "billing",
+    "version": "v1.0.0",
+    "icon": "/images/logo.png",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "code": "coupon_center",
+    "name": {
+        "zh-cn": "领券中心",
+        "en": "Coupon Center"
+    },
+    "description": {
+        "zh-cn": "领券中心：复用「优惠券(Coupon)」插件的券池，提供前台领券中心列表、一键领取(每人限领)、我的券包接口。会员领取后凭券码在结算使用，领取记录与统计在后台查看。需先安装 Coupon 插件。",
+        "en": "Coupon Center: reuses the Coupon plugin's pool to offer a storefront coupon list, one-click claim (per-customer limit) and a my-coupons API. Claimed codes are used at checkout. Requires the Coupon plugin installed."
+    },
+    "type": "marketing",
+    "version": "v1.0.0",
+    "icon": "bi-ticket-detailed",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

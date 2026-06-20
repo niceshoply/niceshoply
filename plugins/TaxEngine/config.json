@@ -1,0 +1,12 @@
+{
+    "code": "tax_engine",
+    "name": {"zh-cn": "税费引擎", "en": "Tax Engine"},
+    "description": {
+        "zh-cn": "按国家/地区配置 VAT/GST/消费税规则，结算自动计税，支持含税/不含税展示与税号格式校验 API。",
+        "en": "Regional VAT/GST/sales tax rules, checkout fee calculation, inclusive/exclusive display helpers and VAT number validation API."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-receipt",
+    "author": {"name": "NiceShoply", "email": "team@niceshoply.com"}
+}

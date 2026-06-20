@@ -1,0 +1,18 @@
+{
+    "code": "distribution",
+    "name": {
+        "zh-cn": "分销推广",
+        "en": "Distribution"
+    },
+    "description": {
+        "zh-cn": "分销推广：会员成为推广员获得专属邀请码/链接，下级下单后按多级比例计算佣金，支持后台结算并入账到会员余额。",
+        "en": "Affiliate distribution: members become distributors with referral codes/links and earn multi-level commissions from referred orders. Settle to member balance from admin."
+    },
+    "type": "marketing",
+    "version": "v1.0.0",
+    "icon": "bi-diagram-3",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

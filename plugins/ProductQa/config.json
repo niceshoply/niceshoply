@@ -1,0 +1,18 @@
+{
+    "code": "product_qa",
+    "name": {
+        "zh-cn": "商品问答",
+        "en": "Product Q&A"
+    },
+    "description": {
+        "zh-cn": "商品问答：买家在商详页提问，商家或其他买家回答，后台审核问答内容，前台展示精选/已通过问答，提升决策转化。",
+        "en": "Product Q&A: buyers ask on product pages, merchant or other buyers answer, admin moderates, storefront shows approved/featured Q&A to boost conversion."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-question-circle",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

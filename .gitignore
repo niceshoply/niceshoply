@@ -1,0 +1,219 @@
+# Existing project-specific rules preserved
+# =============================================================================
+# 依赖与构建产物
+venv/
+env/
+__pycache__/
+*.pyc
+target/
+# PHP / Laravel（niceshoply、niceshoply_marketplace）
+.phpunit.cache
+.env.backup
+.env.production
+.env.local
+.env.*.local
+auth.json
+**/bootstrap/cache/*
+**/database/*.sqlite*
+**/public/build/**
+**/public/hot
+**/public/storage
+**/public/cache/**
+**/public/mix-manifest.json
+**/storage/*.key
+**/storage/installed
+**/storage/pail
+**/storage/logs/**
+**/storage/debugbar/**
+**/storage/app/*
+!**/storage/app/public/
+!**/storage/app/public/**
+**/storage/framework/cache/**
+**/storage/framework/cache/data/**
+**/storage/framework/sessions/**
+**/storage/framework/views/**
+**/storage/framework/testing/**
+**/storage/framework/compiled.php
+**/storage/framework/config.php
+**/storage/framework/down
+**/storage/framework/events.scanned.php
+**/storage/framework/maintenance.php
+**/storage/framework/routes.php
+**/storage/framework/routes.scanned.php
+**/storage/framework/schedule-*
+**/storage/framework/services.json
+# React Native（niceshoply_app）
+**/.gradle/
+**/ios/Pods/
+**/ios/build/
+**/android/app/build/
+*.keystore
+*.jks
+*.hprof
+# IDE 与编辑器
+.fleet/
+.nova/
+.zed/
+.phpactor.json
+# 密钥、日志、临时文件
+secrets.*
+lerna-debug.log*
+.pnpm-debug.log*
+*.tmp
+*.temp
+# 测试与覆盖率
+.nyc_output/
+# 打包与系统文件
+*.zip
+*.tar.gz
+*.rar
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# Repository ignore rules for niceshoply
+# Profile: node, php, laravel
+# ============================================
+# Common OS / editor
+# ============================================
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Claude / local assistant state
+.claude/
+.serena/
+
+# ============================================
+# Environment / secrets
+# ============================================
+.env
+.env.*
+!.env.example
+!.env.testing.example
+*.local
+*.key
+*.pem
+*.crt
+*.p12
+*.pfx
+
+# ============================================
+# Logs / runtime / cache
+# ============================================
+*.log
+logs/
+log/
+tmp/
+temp/
+.cache/
+.cache-loader/
+
+# ============================================
+# Node / Frontend
+# ============================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+.npm/
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+.yarn/install-state.gz
+
+# Build outputs
+dist/
+build/
+out/
+.output/
+.next/
+.nuxt/
+.vite/
+.turbo/
+coverage/
+*.tsbuildinfo
+
+# Electron / desktop packages
+release/
+releases/
+dist-electron/
+
+# ============================================
+# PHP / Composer
+# ============================================
+vendor/
+composer.phar
+.phpunit.result.cache
+.php-cs-fixer.cache
+.phpstan.cache
+
+# ============================================
+# Laravel runtime
+# ============================================
+/storage/*.key
+/storage/app/*
+!/storage/app/.gitkeep
+!/storage/app/public/
+!/storage/app/public/.gitkeep
+/storage/app/private/*
+!/storage/app/private/.gitkeep
+/storage/framework/cache/*
+!/storage/framework/cache/.gitkeep
+/storage/framework/cache/data/*
+!/storage/framework/cache/data/.gitkeep
+/storage/framework/sessions/*
+!/storage/framework/sessions/.gitkeep
+/storage/framework/testing/*
+!/storage/framework/testing/.gitkeep
+/storage/framework/views/*
+!/storage/framework/views/.gitkeep
+/storage/logs/*
+!/storage/logs/.gitkeep
+/bootstrap/cache/*.php
+!/bootstrap/cache/.gitkeep
+/public/storage
+Homestead.json
+Homestead.yaml
+/.vagrant
+
+# ============================================
+# Keep placeholders
+# ============================================
+!.gitkeep
+!**/.gitkeep
+
+# ============================================
+# Rules migrated from nested .gitignore files
+# ============================================
+
+# Migrated from niceshoply/public/static/.gitignore
+/niceshoply/public/static/*
+!/niceshoply/public/static/media/.gitkeep
+!/niceshoply/public/static/plugins/.gitkeep
+!/niceshoply/public/static/themes/.gitkeep
+!/niceshoply/public/static/uploads/.gitkeep
+
+# Migrated from niceshoply/plugins/.gitignore
+/niceshoply/plugins/*
+!/niceshoply/plugins/FixedShipping
+!/niceshoply/plugins/FixedShipping/**
+!/niceshoply/plugins/BankTransfer
+!/niceshoply/plugins/BankTransfer/**
+!/niceshoply/plugins/PayPal
+!/niceshoply/plugins/PayPal/**
+!/niceshoply/plugins/Stripe
+!/niceshoply/plugins/Stripe/**
+!/niceshoply/plugins/PageBuilder
+!/niceshoply/plugins/PageBuilder/**

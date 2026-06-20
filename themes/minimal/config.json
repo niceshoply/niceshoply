@@ -1,0 +1,17 @@
+{
+    "code": "minimal",
+    "name": {
+        "zh-cn": "极简 Minimal",
+        "en": "Minimal"
+    },
+    "description": {
+        "zh-cn": "极简主义电商主题：纯白留白、克制的黑白配色、细发丝线条与现代无衬线字体，去除一切多余装饰，让商品本身成为主角。适合服饰、家居、数码、设计师品牌等追求质感与高级感的店铺。",
+        "en": "A minimalist e-commerce theme with clean white space, restrained black-and-white palette, hairline borders and a modern sans-serif typeface. Strips away decoration so the product itself takes center stage."
+    },
+    "version": "v1.0.0",
+    "icon": "images/icon.png",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

@@ -1,0 +1,172 @@
+<?php
+/**
+ * Copyright (c) Since 2024 NiceShoply - All Rights Reserved
+ *
+ * @link       https://www.niceshoply.com
+ * @author     NiceShoply <team@niceshoply.com>
+ * @license    https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ */
+
+namespace NiceShoply\Common\Models\Order;
+
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use NiceShoply\Common\Models\BaseModel;
+use NiceShoply\Common\Models\Order;
+use NiceShoply\Common\Models\OrderItemOption;
+use NiceShoply\Common\Models\OrderReturn;
+use NiceShoply\Common\Models\Product;
+use NiceShoply\Common\Models\Product\Sku;
+use NiceShoply\Common\Models\Review;
+
+class Item extends BaseModel
+{
+    protected $table = 'order_items';
+
+    protected $fillable = [
+        'order_id', 'product_id', 'order_number', 'product_sku', 'variant_label', 'name', 'image', 'quantity', 'price', 'item_type', 'reference',
+    ];
+
+    protected $appends = [
+        'subtotal',
+        'price_format',
+        'subtotal_format',
+        'has_review',
+        'item_type_label',
+    ];
+
+    protected $casts = [
+        'reference' => 'array',
+    ];
+
+    /**
+     * @return BelongsTo
+     */
+    public function order(): BelongsTo
+    {
+        return $this->belongsTo(Order::class, 'order_id', 'id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class, 'product_id', 'id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function productSku(): BelongsTo
+    {
+        return $this->belongsTo(Sku::class, 'product_sku', 'code');
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function review(): HasOne
+    {
+        return $this->hasOne(Review::class, 'order_item_id', 'id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function returns(): HasMany
+    {
+        return $this->hasMany(OrderReturn::class, 'order_item_id', 'id');
+    }
+
+    /**
+     * 获取订单项的选项值
+     */
+    public function optionValues(): HasMany
+    {
+        return $this->hasMany(OptionValue::class, 'order_item_id', 'id');
+    }
+
+    /**
+     * 获取订单项的选项（兼容旧版本）
+     */
+    public function options(): HasMany
+    {
+        return $this->hasMany(OrderItemOption::class, 'order_item_id', 'id');
+    }
+
+    /**
+     * @return float
+     */
+    public function getSubtotalAttribute(): float
+    {
+        $order   = $this->order;
+        $decimal = currency_decimal_place($order->currency_code ?? '');
+
+        return round($this->price * $this->quantity, $decimal);
+    }
+
+    /**
+     * @return string
+     */
+    public function getPriceFormatAttribute(): string
+    {
+        $order = $this->order;
+
+        return currency_format($this->price, $order->currency_code, $order->currency_value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getSubtotalFormatAttribute(): string
+    {
+        $order = $this->order;
+
+        return currency_format($this->subtotal, $order->currency_code, $order->currency_value);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getHasReviewAttribute(): bool
+    {
+        return (bool) $this->review;
+    }
+
+    /**
+     * Get the item type label
+     *
+     * @return string
+     */
+    public function getItemTypeLabelAttribute(): string
+    {
+        if ($this->item_type == 'normal') {
+            return '';
+        } elseif ($this->item_type == 'bundle') {
+            return trans('console/product.type_bundle');
+        }
+
+        $data = [
+            'label' => '',
+            'item'  => $this,
+        ];
+
+        return fire_hook_filter('model.order.item.type_label', $data)['label'];
+    }
+
+    /**
+     * Get bundle items
+     *
+     * @return array
+     */
+    public function getBundleItemsAttribute()
+    {
+        if ($this->item_type === 'bundle' && isset($this->reference['bundles'])) {
+            return $this->reference['bundles'];
+        }
+
+        return [];
+    }
+}

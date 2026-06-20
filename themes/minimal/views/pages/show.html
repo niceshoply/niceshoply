@@ -1,0 +1,35 @@
+{nice:extends layout="app"}
+{nice:section name="body-class" value="page-single"}
+
+@section('title', \NiceShoply\Common\Libraries\MetaInfo::getInstance($page)->getTitle())
+@section('description', \NiceShoply\Common\Libraries\MetaInfo::getInstance($page)->getDescription())
+@section('keywords', \NiceShoply\Common\Libraries\MetaInfo::getInstance($page)->getKeywords())
+
+{nice:section name="content"}
+
+  <div class="mn-container">
+    {nice:if $page->show_breadcrumb}
+      <div class="mn-breadcrumb">
+        <a href="{{ front_route('home.index') }}">{{ __('front/common.home') }}</a>
+        <span class="sep">/</span>
+        <span class="current">{{ $page->translation->title }}</span>
+      </div>
+    {/nice:if}
+
+    {nice:hook "page.show.top"}
+
+    {nice:if isset($result)}
+      {!! $result !!}
+    {nice:else}
+      <div class="mn-page-content">
+        <h1 class="mn-page-title">{{ $page->translation->title }}</h1>
+        <div class="mn-page-body">
+          {!! $page->translation->content !!}
+        </div>
+      </div>
+    {/nice:if}
+
+    {nice:hook "page.show.bottom"}
+  </div>
+
+{/nice:section}

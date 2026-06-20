@@ -1,0 +1,25 @@
+<?php
+/**
+ * Copyright (c) Since 2024 NiceShoply - All Rights Reserved
+ *
+ * @link       https://www.niceshoply.com
+ * @author     NiceShoply <team@niceshoply.com>
+ * @license    https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ */
+
+return [
+    'add_to_cart' => 'Añadir al carrito',
+    'cart'        => 'Carrito',
+    'cart_total'  => 'Totales del carrito',
+    'continue'    => 'Seguir comprando',
+    'empty_cart'  => 'Tu carrito está vacío',
+    'go_checkout' => 'Pagar',
+    'price'       => 'Precio',
+    'product'     => 'Producto',
+    'quantity'    => 'Cantidad',
+    'select_all'  => 'QuanXuan',
+    'selected'    => 'Seleccionado',
+    'subtotal'    => 'Subtotal',
+    'total'       => 'Total',
+    'view_cart'   => 'Ir al carrito',
+];

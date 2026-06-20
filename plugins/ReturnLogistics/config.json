@@ -1,0 +1,18 @@
+{
+    "code": "return_logistics",
+    "name": {
+        "zh-cn": "退货物流",
+        "en": "Return Logistics"
+    },
+    "description": {
+        "zh-cn": "退货物流：维护退货地址池，关联售后单生成退货寄回指引，记录客户回寄运单号并查询轨迹(复用 CnTracking)。支持后台创建与前台提交回寄单号。",
+        "en": "Return logistics: return address pool, link to after-sale tickets with return instructions, record customer return tracking and query traces (via CnTracking)."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-arrow-return-left",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

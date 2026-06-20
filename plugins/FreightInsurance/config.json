@@ -1,0 +1,18 @@
+{
+    "code": "freight_insurance",
+    "name": {
+        "zh-cn": "运费险",
+        "en": "Freight Insurance"
+    },
+    "description": {
+        "zh-cn": "运费险：结算时可选投保，按固定保费或订单金额百分比(含保费上下限)收取，作为结算费用项计入订单；记录投保订单便于退货时核赔参考。前端传 freight_insurance=1 即开启投保。",
+        "en": "Freight insurance: optional opt-in at checkout charging a flat or percent premium (with min/max), added as a checkout fee; insured orders are logged for return/claim reference. Pass freight_insurance=1 to opt in."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-shield-check",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

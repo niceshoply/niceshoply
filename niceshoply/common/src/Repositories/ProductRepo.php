@@ -1,0 +1,905 @@
+<?php
+/**
+ * Copyright (c) Since 2024 NiceShoply - All Rights Reserved
+ *
+ * @link       https://www.niceshoply.com
+ * @author     NiceShoply <team@niceshoply.com>
+ * @license    https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ */
+
+namespace NiceShoply\Common\Repositories;
+
+use Exception;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
+use NiceShoply\Common\Handlers\TranslationHandler;
+use NiceShoply\Common\Models\Category;
+use NiceShoply\Common\Models\Product;
+use NiceShoply\Common\Repositories\Product\BundleRepo;
+use NiceShoply\Common\Repositories\Product\OptionValueRepo;
+use NiceShoply\Common\Repositories\Product\RelationRepo;
+use NiceShoply\Common\Repositories\Product\VariantRepo;
+use Throwable;
+
+class ProductRepo extends BaseRepo
+{
+    const AVAILABLE_SORT_FIELDS = [
+        'position',
+        'rating',
+        'sales',
+        'viewed',
+        'updated_at',
+        'created_at',
+        'ps.price',
+        'pt.name',
+    ];
+
+    /**
+     * Get available sort options for products
+     *
+     * @return array
+     */
+    public static function getSortOptions(): array
+    {
+        $options = [
+            'pt.name'    => __('console/common.name'),
+            'ps.price'   => __('console/product.price'),
+            'position'   => __('console/common.position'),
+            'sales'      => __('console/product.sales'),
+            'viewed'     => __('console/product.viewed'),
+            'created_at' => __('console/common.created_at'),
+            'updated_at' => __('console/common.updated_at'),
+        ];
+
+        return fire_hook_filter('common.repo.product.sort_options', $options);
+    }
+
+    /**
+     * Get available product types
+     *
+     * @return array
+     */
+    public static function getProductTypes(): array
+    {
+        $types = [
+            'normal' => __('console/product.type_normal'),
+            'bundle' => __('console/product.type_bundle'),
+            // 'virtual' => __('console/product.type_virtual'),
+            // 'card'    => __('console/product.type_card'),
+        ];
+
+        return fire_hook_filter('common.repo.product.types', $types);
+    }
+
+    /**
+     * @return array[]
+     */
+    public static function getCriteria(): array
+    {
+        $criteria = [
+            ['name' => 'keyword', 'type' => 'input', 'label' => trans('console/common.name')],
+            [
+                'name'              => 'sku_code',
+                'type'              => 'autocomplete',
+                'label'             => trans('console/product.sku_code'),
+                'url'               => route('api.console.products.sku_autocomplete'),
+                'hidden_input_name' => 'sku_id',
+                'option_label_key'  => 'display_name',
+                'input_value_key'   => 'code',
+            ],
+            [
+                'name'  => 'category',
+                'type'  => 'autocomplete',
+                'label' => trans('console/product.category'),
+                'url'   => route('api.console.categories.autocomplete'),
+            ],
+            [
+                'name'  => 'brand',
+                'type'  => 'autocomplete',
+                'label' => trans('console/product.brand'),
+                'url'   => route('api.console.brands.autocomplete'),
+            ],
+            ['name' => 'price', 'type' => 'range', 'label' => trans('console/product.price')],
+            ['name' => 'created_at', 'type' => 'date_range', 'label' => trans('console/common.created_at')],
+        ];
+
+        return fire_hook_filter('common.repo.product.criteria', $criteria);
+    }
+
+    /**
+     * @param  array  $filters
+     * @return LengthAwarePaginator
+     * @throws Exception
+     */
+    public function list(array $filters = []): LengthAwarePaginator
+    {
+        $builder = $this->builder($filters);
+        $this->applySorting($builder, $filters);
+
+        return $builder->paginate($filters['per_page'] ?? 15);
+    }
+
+    /**
+     * @param  array  $filters
+     * @return LengthAwarePaginator
+     * @throws Exception
+     */
+    public function getFrontList(array $filters = []): LengthAwarePaginator
+    {
+        $builder = $this->withActive()->builder($filters);
+        $this->applySorting($builder, $filters);
+
+        return $builder->paginate($filters['per_page'] ?? 15);
+    }
+
+    /**
+     * Apply sorting to the builder.
+     *
+     * @param  Builder  $builder
+     * @param  array  $filters
+     * @return void
+     * @throws Exception
+     */
+    private function applySorting(Builder $builder, array $filters): void
+    {
+        $sort  = $filters['sort'] ?? 'created_at';
+        $order = $filters['order'] ?? 'desc';
+
+        if ($sort == 'pt.name') {
+            $builder->select(['products.*', 'pt.name', 'pt.content']);
+            $builder->join('product_translations as pt', function ($join) {
+                $join->on('products.id', '=', 'pt.product_id')
+                    ->where('pt.locale', locale_code());
+            });
+        } elseif ($sort == 'ps.price') {
+            $builder->select(['products.*', 'ps.price']);
+            $builder->join('product_skus as ps', function ($query) {
+                $query->on('ps.product_id', '=', 'products.id')
+                    ->where('is_default', true);
+            });
+        }
+
+        if (! in_array($sort, self::AVAILABLE_SORT_FIELDS)) {
+            $sort = 'created_at';
+        }
+
+        if (! in_array($order, ['asc', 'desc'])) {
+            $order = 'desc';
+        }
+
+        if ($sort && $order) {
+            $builder->orderBy($sort, $order);
+        }
+    }
+
+    /**
+     * Create product.
+     *
+     * @param  $data
+     * @return mixed
+     * @throws Throwable
+     */
+    public function create($data): mixed
+    {
+        $product = new Product;
+
+        $product = $this->createOrUpdate($product, $data);
+
+        return fire_hook_filter('common.repo.product.create.after', $product);
+    }
+
+    /**
+     * Update product.
+     *
+     * @param  $item
+     * @param  $data
+     * @return mixed
+     * @throws Exception
+     * @throws Throwable
+     */
+    public function update($item, $data): mixed
+    {
+        $product = $this->createOrUpdate($item, $data);
+
+        return fire_hook_filter('common.repo.product.update.after', $product);
+    }
+
+    /**
+     * @param  mixed  $item
+     * @return void
+     */
+    public function destroy(mixed $item): void
+    {
+        fire_hook_action('common.repo.product.destroy.before', $item);
+
+        $item->productAttributes()->delete();
+        $item->categories()->sync([]);
+        $item->relations()->delete();
+        BundleRepo::getInstance()->deleteBundles($item);
+        $item->skus()->delete();
+        $item->translations()->delete();
+        $item->delete();
+    }
+
+    /**
+     * Bulk update products
+     *
+     * @param  array  $ids
+     * @param  string  $action
+     * @param  array  $data
+     * @return array
+     * @throws Throwable
+     */
+    public function bulkUpdate(array $ids, string $action, array $data = []): array
+    {
+        $updatedCount = 0;
+
+        DB::beginTransaction();
+        try {
+            $products = Product::whereIn('id', $ids)->get();
+
+            foreach ($products as $product) {
+                switch ($action) {
+                    case 'price':
+                        $this->updateProductPrice($product, $data);
+                        break;
+                    case 'categories':
+                        $this->updateProductCategories($product, $data);
+                        break;
+                    case 'quantity':
+                        $this->updateProductQuantity($product, $data);
+                        break;
+                    case 'publish':
+                        $product->update(['active' => true]);
+                        break;
+                    case 'unpublish':
+                        $product->update(['active' => false]);
+                        break;
+                }
+                $updatedCount++;
+            }
+
+            DB::commit();
+
+            return ['success' => true, 'count' => $updatedCount];
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    /**
+     * Update product price
+     *
+     * @param  Product  $product
+     * @param  array  $data
+     * @return void
+     */
+    private function updateProductPrice(Product $product, array $data): void
+    {
+        $mode  = $data['mode'] ?? 'reset';
+        $value = (float) ($data['value'] ?? 0);
+
+        if ($value <= 0) {
+            return;
+        }
+
+        $skus = $product->skus;
+        foreach ($skus as $sku) {
+            $currentPrice = $sku->price;
+
+            switch ($mode) {
+                case 'reset':
+                    $newPrice = $value;
+                    break;
+                case 'increase':
+                    $newPrice = $currentPrice + $value;
+                    break;
+                case 'decrease':
+                    $newPrice = max(0, $currentPrice - $value);
+                    break;
+                default:
+                    continue 2;
+            }
+
+            $sku->update(['price' => $newPrice]);
+        }
+    }
+
+    /**
+     * Update product categories
+     *
+     * @param  Product  $product
+     * @param  array  $data
+     * @return void
+     */
+    private function updateProductCategories(Product $product, array $data): void
+    {
+        if (empty($data) || ! is_array($data)) {
+            return;
+        }
+
+        $categoryIds = array_filter($data, 'is_numeric');
+        $product->categories()->sync($categoryIds);
+    }
+
+    /**
+     * Update product quantity
+     *
+     * @param  Product  $product
+     * @param  array  $data
+     * @return void
+     */
+    private function updateProductQuantity(Product $product, array $data): void
+    {
+        $mode  = $data['mode'] ?? 'reset';
+        $value = (int) ($data['value'] ?? 0);
+
+        if ($value < 0) {
+            return;
+        }
+
+        $skus = $product->skus;
+        foreach ($skus as $sku) {
+            $currentQuantity = $sku->quantity;
+
+            switch ($mode) {
+                case 'reset':
+                    $newQuantity = $value;
+                    break;
+                case 'increase':
+                    $newQuantity = $currentQuantity + $value;
+                    break;
+                case 'decrease':
+                    $newQuantity = max(0, $currentQuantity - $value);
+                    break;
+                default:
+                    continue 2;
+            }
+
+            $sku->update(['quantity' => $newQuantity]);
+        }
+    }
+
+    /**
+     * Bulk destroy products
+     *
+     * @param  array  $ids
+     * @return int
+     * @throws Throwable
+     */
+    public function bulkDestroy(array $ids): int
+    {
+        $deletedCount = 0;
+
+        DB::beginTransaction();
+        try {
+            $products = Product::whereIn('id', $ids)->get();
+
+            foreach ($products as $product) {
+                $this->destroy($product);
+                $deletedCount++;
+            }
+
+            DB::commit();
+
+            return $deletedCount;
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    /**
+     * Copy product and related data
+     *
+     * @param  Product  $product
+     * @return mixed
+     */
+    public function copy(Product $product): mixed
+    {
+        $product->load([
+            'skus',
+            'translations',
+            'categories',
+            'productAttributes',
+            'relations',
+            'bundles',
+            'productOptions',
+            'productOptionValues',
+        ]);
+        $copy = $product->replicate();
+
+        $copy->slug .= '-'.rand(0, 99999);
+        if ($copy->spu_code) {
+            $copy->spu_code .= '-'.rand(0, 99999);
+        }
+        $copy->push();
+
+        foreach ($product->getRelations() as $relation => $entries) {
+            foreach ($entries as $entry) {
+                $newEntry = $entry->replicate();
+                if ($relation == 'skus') {
+                    $newEntry->code .= '-'.rand(0, 99999);
+                } elseif ($relation == 'categories') {
+                    $copy->categories()->attach($entry->id);
+
+                    continue;
+                } elseif ($relation == 'bundles') {
+                    continue;
+                } elseif ($relation == 'productOptions') {
+                    $newEntry->product_id = $copy->id;
+                } elseif ($relation == 'productOptionValues') {
+                    $newEntry->product_id = $copy->id;
+                }
+                if ($newEntry->push()) {
+                    $copy->{$relation}()->save($newEntry);
+                }
+            }
+        }
+
+        BundleRepo::getInstance()->copyBundles($product, $copy);
+
+        return $copy;
+    }
+
+    /**
+     * Crate or update product.
+     *
+     * @param  Product  $product
+     * @param  $data
+     * @return mixed
+     * @throws Throwable
+     */
+    private function createOrUpdate(Product $product, $data): mixed
+    {
+        $isUpdating = $product->id > 0;
+        DB::beginTransaction();
+
+        try {
+            if ($isUpdating) {
+                $data['type'] = $product->type;
+            }
+            $productData = $this->handleProductData($data);
+            $product->fill($productData);
+            $product->updated_at = now();
+            $product->saveOrFail();
+
+            if ($isUpdating) {
+                $product->skus()->delete();
+                $product->translations()->delete();
+                $product->productAttributes()->delete();
+                $product->relations()->delete();
+            }
+
+            $translations = $this->handleTranslations($data['translations'] ?? []);
+            if ($translations) {
+                $product->translations()->createMany($translations);
+            }
+
+            $product->productAttributes()->createMany($this->handleAttributes($data['attributes'] ?? []));
+            RelationRepo::getInstance()->handleBidirectionalRelations($product, $data['related_ids'] ?? []);
+            $product->categories()->sync($data['categories'] ?? []);
+
+            if (isset($data['bundles'])) {
+                BundleRepo::getInstance()->handleBundles($product, $data['bundles'] ?? []);
+            }
+
+            // Handle product option configuration
+            if (isset($data['product_options'])) {
+                OptionValueRepo::getInstance()->createProductOptionValues($product->id, $data['product_options']);
+            }
+
+            $skus = $this->handleSkus($data['skus'] ?? []);
+            if (isset($data['price_type']) && $data['price_type'] === 'single' && ! empty($skus)) {
+                $product->update(['variables' => []]);
+                $skus = [$skus[0]];
+            }
+            $product->skus()->createMany($skus);
+
+            DB::commit();
+
+            return $product;
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    /**
+     * Patch a product.
+     *
+     * @param  Product  $product
+     * @param  $data
+     * @return mixed
+     * @throws Throwable
+     */
+    public function patch(Product $product, $data): mixed
+    {
+        DB::beginTransaction();
+
+        try {
+            if (isset($data['variants'])) {
+                $variables         = VariantRepo::getInstance()->mergeVariant($product->variables ?? [], $data['variants']);
+                $data['variables'] = $variables;
+            }
+
+            $product->fill($data);
+            $product->saveOrFail();
+
+            if (isset($data['translations'])) {
+                $translations = $this->handleTranslations($data['translations']);
+                foreach ($translations as $translation) {
+                    $existTranslation = $product->translations()->where('locale', $translation['locale'])->first();
+                    if ($existTranslation) {
+                        $existTranslation->update($translation);
+                    } else {
+                        $product->translations()->create($translation);
+                    }
+                }
+            }
+
+            if (isset($data['attributes'])) {
+                $product->productAttributes()->delete();
+                $product->productAttributes()->createMany($this->handleAttributes($data['attributes']));
+            }
+
+            if (isset($data['related_ids'])) {
+                RelationRepo::getInstance()->handleBidirectionalRelations($product, $data['related_ids']);
+            }
+
+            if (isset($data['categories'])) {
+                $product->categories()->sync($data['categories']);
+            }
+
+            if (isset($data['skus'])) {
+                $product->skus()->delete();
+                $product->skus()->createMany($this->handleSkus($data['skus']));
+            }
+
+            if (isset($data['bundles'])) {
+                BundleRepo::getInstance()->handleBundles($product, $data['bundles']);
+            }
+
+            // Handle product option configuration
+            if (isset($data['product_options'])) {
+                OptionValueRepo::getInstance()->createProductOptionValues($product->id, $data['product_options']);
+            }
+
+            DB::commit();
+
+            return $product;
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    /**
+     * @param  $data
+     * @return string[]
+     */
+    public function handleProductData($data): array
+    {
+        $images = $data['images'] ?? null;
+        if (is_string($images)) {
+            $images = json_decode($images, true);
+        }
+
+        $video = $data['video'] ?? null;
+        if (is_string($video)) {
+            $video = json_decode($video, true);
+        }
+
+        $variables = $data['variables'] ?? ($data['variants'] ?? []);
+        if (is_string($variables)) {
+            $variables = json_decode($variables, true);
+        }
+
+        $slug = $data['slug'] ?? null;
+        if (is_string($slug) && empty($slug)) {
+            $slug = null;
+        }
+
+        $spuCode = $data['spu_code'] ?? null;
+        if (is_string($spuCode) && empty($spuCode)) {
+            $spuCode = null;
+        }
+
+        return [
+            'type'         => $data['type'] ?? Product::TYPE_NORMAL,
+            'spu_code'     => $spuCode,
+            'slug'         => $slug,
+            'brand_id'     => $data['brand_id'] ?? 0,
+            'images'       => $images,
+            'hover_image'  => $data['hover_image'] ?? '',
+            'video'        => $video,
+            'tax_class_id' => $data['tax_class_id'] ?? 0,
+            'variables'    => $variables,
+            'position'     => (int) ($data['position'] ?? 0),
+            'weight'       => $data['weight'] ?? 0,
+            'weight_class' => $data['weight_class'] ?? '',
+            'sales'        => (int) ($data['sales'] ?? 0),
+            'viewed'       => (int) ($data['viewed'] ?? 0),
+            'minimum'      => max(1, (int) ($data['minimum'] ?? 1)),
+            'published_at' => $data['published_at'] ?? now(),
+            'active'       => (bool) ($data['active'] ?? false),
+        ];
+    }
+
+    /**
+     * @param  $skus
+     * @return array
+     */
+    public function handleSkus($skus): array
+    {
+        if (is_string($skus)) {
+            $skus = json_decode($skus, true);
+        }
+        $onlyOneSku = count($skus) == 1;
+
+        $items = [];
+        foreach ($skus as $sku) {
+            $variants = $sku['variants'] ?? [];
+            if (is_string($variants)) {
+                $variants = json_decode($variants);
+            }
+
+            if ($onlyOneSku) {
+                $isDefault = true;
+            } else {
+                $isDefault = $sku['is_default'] ?? false;
+            }
+
+            $code = $sku['code'];
+
+            $items[] = [
+                'images'       => [$sku['image'] ?? ''],
+                'variants'     => $variants,
+                'code'         => $code,
+                'model'        => $sku['model'] ?? $code,
+                'price'        => (float) ($sku['price'] ?? 0),
+                'origin_price' => (float) ($sku['origin_price'] ?? 0),
+                'quantity'     => (int) ($sku['quantity'] ?? 0),
+                'is_default'   => (bool) $isDefault,
+                'position'     => (int) ($sku['position'] ?? 0),
+            ];
+        }
+
+        return $items;
+    }
+
+    /**
+     * @param  $translations
+     * @return array
+     * @throws Exception
+     */
+    private function handleTranslations($translations): array
+    {
+        if (empty($translations)) {
+            return [];
+        }
+
+        // Define field mapping for name to other fields
+        $fieldMap = [
+            'name' => ['summary', 'selling_point', 'content', 'meta_title', 'meta_description', 'meta_keywords'],
+        ];
+
+        // Process translations using TranslationHandler
+        return TranslationHandler::process($translations, $fieldMap);
+    }
+
+    /**
+     * @param  $attributes
+     * @return array
+     */
+    private function handleAttributes($attributes): array
+    {
+        if (is_string($attributes)) {
+            $attributes = json_decode($attributes, true);
+        }
+
+        $items = [];
+        foreach ($attributes as $attribute) {
+            if (empty($attribute['attribute_id'] ?? []) || empty($attribute['attribute_value_id'] ?? [])) {
+                continue;
+            }
+            $items[] = $attribute;
+        }
+
+        return $items;
+    }
+
+    /**
+     * @return Builder
+     */
+    public function baseBuilder(): Builder
+    {
+        return Product::query();
+    }
+
+    /**
+     * attr format: attr=1:1,2,3|5:6,7
+     * @param  array  $filters
+     * @return Builder
+     * @throws Exception
+     */
+    public function builder(array $filters = []): Builder
+    {
+        $relations = [
+            'skus',
+            'masterSku',
+            'translation',
+            'categories.translation',
+            'favorites',
+            'bundles.sku.product.translation',
+        ];
+
+        $relations = array_merge($this->relations, $relations);
+
+        $builder = $this->baseBuilder()->with($relations);
+
+        $filters = array_merge($this->filters, $filters);
+
+        // Use ProductQueryBuilder to handle filtering logic
+        $queryBuilder = new \NiceShoply\Common\Services\ProductQueryBuilder;
+
+        $builder = $queryBuilder->applyCategoryFilters($builder, $filters);
+        $builder = $queryBuilder->applyAttributeFilters($builder, $filters);
+        $builder = $queryBuilder->applyBrandFilters($builder, $filters);
+        $builder = $queryBuilder->applyPriceFilters($builder, $filters);
+        $builder = $queryBuilder->applyStockFilters($builder, $filters);
+        $builder = $queryBuilder->applySearchFilters($builder, $filters);
+        $builder = $queryBuilder->applySkuFilters($builder, $filters);
+        $builder = $queryBuilder->applyBasicFilters($builder, $filters);
+        $builder = $queryBuilder->applyDateFilters($builder, $filters);
+
+        return fire_hook_filter('repo.product.builder', $builder);
+    }
+
+    /**
+     * @param  int  $limit
+     * @return mixed
+     * @throws Exception
+     */
+    public function getBestSellerProducts(int $limit = 8): mixed
+    {
+        return $this->withActive()->builder()
+            ->whereHas('translation')
+            ->withCount('orderItems')
+            ->orderByDesc('order_items_count')
+            ->limit($limit)
+            ->get();
+    }
+
+    /**
+     * @param  int  $limit
+     * @return mixed
+     * @throws Exception
+     */
+    public function getLatestProducts(int $limit = 8): mixed
+    {
+        return $this->withActive()->builder()
+            ->orderByDesc('updated_at')
+            ->limit($limit)
+            ->get();
+    }
+
+    /**
+     * Get product list by IDs.
+     *
+     * @param  mixed  $productIDs
+     * @return Collection
+     */
+    public function getListByProductIDs(mixed $productIDs): Collection
+    {
+        if (empty($productIDs)) {
+            return collect();
+        }
+        if (is_string($productIDs)) {
+            $productIDs = explode(',', $productIDs);
+        }
+
+        return Product::query()
+            ->with(['translation', 'masterSku'])
+            ->whereIn('id', $productIDs)
+            ->orderByRaw('FIELD(id, '.implode(',', $productIDs).')')
+            ->get();
+    }
+
+    /**
+     * @param  $spuCode
+     * @return ?Product
+     */
+    public function findBySpuCode($spuCode): ?Product
+    {
+        if (empty($spuCode)) {
+            return null;
+        }
+
+        return Product::query()->where('spu_code', $spuCode)->first();
+    }
+
+    /**
+     * @param  $slug
+     * @return ?Product
+     */
+    public function findBySlug($slug): ?Product
+    {
+        if (empty($slug)) {
+            return null;
+        }
+
+        return Product::query()->where('slug', $slug)->first();
+    }
+
+    /**
+     * @param  $keyword
+     * @param  int  $limit
+     * @return mixed
+     */
+    public function autocomplete($keyword, int $limit = 10): mixed
+    {
+        $builder = Product::query()->with(['translation', 'masterSku']);
+        if ($keyword) {
+            $builder->whereHas('translation', function ($query) use ($keyword) {
+                $query->where('name', 'like', "%{$keyword}%");
+            });
+        }
+
+        return $builder->limit($limit)->get();
+    }
+
+    /**
+     * @param  $id
+     * @return string
+     */
+    public function getNameByID($id): string
+    {
+        return Product::query()->find($id)->description->name ?? '';
+    }
+
+    /**
+     * Get bundle items for product display
+     *
+     * @param  Product  $product
+     * @return Collection
+     */
+    public function getBundleItems(Product $product): Collection
+    {
+        return BundleRepo::getInstance()->getBundleItemsForDisplay($product);
+    }
+
+    /**
+     * Get category options for cascader component
+     *
+     * @return array
+     */
+    public static function getCategoryOptions(): array
+    {
+        // Get only active categories and build tree structure
+        $activeCategories = Category::where('active', true)
+            ->with(['translation', 'children.translation'])
+            ->orderBy('position')
+            ->get();
+
+        // Build tree structure manually since we need to filter by active status
+        $tree      = collect();
+        $itemsById = $activeCategories->keyBy('id');
+
+        foreach ($activeCategories as $category) {
+            if ($category->parent_id && isset($itemsById[$category->parent_id])) {
+                if (! isset($itemsById[$category->parent_id]->children)) {
+                    $itemsById[$category->parent_id]->children = collect();
+                }
+                $itemsById[$category->parent_id]->children->push($category);
+            } else {
+                $tree->push($category);
+            }
+        }
+
+        return CategoryRepo::formatCategoriesForCascader($tree);
+    }
+}

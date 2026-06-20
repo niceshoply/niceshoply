@@ -1,0 +1,121 @@
+@extends('console::layouts.app')
+
+@section('title', __('console/menu.pages'))
+
+<x-console::form.right-btns />
+
+@push('header')
+<script src="{{ asset('vendor/tinymce/5.9.1/tinymce.min.js') }}"></script>
+@endpush
+
+@section('content')
+<form class="needs-validation" novalidate id="app-form"
+  action="{{ $page->id ? console_route('pages.update', [$page->id]) : console_route('pages.store') }}" method="POST">
+  @csrf
+  @method($page->id ? 'PUT' : 'POST')
+
+  <div class="row">
+    <div class="col-12 col-md-9">
+      <div class="card mb-3">
+        <div class="card-header">
+          <h5 class="card-title mb-0">{{ __('console/common.basic_info') }}</h5>
+        </div>
+        <div class="card-body">
+          <div class="accordion accordion-flush locales-accordion" id="data-locales">
+            @foreach (locales() as $locale)
+            @php($localeCode = $locale->code)
+            @php($localeName = $locale->name)
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button {{ $loop->first ? '' : 'collapsed' }}" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#data-locale-{{ $localeCode }}"
+                  aria-expanded="{{ $loop->first ? 'true' : 'false' }}" aria-controls="data-locale-{{ $localeCode }}">
+                  <div class="d-flex align-items-center wh-20">
+                    <img src="{{ image_origin($locale->image) }}" class="img-fluid {{ default_locale_class($locale->code) }}"
+                         alt="{{ $localeName }}">
+                  </div>&nbsp;
+                  {{ $localeName }}
+                </button>
+              </h2>
+              <div id="data-locale-{{ $localeCode }}"
+                class="accordion-collapse collapse {{ $loop->first ? 'show' : '' }}" data-bs-parent="#data-locales">
+                <div class="accordion-body">
+                  <input  name="translations[{{$localeCode}}][locale]" value="{{$localeCode}}" class="d-none">
+
+                  <x-common-form-input title="{{ __('console/article.title') }}" name="translations[{{$localeCode}}][title]"
+                    :translate="true"  value="{{ old('translations.' . $localeCode . '.title', $page->translate($localeCode, 'title')) }}"/>
+
+                  <x-console::form.row title="{{ __('console/article.content') }}" width="900" :translate="true">
+                    <ul class="nav nav-tabs mb-3 code-tabs" role="tablist">
+                      <li class="nav-item" role="presentation">
+                        <button class="nav-link active" data-bs-toggle="tab"
+                          data-bs-target="#tab-contentx-{{ $localeCode }}" type="button">{{ __('console/article.content') }}
+                        </button>
+                      </li>
+                      <li class="nav-item" role="presentation">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-code-{{ $localeCode }}"
+                          type="button">{{ __('console/page.theme') }}</button>
+                      </li>
+                    </ul>
+
+                    <div class="tab-content">
+                      <div class="tab-pane fade show active" id="tab-contentx-{{ $localeCode }}">
+                        <textarea rows="4" type="text" name="translations[{{$localeCode}}][content]" class="tinymce" id="content-{{ $localeCode }}"
+                          placeholder="{{ __('console/article.content') }}">{{ old('translations.' . $localeCode . '.content', $page->translate($localeCode, 'content')) }}</textarea>
+                      </div>
+                      <div class="tab-pane fade show" id="tab-code-{{ $localeCode }}">
+                        <x-console-form-codemirror title="{{ __('console/page.theme') }}" name="translations[{{$localeCode}}][template]"
+                          value="{{ old('translations.' . $localeCode . '.template', $page->translate($localeCode, 'template')) }}"
+                          required  />
+                      </div>
+                    </div>
+
+                  </x-console::form.row>
+
+                  <x-common-form-input title="{{ __('console/setting.meta_title') }}" name="translations[{{$localeCode}}][meta_title]"
+                    :translate="true"  value="{{ old('translations.' . $localeCode . '.meta_title', $page->translate($localeCode, 'meta_title')) }}"
+                     />
+
+                  <x-common-form-input title="{{ __('console/setting.meta_keywords') }}" name="translations[{{$localeCode}}][meta_keywords]"
+                    :translate="true"  value="{{ old('translations.' . $localeCode . '.meta_keywords', $page->translate($localeCode, 'meta_keywords')) }}"
+                     />
+
+                  <x-common-form-input title="{{ __('console/setting.meta_description') }}" name="translations[{{$localeCode}}][meta_description]"
+                    :translate="true"  value="{{ old('translations.' . $localeCode . '.meta_description', $page->translate($localeCode, 'meta_description')) }}"
+                     />
+
+                  <x-common-form-input title="{{ __('console/common.canonical') }}" name="translations[{{$localeCode}}][canonical]"
+                    :translate="true" value="{{ old('translations.' . $localeCode . '.canonical', $page->translate($localeCode, 'canonical')) }}"
+                    placeholder="https://" description="{{ __('console/common.canonical_description') }}" />
+                </div>
+              </div>
+            </div>
+            @endforeach
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-3 ps-md-0">
+      <div class="card">
+        <div class="card-body">
+          <x-common-form-switch-radio title="{{ __('console/common.whether_enable') }}" name="active" :value="old('active', $page->active ?? true)"
+            placeholder="{{ __('console/common.whether_enable') }}" />
+          <x-common-form-switch-radio title="{{ __('console/common.show_breadcrumb') }}" name="show_breadcrumb" :value="old('show_breadcrumb', $page->show_breadcrumb ?? true)"
+            placeholder="{{ __('console/common.show_breadcrumb') }}" />
+          <x-common-form-input title="{{ __('console/common.slug') }}" name="slug" :value="old('slug', $page->slug ?? '')" placeholder="{{ __('console/common.slug') }}" />
+          <x-common-form-input title="{{ __('console/article.viewed') }}" name="viewed" :value="old('viewed', $page->viewed ?? 0)"
+            />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" class="d-none"></button>
+</form>
+@endsection
+
+@push('footer')
+<script>
+</script>
+@endpush

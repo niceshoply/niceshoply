@@ -1,0 +1,18 @@
+{
+    "code": "privacy_consent",
+    "name": {
+        "zh-cn": "Cookie/隐私合规",
+        "en": "Cookie / Privacy Consent"
+    },
+    "description": {
+        "zh-cn": "Cookie/隐私合规：在前台底部/顶部自动注入可定制的 Cookie 同意横幅(含接受/拒绝与隐私政策链接),用户选择保存在本地并上报后台留存同意记录(含 IP/时间/选择),帮助满足 GDPR/Cookie 告知要求。",
+        "en": "Cookie/privacy compliance: auto-inject a customizable cookie consent banner (accept/reject + policy link) at the storefront top/bottom; the choice is stored locally and logged server-side (IP/time/choice) to help meet GDPR/cookie notice requirements."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-cookie",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

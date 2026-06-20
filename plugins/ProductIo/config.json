@@ -1,0 +1,18 @@
+{
+    "code": "product_io",
+    "name": {
+        "zh-cn": "商品批量导入导出",
+        "en": "Product Import/Export"
+    },
+    "description": {
+        "zh-cn": "商品批量导入导出：一键导出商品/SKU 的价格、库存、上下架等为 CSV；按 SKU 编码批量回填更新价格与库存(可选上下架)，适合批量改价、补货与盘点，导入前预校验并返回更新/跳过明细。",
+        "en": "Bulk product import/export: export product/SKU price, stock and status to CSV; bulk-update price and stock (and optional active) by SKU code — ideal for repricing, restocking and stocktaking, with a pre-check summary of updated/skipped rows."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-file-earmark-spreadsheet",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

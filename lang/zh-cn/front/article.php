@@ -1,0 +1,18 @@
+<?php
+/**
+ * Copyright (c) Since 2024 NiceShoply - All Rights Reserved
+ *
+ * @link       https://www.niceshoply.com
+ * @author     NiceShoply <team@niceshoply.com>
+ * @license    https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ */
+
+return [
+    'articles'            => '文章首页',
+    'keyword'             => '请输入关键字',
+    'news_classification' => '新闻分类',
+    'news_tag'            => '新闻标签',
+    'related_articles'    => '相关文章',
+    'related_products'    => '相关商品',
+    'search'              => '搜索',
+];

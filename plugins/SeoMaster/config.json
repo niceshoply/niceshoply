@@ -1,0 +1,18 @@
+{
+    "code": "seo_master",
+    "name": {
+        "zh-cn": "SEO 优化",
+        "en": "SEO Master"
+    },
+    "description": {
+        "zh-cn": "SEO 增强：自动注入 Open Graph / Twitter Card / 规范链接 / 结构化数据(JSON-LD)，并提供动态 sitemap.xml 与 robots.txt。",
+        "en": "SEO enhancement: auto-inject Open Graph / Twitter Card / canonical / JSON-LD structured data, plus dynamic sitemap.xml and robots.txt."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-search",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

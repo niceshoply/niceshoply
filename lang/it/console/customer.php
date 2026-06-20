@@ -1,0 +1,29 @@
+<?php
+/**
+ * Copyright (c) Since 2024 NiceShoply - All Rights Reserved
+ *
+ * @link       https://www.niceshoply.com
+ * @author     NiceShoply <team@niceshoply.com>
+ * @license    https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ */
+
+return [
+    'address'        => 'Gestione indirizzi',
+    'address_id'     => 'ID Indirizzo',
+    'address_manage' => 'Gestione degli indirizzi',
+    'avatar'         => 'Avatar',
+    'balance_manage' => 'Gestione dei saldi',
+    'basic_info'     => 'Informazioni di base',
+    'code'           => 'Codice',
+    'customer_info'  => 'Informazione dei clienti',
+    'discount_rate'  => 'Aliquota di sconto',
+    'email'          => 'Email',
+    'from'           => 'Da',
+    'group'          => 'Gruppo clienti',
+    'level'          => 'Livello',
+    'locale'         => 'Lingua utilizzata',
+    'login_frontend' => 'Fate il giro',
+    'mini_cost'      => 'Importo minimo di spesa',
+    'name'           => 'Nome',
+    'password'       => 'Password',
+];

@@ -1,0 +1,69 @@
+// ============================================================
+// 【文件说明】社交登录按钮样式文件
+// 【对应模板】views/account/_social.blade.php
+//            在登录页（login）和注册页（register）的表单底部引入
+// ============================================================
+//
+// 【关键 CSS 类】
+//
+//   .line          - "or" 分隔线左右两侧的横线（宽度 50%，高度 1px，浅灰色）
+//   .word          - "or" 文字容器（浅灰色，配合两侧 .line 形成 "--- or ---" 布局）
+//   .social-button - 单个社交登录按钮圆形容器（50×50px，圆形，主色 $primary 背景，白色图标）
+//                    图标使用 Bootstrap Icons（bi bi-{provider}）
+//
+// 【自定义建议】
+//   - 修改按钮颜色：更改 background-color: $primary 为具体颜色（如各平台品牌色）
+//     例如：Google 用 #DB4437，GitHub 用 #333，Facebook 用 #4267B2
+//   - 修改按钮尺寸：调整 width/height（当前 50px），font-size 同步调整
+//   - 添加 hover 效果：增加 transition 和 opacity/brightness 变化
+//   - 如需横排文字（"使用 Google 登录"），修改 flex-direction 并增加 width
+// ============================================================
+
+/*
+ * ============================================================
+ * 【文件说明】社交登录样式文件
+ * 【对应模板】登录/注册页面（login.blade.php）中的社交账号登录区域
+ * ============================================================
+ *
+ * 【关键 CSS 类】
+ *   .line            - 分隔线（宽度 50%，1px 高度，灰色 #c3c1c1），用于"或"分隔符两侧
+ *   .word            - 分隔文字（如"OR"），灰色 #c3c1c1
+ *   .social-button   - 社交登录按钮（50x50px 圆形，$primary 背景色，白色图标，无边框）
+ *                      适用于 Google、Facebook、微信等社交账号登录按钮
+ *
+ * 【使用示例】
+ *   <div class="d-flex align-items-center">
+ *     <div class="line"></div>
+ *     <span class="word mx-2">OR</span>
+ *     <div class="line"></div>
+ *   </div>
+ *   <a href="/auth/google" class="social-button"><i class="bi bi-google"></i></a>
+ *
+ * 【自定义建议】
+ *   - .social-button 背景色使用 $primary，修改主题色即可
+ *   - 如需各社交平台使用品牌专属颜色，可为每个平台添加独立的颜色类
+ *     如：.social-button.google { background-color: #DB4437; }
+ * ============================================================
+ */
+
+.line {
+    width: 50%;
+    height: 1px;
+    background:  #c3c1c1;
+}
+.word {
+    color: #c3c1c1;
+}
+.social-button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: $primary;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: white;
+    font-size: 1.5rem;
+    border: none;
+}

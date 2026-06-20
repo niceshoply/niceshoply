@@ -1,0 +1,18 @@
+{
+    "code": "translator_ai",
+    "name": {
+        "zh-cn": "AI 翻译工具",
+        "en": "AI Translator"
+    },
+    "description": {
+        "zh-cn": "AI 在线翻译工具：复用系统内置 6 大模型批量翻译 UI 文案与业务内容，支持术语表锁定、占位符(:name/{count})完整性校验，输出可直接使用的 PHP/JSON 语言数组。",
+        "en": "AI translation tool: batch-translate UI strings & content via built-in 6 models, with glossary locking, placeholder (:name/{count}) integrity checks, exporting ready-to-use PHP/JSON language arrays."
+    },
+    "type": "translator",
+    "version": "v1.0.0",
+    "icon": "bi-translate",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

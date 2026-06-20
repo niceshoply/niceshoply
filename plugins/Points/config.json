@@ -1,0 +1,18 @@
+{
+    "code": "points",
+    "name": {
+        "zh-cn": "积分商城",
+        "en": "Points"
+    },
+    "description": {
+        "zh-cn": "会员积分系统：下单按比例赠送积分，结算时可用积分抵现。支持积分账户、积分流水、获取/抵扣比例与单笔抵扣上限配置。",
+        "en": "Member points system: earn points on orders and redeem points as cash at checkout. Includes point accounts, point logs, earn/redeem rates and per-order redeem cap."
+    },
+    "type": "marketing",
+    "version": "v1.0.0",
+    "icon": "bi-coin",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

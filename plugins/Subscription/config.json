@@ -1,0 +1,18 @@
+{
+    "code": "subscription",
+    "name": {
+        "zh-cn": "周期购/订阅",
+        "en": "Subscription"
+    },
+    "description": {
+        "zh-cn": "周期购/订阅：会员对商品设置按天/周/月的周期，到期自动生成订单。支持「余额自动扣款」与「到期提醒」两种模式，可暂停/恢复/取消；提供 subscription:run 命令(可加入 cron)与后台一键执行。",
+        "en": "Subscription: members set a daily/weekly/monthly cadence for a product; orders are auto-generated when due. Supports wallet auto-charge or reminder modes, pause/resume/cancel; ships a subscription:run command (cron-ready) plus one-click admin run."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-arrow-repeat",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

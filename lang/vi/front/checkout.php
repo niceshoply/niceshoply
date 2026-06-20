@@ -1,0 +1,32 @@
+<?php
+/**
+ * Copyright (c) Since 2024 NiceShoply - All Rights Reserved
+ *
+ * @link       https://www.niceshoply.com
+ * @author     NiceShoply <team@niceshoply.com>
+ * @license    https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ */
+
+return [
+    'billing_address'         => 'Địa chỉ thanh toán',
+    'billing_methods'         => 'Phương thức thanh toán',
+    'cancel_create'           => 'Hủy',
+    'checkout'                => 'Thanh toán',
+    'create_address'          => 'Tạo địa chỉ',
+    'failed'                  => 'Tên người dùng hoặc mật khẩu không đúng.',
+    'my_order'                => 'Đơn hàng của tôi',
+    'no_billing_methods'      => 'Không có phương thức thanh toán, vui lòng liên hệ quản trị viên',
+    'no_shipping_methods'     => 'Không có phương thức vận chuyển, vui lòng liên hệ quản trị viên',
+    'order_comment'           => 'Ghi chú đơn hàng',
+    'password'                => 'Mật khẩu không đúng.',
+    'place_order'             => 'Đặt hàng',
+    'please_create_address'   => 'Xin vui lòng tạo một địa chỉ',
+    'same_shipping_address'   => 'Địa chỉ thanh toán như địa chỉ giao hàng',
+    'shipping_address'        => 'Địa chỉ giao hàng',
+    'shipping_methods'        => 'Phương thức vận chuyển',
+    'shipping_quote_error'    => 'Vui lòng thực hiện phương pháp : public function getQuotes($checkoutService)\" trong plugin :classname',
+    'throttle'                => 'Bạn đã thử đăng nhập quá nhiều lần, vui lòng thử lại sau :seconds giây.',
+    'warehouse_ship_from'     => 'Sản phẩm này sẽ được giao từ :warehouse.',
+    'warehouse_fallback_ship' => 'Kho địa phương hết hàng. Sẽ giao từ :warehouse.',
+    'warehouse_out_of_stock'  => 'Sản phẩm này hiện đã hết hàng tại tất cả kho.',
+];

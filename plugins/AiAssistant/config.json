@@ -1,0 +1,18 @@
+{
+    "code": "ai_assistant",
+    "name": {
+        "zh-cn": "AI 导购客服",
+        "en": "AI Shopping Assistant"
+    },
+    "description": {
+        "zh-cn": "AI 导购客服：复用核心 6 大模型，结合可维护的知识库与热销商品上下文，回答商品咨询/导购/常见问题。前台自动注入对话挂件，记录会话便于复盘与训练知识库。需在「系统设置-AI」配置模型。",
+        "en": "AI shopping assistant: reuses the core LLMs with an editable knowledge base and best-seller context to answer product/shopping/FAQ questions. Injects a chat widget on the storefront and logs conversations. Requires an AI model configured in System Settings - AI."
+    },
+    "type": "intelli",
+    "version": "v1.0.0",
+    "icon": "bi-robot",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

@@ -1,0 +1,40 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node build.js --watch",
+    "watch": "node build.js --watch",
+    "build": "node deploy-vendor.mjs && node build.js",
+    "prod": "node deploy-vendor.mjs && node build.js",
+    "production": "node deploy-vendor.mjs && node build.js",
+    "vendor": "node deploy-vendor.mjs",
+    "release:upgrade": "bash scripts/release-upgrade.sh",
+    "release:upgrade:full": "bash scripts/release-upgrade.sh --full",
+    "release:upgrade:upload": "bash scripts/release-upgrade.sh --upload"
+  },
+  "devDependencies": {
+    "axios": "^1.6.4",
+    "jquery": "^3.7.1",
+    "sass": "^1.75.0",
+    "vite": "^6.4.3"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
+    "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
+    "chart.js": "^4.4.0",
+    "codemirror": "^5.65.21",
+    "element-plus": "^2.8.0",
+    "github-markdown-css": "^5.6.1",
+    "highlight.js": "^11.9.0",
+    "laydate": "^1.0.7",
+    "layui-layer": "^1.0.9",
+    "photoswipe": "^5.4.0",
+    "sortablejs": "^1.15.0",
+    "swiper": "^11.0.0",
+    "tinymce": "^5.10.9",
+    "video.js": "^8.0.0",
+    "vue": "^3.5.0",
+    "vuedraggable": "^4.1.0"
+  }
+}

@@ -1,0 +1,40 @@
+/*
+ * ============================================================
+ * 【文件说明】首页轮播图模块（Banner Swiper）样式
+ * 【对应模板】resources/views/components/module-swiper.blade.php（或 home.blade.php 中的轮播区块）
+ * ============================================================
+ *
+ * 【关键 CSS 类】
+ *   .module-swiper                       - 轮播图模块外层容器
+ *   .module-swiper .swiper-slide img     - 轮播图图片，宽度 100% 自适应
+ *   .module-swiper .swiper-pagination    - 分页器容器
+ *     .swiper-pagination-bullet          - 分页器圆点，宽度 30px（扁形椭圆）
+ *     .swiper-pagination-bullet-active   - 当前激活分页点，使用 $primary 主题色
+ *
+ * 【依赖】
+ *   Swiper.js 库（CSS 由 Bootstrap 或主题包引入）
+ *
+ * 【自定义建议】
+ *   - 修改 .swiper-pagination-bullet 的 width 可调整分页器宽度
+ *   - 激活颜色通过 $primary 变量控制，修改变量即可全局生效
+ *   - 如需箭头导航按钮，在此文件中添加 .swiper-button-prev/next 的样式覆盖
+ * ============================================================
+ */
+
+.module-swiper {
+  .swiper-slide {
+    img {
+      width: 100%;
+    }
+  }
+
+  .swiper-pagination {
+    .swiper-pagination-bullet {
+      width: 30px;
+    }
+
+    .swiper-pagination-bullet-active {
+      background: $primary !important;
+    }
+  }
+}

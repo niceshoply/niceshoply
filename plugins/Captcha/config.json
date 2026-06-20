@@ -1,0 +1,18 @@
+{
+    "code": "captcha",
+    "name": {
+        "zh-cn": "验证码/人机验证",
+        "en": "Captcha / Bot Protection"
+    },
+    "description": {
+        "zh-cn": "人机验证：集成 Google reCAPTCHA v2 / Cloudflare Turnstile / hCaptcha，自动在前台注入验证脚本并提供服务端校验接口(/api 验证 token)，用于注册/登录/下单等场景防机器人与刷单。需在对应平台申请站点密钥。",
+        "en": "Bot protection: integrates Google reCAPTCHA v2 / Cloudflare Turnstile / hCaptcha, auto-injects the widget script to the storefront and exposes a server-side token verify endpoint for register/login/checkout. Requires site keys from the provider."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-robot",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

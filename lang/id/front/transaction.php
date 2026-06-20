@@ -1,0 +1,26 @@
+<?php
+/**
+ * Copyright (c) Since 2024 NiceShoply - All Rights Reserved
+ *
+ * @link       https://www.niceshoply.com
+ * @author     NiceShoply <team@niceshoply.com>
+ * @license    https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ */
+
+return [
+    'amount'               => 'jumlah',
+    'available'            => 'Saldo tersedia',
+    'available_balance'    => 'Saldo tersedia',
+    'balance'              => 'saldo',
+    'balance_placeholder'  => 'Silahkan masukkan saldo',
+    'comment'              => '-',
+    'confirm'              => 'yakin',
+    'date'                 => 'tanggal',
+    'frozen'               => 'Saldo beku',
+    'input_balance_total'  => 'Saldo yang dimasukkan harus lebih rendah dari harga barang',
+    'input_should_balance' => 'Saldo yang dimasukkan harus kurang dari atau sama dengan saldo yang tersedia',
+    'no_transactions'      => 'Tidak ada catatan transaksi',
+    'total'                => 'Saldo total',
+    'transaction'          => 'Saldo saya',
+    'type'                 => 'jenis',
+];

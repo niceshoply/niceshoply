@@ -1,0 +1,168 @@
+{nice:if $productOptions && $productOptions->count() > 0}
+  <div class="mn-options product-options">
+    <div class="mn-variant-label" style="margin-bottom:12px;">{{ __('front/product.custom_options') }}</div>
+
+    {nice:foreach $productOptions as $productOption}
+      {nice:php}
+        $option = $productOption->option;
+        $productOptionValues = $product->productOptionValues->where('option_id', $option->id);
+        $optionType = $option->type ?? 'select';
+        $isRequired = $option->required ?? false;
+      {/nice:php}
+
+      {nice:if $option && $productOptionValues->count() > 0}
+        <div class="mn-option-group option-group" data-option-id="{{ $option->id }}" data-option-type="{{ $optionType }}" data-required="{{ $isRequired ? 'true' : 'false' }}">
+          <label class="mn-option-label option-label">
+            {{ $option->currentName }}
+            {nice:if $isRequired}<span style="color:var(--mn-red);">*</span>{/nice:if}
+          </label>
+
+          {nice:if $optionType === 'select'}
+            <select class="mn-option-select option-select" name="option_{{ $option->id }}" data-option-id="{{ $option->id }}">
+              <option value="">{{ __('front/common.please_choose') }}</option>
+              {nice:foreach $productOptionValues as $productOptionValue}
+                {nice:php}
+                  $optionValue = $productOptionValue->optionValue;
+                  $priceAdjustment = $productOptionValue->price_adjustment ?? 0;
+                  $quantity = $productOptionValue->quantity ?? 0;
+                  $isOutOfStock = $quantity <= 0;
+                {/nice:php}
+                <option value="{{ $optionValue->id }}" data-price-adjustment="{{ $priceAdjustment }}" data-quantity="{{ $quantity }}" {{ $isOutOfStock ? 'disabled' : '' }}>
+                  {{ $optionValue->currentName }}
+                  {nice:if $priceAdjustment != 0}({{ $priceAdjustment > 0 ? '+' : '' }}{{ currency_format($priceAdjustment) }}){/nice:if}
+                  {nice:if $isOutOfStock} - {{ __('front/product.out_stock') }}{/nice:if}
+                </option>
+              {/nice:foreach}
+            </select>
+          {/nice:if}
+
+          {nice:if $optionType === 'radio'}
+            <div class="mn-option-values option-values radio-group">
+              {nice:foreach $productOptionValues as $productOptionValue}
+                {nice:php}
+                  $optionValue = $productOptionValue->optionValue;
+                  $priceAdjustment = $productOptionValue->price_adjustment ?? 0;
+                  $quantity = $productOptionValue->quantity ?? 0;
+                  $isOutOfStock = $quantity <= 0;
+                {/nice:php}
+                <div class="mn-option-item option-radio-item {{ $isOutOfStock ? 'out-of-stock' : '' }}">
+                  <input type="radio" name="option_{{ $option->id }}" id="option_{{ $option->id }}_{{ $optionValue->id }}" value="{{ $optionValue->id }}" data-option-id="{{ $option->id }}" data-price-adjustment="{{ $priceAdjustment }}" data-quantity="{{ $quantity }}" {{ $isOutOfStock ? 'disabled' : '' }}>
+                  <label for="option_{{ $option->id }}_{{ $optionValue->id }}">
+                    {nice:if $optionValue->image}
+                      <span class="mn-option-image"><img src="{{ image_resize($optionValue->image) }}" alt="{{ $optionValue->currentName }}"></span>
+                    {/nice:if}
+                    <span class="option-name">{{ $optionValue->currentName }}</span>
+                    {nice:if $priceAdjustment != 0}<span class="price-adjustment">({{ $priceAdjustment > 0 ? '+' : '' }}{{ currency_format($priceAdjustment) }})</span>{/nice:if}
+                  </label>
+                </div>
+              {/nice:foreach}
+            </div>
+          {/nice:if}
+
+          {nice:if $optionType === 'checkbox'}
+            <div class="mn-option-values option-values checkbox-group">
+              {nice:foreach $productOptionValues as $productOptionValue}
+                {nice:php}
+                  $optionValue = $productOptionValue->optionValue;
+                  $priceAdjustment = $productOptionValue->price_adjustment ?? 0;
+                  $quantity = $productOptionValue->quantity ?? 0;
+                  $isOutOfStock = $quantity <= 0;
+                {/nice:php}
+                <div class="mn-option-item option-checkbox-item {{ $isOutOfStock ? 'out-of-stock' : '' }}">
+                  <input type="checkbox" name="option_{{ $option->id }}[]" id="option_{{ $option->id }}_{{ $optionValue->id }}" value="{{ $optionValue->id }}" data-option-id="{{ $option->id }}" data-price-adjustment="{{ $priceAdjustment }}" data-quantity="{{ $quantity }}" {{ $isOutOfStock ? 'disabled' : '' }}>
+                  <label for="option_{{ $option->id }}_{{ $optionValue->id }}">
+                    {nice:if $optionValue->image}
+                      <span class="mn-option-image"><img src="{{ image_resize($optionValue->image) }}" alt="{{ $optionValue->currentName }}"></span>
+                    {/nice:if}
+                    <span class="option-name">{{ $optionValue->currentName }}</span>
+                    {nice:if $priceAdjustment != 0}<span class="price-adjustment">({{ $priceAdjustment > 0 ? '+' : '' }}{{ currency_format($priceAdjustment) }})</span>{/nice:if}
+                  </label>
+                </div>
+              {/nice:foreach}
+            </div>
+          {/nice:if}
+
+          {nice:if $option->description && is_array($option->description)}
+            <div class="mn-option-desc">{{ $option->description[app()->getLocale()] ?? $option->description['en'] ?? '' }}</div>
+          {/nice:if}
+        </div>
+      {/nice:if}
+    {/nice:foreach}
+  </div>
+
+  {nice:push name="footer"}
+  <script>
+    $(document).ready(function () {
+      let basePrice = {{ $sku['price'] ?? 0 }};
+      window.updateBasePrice = function (newPrice) { basePrice = parseFloat(newPrice); updateProductPrice(); };
+      let selectedOptions = {};
+      window.validateRequiredOptions = function () { return validateRequiredOptions(); };
+
+      $('.option-select').change(function () {
+        const id = $(this).data('option-id'); const v = $(this).val();
+        if (v) { selectedOptions[id] = [v]; } else { delete selectedOptions[id]; }
+        updateProductPrice(); validateRequiredOptions();
+      });
+
+      $('.option-radio-item, .option-radio-item label').on('click', function (e) {
+        e.preventDefault(); e.stopPropagation();
+        const $item = $(this).hasClass('option-radio-item') ? $(this) : $(this).closest('.option-radio-item');
+        const $input = $item.find('input[type="radio"]');
+        if ($input.prop('disabled') || $item.hasClass('out-of-stock')) return false;
+        $item.siblings('.option-radio-item').removeClass('selected');
+        $item.addClass('selected'); $input.prop('checked', true);
+        selectedOptions[$input.data('option-id')] = [$input.val()];
+        updateProductPrice(); validateRequiredOptions();
+      });
+
+      $('.option-checkbox-item, .option-checkbox-item label').on('click', function (e) {
+        e.preventDefault(); e.stopPropagation();
+        const $item = $(this).hasClass('option-checkbox-item') ? $(this) : $(this).closest('.option-checkbox-item');
+        const $input = $item.find('input[type="checkbox"]');
+        if ($input.prop('disabled') || $item.hasClass('out-of-stock')) return false;
+        const id = $input.data('option-id');
+        if ($item.hasClass('selected')) {
+          $item.removeClass('selected'); $input.prop('checked', false);
+          if (selectedOptions[id]) { selectedOptions[id] = selectedOptions[id].filter(x => x !== $input.val()); if (selectedOptions[id].length === 0) delete selectedOptions[id]; }
+        } else {
+          $item.addClass('selected'); $input.prop('checked', true);
+          if (!selectedOptions[id]) selectedOptions[id] = [];
+          selectedOptions[id].push($input.val());
+        }
+        updateProductPrice(); validateRequiredOptions();
+      });
+
+      function updateProductPrice() {
+        let total = 0;
+        $('.option-select').each(function () { const o = $(this).find('option:selected'); if (o.val()) total += parseFloat(o.data('price-adjustment')) || 0; });
+        $('.option-radio-item input[type="radio"]:checked').each(function () { total += parseFloat($(this).data('price-adjustment')) || 0; });
+        $('.option-checkbox-item input[type="checkbox"]:checked').each(function () { total += parseFloat($(this).data('price-adjustment')) || 0; });
+        const finalPrice = basePrice + total;
+        const formatted = window.inno.formatCurrency(finalPrice);
+        $('.mn-pdp-info .product-price').first().contents().filter(function () { return this.nodeType === 3; }).first().replaceWith(formatted);
+      }
+
+      function validateRequiredOptions() {
+        let allValid = true, hasRequired = false, missing = [];
+        $('.option-group').each(function () {
+          const $g = $(this), type = $g.data('option-type'), req = $g.data('required');
+          const name = $g.find('.option-label').text().trim().replace('*', '');
+          $g.find('.mn-option-error').remove();
+          if (req) {
+            hasRequired = true; let has = false;
+            if (type === 'select') has = $g.find('.option-select').val() !== '';
+            else if (type === 'radio') has = $g.find('input[type="radio"]:checked').length > 0;
+            else if (type === 'checkbox') has = $g.find('input[type="checkbox"]:checked').length > 0;
+            if (!has) { allValid = false; $g.addClass('has-error'); missing.push(name); $g.append('<div class="mn-option-error"><i class="bi bi-exclamation-circle"></i> ' + name + '</div>'); }
+            else { $g.removeClass('has-error'); }
+          } else { $g.removeClass('has-error'); }
+        });
+        if (!hasRequired) allValid = true;
+        if (allValid) { $('.add-cart').removeClass('disabled').attr('title', ''); }
+        else { $('.add-cart').addClass('disabled').attr('title', missing.join(', ')); }
+        return allValid;
+      }
+    });
+  </script>
+  {/nice:push}
+{/nice:if}

@@ -1,0 +1,5 @@
+{
+  "require": {
+    "w7corp/easywechat": "^6.0"
+  }
+}

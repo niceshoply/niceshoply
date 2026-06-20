@@ -1,0 +1,18 @@
+{
+    "code": "review_aftersale",
+    "name": {
+        "zh-cn": "评价与售后",
+        "en": "Review & After-Sales"
+    },
+    "description": {
+        "zh-cn": "商品评价晒单 + 售后工单：会员可对已购商品评分/晒图，后台审核；并可发起退款/退货/换货售后申请，后台按工作流处理。",
+        "en": "Product reviews with photos + after-sales tickets: members rate/photo-review purchased items (admin moderated), and submit refund/return/exchange requests handled via workflow."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-star-half",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

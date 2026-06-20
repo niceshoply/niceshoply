@@ -1,0 +1,8 @@
+{nice:if $category->fallbackName('content')}
+  <div class="mn-cat-description">
+    <div class="desc-title">{{ __('front/category.content') }}</div>
+    <div class="desc-body">
+      {!! $category->fallbackName('content') !!}
+    </div>
+  </div>
+{/nice:if}

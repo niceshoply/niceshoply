@@ -1,0 +1,234 @@
+/*
+ * ============================================================
+ * 【文件说明】商品卡片通用样式文件
+ * 【对应模板】所有包含商品列表的页面（首页、分类页、搜索结果页等）
+ * ============================================================
+ *
+ * 【关键 CSS 类 — 网格卡片模式】
+ *   .product-grid-item                  - 网格布局商品卡片外层容器
+ *   .product-grid-item .image           - 封面图容器（overflow: hidden，圆角）
+ *     .product-main-image               - 主图，hover 时轻微缩小并淡出（配合 hover image 切换）
+ *     .product-hover-image              - 悬停替换图，hover 时淡入放大（opacity 切换动画）
+ *     .cancel-favorite                  - 右上角取消收藏按钮（圆形白色图标）
+ *   .product-item-info                  - 商品信息区（居中）
+ *     .product-name                     - 商品名称（单行溢出省略，hover 下划线+主题色）
+ *     .product-bottom                   - 价格/按钮的相对定位容器（overflow: hidden）
+ *     .product-bottom-btns              - 底部操作按钮区（桌面端默认隐藏在上方，hover 时滑入）
+ *       .btn-add-cart                   - 加入购物车按钮（主题色文字+下划线）
+ *     .product-price                    - 价格区（桌面端 hover 时上移隐藏）
+ *       .price-new                      - 现价（使用 $price 红色，加粗）
+ *       .price-old                      - 原价（灰色+删除线）
+ *
+ * 【关键 CSS 类 — 列表模式】
+ *   .list                               - 列表布局容器（横向排列，带底部分隔线）
+ *   .list .image                        - 固定宽度 200px 的封面图区域
+ *   .list .product-item-info            - 列表模式的商品信息，左对齐
+ *
+ * 【hover 交互说明】
+ *   桌面端（992px以上）：鼠标悬停时，价格区向下移出（translateY 100%），
+ *   操作按钮从上方滑入（translateY 0），实现价格/按钮切换效果。
+ *   支持双图切换（main-image 淡出，hover-image 淡入）。
+ *
+ * 【自定义建议】
+ *   - .product-name a 的 hover 颜色使用 $primary，修改主题色即可
+ *   - .btn-add-cart 的颜色使用 $primary，修改主题色即可
+ *   - 如不需要双图切换效果，可移除 .product-hover-image 相关样式
+ *   - 如需卡片圆角，修改 .image 的 border-radius 值（当前 6px）
+ * ============================================================
+ */
+
+.product-grid-item {
+  margin-bottom: 16px;
+
+  @media (min-width: 992px) {
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+
+    &:hover {
+      .product-bottom-btns {
+        transform: translateY(0) !important;
+      }
+
+      .product-price {
+        transform: translateY(100%);
+      }
+    }
+  }
+
+  &:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  .image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
+
+    .product-main-image {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      transition: box-shadow 0.3s ease-in-out, opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+      display: block;
+    }
+
+    .product-hover-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transform: scale(1.05);
+      transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+      z-index: 2;
+    }
+
+    &:has(.product-hover-image):hover {
+      .product-main-image {
+        opacity: 0.9;
+        transform: scale(0.95);
+      }
+
+      .product-hover-image {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .cancel-favorite {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 15px;
+      color: #b00101;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      z-index: 3;
+
+      &:hover {
+        color: #fff;
+        background-color: #b00101;
+      }
+    }
+  }
+
+  .product-item-info {
+    text-align: center;
+
+    .product-name {
+      padding: 0 5px;
+      font-size: 0.875rem;
+      margin-top: 1rem;
+      margin-bottom: .5rem;
+      font-weight: bold;
+      color: #222;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      a {
+        color: inherit;
+
+        &:hover {
+          text-decoration: underline;
+          color: $primary;
+        }
+      }
+    }
+
+    .product-bottom {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-bottom-btns {
+      transform: translateY(-100%);
+      transition: transform .3s;
+
+      .btn-add-cart {
+        font-weight: bold;
+        font-size: 16px;
+        text-decoration: underline;
+        color: $primary;
+      }
+    }
+
+    .product-price {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      transition: transform 0.3s;
+
+      .price-new {
+        font-size: 1rem;
+        font-weight: bold;
+        color: $price;
+      }
+
+      .price-old {
+        font-size: .9rem;
+        color: #768088;
+        text-decoration: line-through;
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+    }
+  }
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1.4rem;
+  margin-bottom: 1.4rem;
+
+  .image {
+    flex: 0 0 200px;
+    margin-bottom: 0;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .product-item-info {
+    flex: 0.2;
+    padding-left: 20px;
+    padding-top: 10px;
+    text-align: left;
+
+    .sub-product-title{
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+
+    .product-bottom {
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+
+    .product-price {
+      text-align: left;
+      justify-content: flex-start;
+      .price-old {
+        margin-left: 0;
+      }
+    }
+
+    .add-wishlist{
+      margin-top: 10px;
+      margin-bottom: 20px;
+      max-width: 100px;
+    }
+  }
+}

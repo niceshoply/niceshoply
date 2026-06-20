@@ -1,0 +1,21 @@
+<?php
+/**
+ * Copyright (c) Since 2024 NiceShoply - All Rights Reserved
+ *
+ * @link       https://www.niceshoply.com
+ * @author     NiceShoply <team@niceshoply.com>
+ * @license    https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ */
+
+return [
+    'amount'          => 'Montant des transactions',
+    'balance'         => 'Balance des paiements',
+    'comment'         => 'Remarques sur l\'opération',
+    'consumption'     => 'consommation',
+    'customer'        => 'Les clients',
+    'customer_search' => 'Recherche de clients',
+    'recharge'        => 'complément',
+    'refund'          => 'Les restitutions',
+    'type'            => 'Type de transaction',
+    'withdraw'        => 'Retraits d\'espèces',
+];

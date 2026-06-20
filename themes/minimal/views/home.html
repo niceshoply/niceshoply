@@ -1,0 +1,239 @@
+{nice:extends layout="app"}
+{nice:section name="body-class" value="page-home"}
+
+{nice:push name="header"}
+  <script src="{{ asset('vendor/swiper/swiper-bundle.min.js') }}"></script>
+  <link rel="stylesheet" href="{{ asset('vendor/swiper/swiper-bundle.min.css') }}">
+{/nice:push}
+
+{nice:php}
+  $categories = $categories ?? \NiceShoply\Common\Repositories\CategoryRepo::getInstance()
+      ->builder(['active' => true, 'parent_id' => 0])
+      ->with(['translation'])->orderBy('position')->limit(8)->get();
+
+  $pages = $pages ?? \NiceShoply\Common\Repositories\PageRepo::getInstance()
+      ->builder(['active' => true])
+      ->with(['translation'])->orderBy('position')->limit(4)->get();
+{/nice:php}
+
+{nice:section name="content"}
+
+  {nice:hook "home.content.top"}
+
+  {-- ===== Hero ===== --}
+  {nice:if !empty($slideshow)}
+    <section class="mn-hero">
+      <div class="swiper" id="mn-hero-swiper">
+        <div class="swiper-wrapper">
+          {nice:foreach $slideshow as $slide}
+            {nice:if $slide['image'][front_locale_code()] ?? false}
+              <div class="swiper-slide">
+                <a href="{{ $slide['link'] ?: 'javascript:void(0)' }}">
+                  <img src="{{ image_origin($slide['image'][front_locale_code()]) }}" alt="">
+                </a>
+                {nice:if !empty($slide['title'] ?? '')}
+                  <div class="mn-hero-content">
+                    <div class="mn-hero-tag">{{ $slide['subtitle'] ?? '' }}</div>
+                    <h2 class="mn-hero-title">{{ $slide['title'] ?? '' }}</h2>
+                    <a href="{{ $slide['link'] ?: '#' }}" class="mn-btn mn-btn-white">{{ __('front/common.shop_now', ['default' => 'Shop Now']) }}</a>
+                  </div>
+                {/nice:if}
+              </div>
+            {/nice:if}
+          {/nice:foreach}
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </section>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        new Swiper('#mn-hero-swiper', {
+          loop: true,
+          pagination: { el: '.swiper-pagination', clickable: true },
+          autoplay: { delay: 5000, disableOnInteraction: true },
+        });
+      });
+    </script>
+  {/nice:if}
+
+  {nice:hook "home.swiper.after"}
+
+  {-- ===== Shop by Category (circular chips) ===== --}
+  {nice:if $categories->count() > 0}
+    <section class="mn-section mn-section-tight">
+      <div class="mn-container">
+        <div class="mn-section-head">
+          <div class="mn-section-eyebrow">{{ __('front/common.collections', ['default' => 'Collections']) }}</div>
+          <div class="mn-section-title">{{ __('front/category.category', ['default' => 'Shop by Category']) }}</div>
+        </div>
+        <div class="mn-cats">
+          {nice:foreach $categories as $cat}
+            <a href="{{ $cat->url }}" class="chip">
+              <div class="c-img">
+                {nice:if $cat->image}
+                  <img src="{{ image_resize($cat->image, 220, 220) }}" alt="{{ $cat->fallbackName() }}">
+                {/nice:if}
+              </div>
+              <div class="c-name">{{ $cat->fallbackName() }}</div>
+            </a>
+          {/nice:foreach}
+        </div>
+      </div>
+    </section>
+  {/nice:if}
+
+  {-- ===== Featured / Tab Products ===== --}
+  {nice:if !empty($tab_products)}
+    <section class="mn-section">
+      <div class="mn-container">
+        <div class="mn-section-head">
+          <div class="mn-section-eyebrow">{{ __('front/home.feature_product_text') }}</div>
+          <div class="mn-section-title">{{ __('front/home.feature_product') }}</div>
+        </div>
+
+        {nice:if count($tab_products) > 1}
+          <div class="mn-tabs">
+            {nice:foreach $tab_products as $item}
+              <div class="mn-tab {{ $loop->first ? 'active' : '' }}" data-bs-toggle="tab" data-bs-target="#mn-tab-{{ $loop->iteration }}">
+                {{ $item['tab_title'] }}
+              </div>
+            {/nice:foreach}
+          </div>
+        {/nice:if}
+
+        <div class="tab-content">
+          {nice:foreach $tab_products as $item}
+            <div class="tab-pane fade show {{ $loop->first ? 'active' : '' }}" id="mn-tab-{{ $loop->iteration }}">
+              <div class="row gx-3 gx-lg-4 gy-5">
+                {nice:foreach $item['products'] as $product}
+                  <div class="col-6 col-md-4 col-lg-3">
+                    {nice:include "shared.product"}
+                  </div>
+                {/nice:foreach}
+              </div>
+            </div>
+          {/nice:foreach}
+        </div>
+
+        <div class="mn-view-more">
+          <a href="{{ front_route('products.index') }}" class="mn-btn">{{ __('front/common.view_all', ['default' => 'View All']) }}</a>
+        </div>
+      </div>
+    </section>
+  {/nice:if}
+
+  {-- ===== Two Category Banners ===== --}
+  {nice:if $categories->count() >= 2}
+    <section class="row g-1 mb-1">
+      {nice:foreach $categories->slice(0, 2) as $cat}
+        <div class="col-12 col-md-6">
+          <a href="{{ $cat->url }}" class="mn-cat-banner" style="height:500px;">
+            {nice:if $cat->image}
+              <img src="{{ image_origin($cat->image) }}" alt="{{ $cat->fallbackName() }}">
+            {nice:else}
+              <div style="height:100%;background:var(--mn-bg-soft);"></div>
+            {/nice:if}
+            <div class="overlay">
+              <div class="t">{{ $cat->fallbackName() }}</div>
+              <div class="l">{{ __('front/common.shop_now', ['default' => 'Shop Now']) }}</div>
+            </div>
+          </a>
+        </div>
+      {/nice:foreach}
+    </section>
+  {/nice:if}
+
+  {-- ===== Hot Products ===== --}
+  {nice:if !empty($hot_products)}
+    <section class="mn-section">
+      <div class="mn-container">
+        <div class="mn-section-head">
+          <div class="mn-section-eyebrow">{{ __('front/home.hot_products_text', [], null) ?: '' }}</div>
+          <div class="mn-section-title">{{ __('front/home.hot_products', [], null) ?: __('console/setting.hot_products') }}</div>
+        </div>
+
+        {nice:if count($hot_products) > 1}
+          <div class="mn-tabs">
+            {nice:foreach $hot_products as $group}
+              <div class="mn-tab {{ $loop->first ? 'active' : '' }}" data-bs-toggle="tab" data-bs-target="#mn-hot-{{ $loop->iteration }}">
+                {{ $group['category_name'] }}
+              </div>
+            {/nice:foreach}
+          </div>
+        {/nice:if}
+
+        <div class="tab-content">
+          {nice:foreach $hot_products as $group}
+            <div class="tab-pane fade show {{ $loop->first ? 'active' : '' }}" id="mn-hot-{{ $loop->iteration }}">
+              <div class="row gx-3 gx-lg-4 gy-5">
+                {nice:foreach $group['products'] as $product}
+                  <div class="col-6 col-md-4 col-lg-3">
+                    {nice:include "shared.product"}
+                  </div>
+                {/nice:foreach}
+              </div>
+            </div>
+          {/nice:foreach}
+        </div>
+      </div>
+    </section>
+  {/nice:if}
+
+  {-- ===== Explore (pages) ===== --}
+  {nice:if $pages->count() > 0}
+    <section class="mn-section mn-section-tight">
+      <div class="mn-container">
+        <div class="mn-section-head">
+          <div class="mn-section-title">{{ __('front/common.more_to_explore', ['default' => 'More to Explore']) }}</div>
+        </div>
+        <div class="mn-explore-grid">
+          {nice:foreach $pages as $page}
+            <a href="{{ $page->url ?? '#' }}" class="mn-explore-item">
+              <div class="e-img">
+                {nice:if $page->image ?? false}
+                  <img src="{{ image_origin($page->image) }}" alt="{{ $page->fallbackName() }}">
+                {nice:else}
+                  <div style="width:100%;height:100%;background:var(--mn-bg-soft);"></div>
+                {/nice:if}
+              </div>
+              <div class="e-label">{{ $page->fallbackName() }}</div>
+            </a>
+          {/nice:foreach}
+        </div>
+      </div>
+    </section>
+  {/nice:if}
+
+  {-- ===== Journal / Blog ===== --}
+  {nice:if !empty($news)}
+    <section class="mn-section">
+      <div class="mn-container">
+        <div class="mn-section-head">
+          <div class="mn-section-eyebrow">{{ __('front/home.news_blog_text') }}</div>
+          <div class="mn-section-title">{{ __('front/home.news_blog') }}</div>
+        </div>
+        <div class="row gx-3 gx-lg-4 gy-4">
+          {nice:foreach $news as $new}
+            <div class="col-6 col-md-4 col-lg-3">
+              {nice:include "shared.blog" item=$new}
+            </div>
+          {/nice:foreach}
+        </div>
+      </div>
+    </section>
+  {/nice:if}
+
+  {nice:hook "home.content.bottom"}
+
+{/nice:section}
+
+{nice:push name="footer"}
+  <script>
+    $(function () {
+      $('.mn-tabs .mn-tab').on('click', function () {
+        $(this).addClass('active').siblings().removeClass('active');
+      });
+    });
+  </script>
+{/nice:push}

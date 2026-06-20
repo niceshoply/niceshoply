@@ -1,0 +1,12 @@
+{
+    "code": "global_pay",
+    "name": {"zh-cn": "海外支付", "en": "Global Pay"},
+    "description": {
+        "zh-cn": "跨境收款：Stripe Checkout 与 PayPal 订单创建，异步回调验签/确认，对齐核心支付钩子。",
+        "en": "Cross-border payments via Stripe Checkout and PayPal order API with signed webhooks and core payment hooks."
+    },
+    "type": "billing",
+    "version": "v1.0.0",
+    "icon": "bi-credit-card-2-front",
+    "author": {"name": "NiceShoply", "email": "team@niceshoply.com"}
+}

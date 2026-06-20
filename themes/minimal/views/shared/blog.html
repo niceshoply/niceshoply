@@ -1,0 +1,19 @@
+{nice:if $item->translation}
+  <div class="mn-blog">
+    <a href="{{ $item->url }}" class="b-img">
+      <img src="{{ image_resize($item->image, 400, 300) }}" alt="{{ $item->translation->title }}">
+    </a>
+    <div class="b-info">
+      {nice:if $item->catalog->translation ?? ''}
+        <div class="b-cat">{{ $item->catalog->translation->title }}</div>
+      {/nice:if}
+      <div class="b-title"><a href="{{ $item->url }}">{{ $item->translation->title }}</a></div>
+      <div class="b-meta">
+        {nice:if $item->author}
+          <span>{{ $item->author }}</span>
+        {/nice:if}
+        <span>{{ $item->created_at->format('Y-m-d') }}</span>
+      </div>
+    </div>
+  </div>
+{/nice:if}

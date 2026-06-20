@@ -1,0 +1,17 @@
+{
+    "code": "lilysilk",
+    "name": {
+        "zh-cn": "LILYSILK 奢华丝绸",
+        "en": "LILYSILK Luxury Silk"
+    },
+    "description": {
+        "zh-cn": "参考 LILYSILK 官网设计的高端奢华丝绸时尚电商主题，干净简约的白色背景搭配优雅衬线字体，完美适配时尚服装、丝绸面料等高端品牌。",
+        "en": "A premium luxury silk fashion e-commerce theme inspired by LILYSILK, featuring clean white backgrounds with elegant serif typography, perfect for high-end fashion brands."
+    },
+    "version": "v1.0.0",
+    "icon": "images/icon.png",
+    "author": {
+        "name": "NiceShoply",
+        "email": "support@niceshoply.com"
+    }
+}

@@ -1,0 +1,153 @@
+<?php
+/**
+ * Copyright (c) Since 2024 NiceShoply - All Rights Reserved
+ *
+ * @link       https://www.niceshoply.com
+ * @author     NiceShoply <team@niceshoply.com>
+ * @license    https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ */
+
+namespace NiceShoply\Console\Controllers;
+
+use Exception;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use NiceShoply\Common\Models\Locale;
+use NiceShoply\Common\Repositories\LocaleRepo;
+use NiceShoply\Console\Requests\LocaleRequest;
+use NiceShoply\Console\Services\TranslationService;
+use Throwable;
+
+class LocaleController extends BaseController
+{
+    /**
+     * @return mixed
+     * @throws Exception
+     */
+    public function index(): mixed
+    {
+        $data = [
+            'criteria' => LocaleRepo::getCriteria(),
+            'locales'  => LocaleRepo::getInstance()->getFrontListWithPath(),
+        ];
+
+        return nice_view('console::locales.index', $data);
+    }
+
+    /**
+     * @param  Request  $request
+     * @return RedirectResponse
+     */
+    public function switch(Request $request): RedirectResponse
+    {
+        $admin      = current_admin();
+        $destCode   = $request->code;
+        $refererUrl = $request->headers->get('referer');
+
+        $admin->locale = $destCode;
+        $admin->save();
+        App::setLocale($destCode);
+
+        return redirect()->to($refererUrl);
+    }
+
+    /**
+     * @param  LocaleRequest  $request
+     * @return RedirectResponse
+     * @throws Throwable
+     */
+    public function install(Request $request): RedirectResponse
+    {
+        try {
+            $code   = $request->get('code');
+            $list   = LocaleRepo::getInstance()->getFrontListWithPath();
+            $data   = collect($list)->where('code', $code)->first();
+            $locale = TranslationService::getInstance()->createLocale($data);
+
+            return redirect(console_route('locales.index'))
+                ->with('instance', $locale)
+                ->with('success', console_trans('common.install_success'));
+        } catch (Exception $e) {
+            return redirect(console_route('locales.index'))->withErrors(['error' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param  Locale  $locale
+     * @return mixed
+     */
+    public function edit(Locale $locale): mixed
+    {
+        $data = [
+            'locale' => $locale,
+        ];
+
+        return nice_view('console::locales.form', $data);
+    }
+
+    /**
+     * @param  LocaleRequest  $request
+     * @param  Locale  $locale
+     * @return RedirectResponse
+     */
+    public function update(LocaleRequest $request, Locale $locale): RedirectResponse
+    {
+        try {
+            $data = $request->all();
+            LocaleRepo::getInstance()->update($locale, $data);
+
+            return back()->with('success', console_trans('common.updated_success'));
+        } catch (Exception $e) {
+            return back()->withErrors(['error' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param  Request  $request
+     * @return mixed
+     */
+    public function uninstall(Request $request): mixed
+    {
+        try {
+            $code   = $request->code;
+            $locale = LocaleRepo::getInstance()->builder(['code' => $code])->firstOrFail();
+            if ($locale->code == system_setting('front_locale')) {
+                throw new Exception(console_trans('locale.cannot_uninstall_default_locale'));
+            }
+            TranslationService::getInstance()->deleteLocale($locale);
+
+            if (session('locale') == $code) {
+                session()->forget('locale');
+            }
+
+            return json_success(console_trans('common.updated_success'));
+        } catch (Exception $e) {
+            return json_fail($e->getMessage());
+        }
+    }
+
+    /**
+     * @throws Exception|Throwable
+     */
+    public function active(Request $request, int $id): mixed
+    {
+        try {
+            $item = Locale::query()->findOrFail($id);
+            if ($item->code == system_setting('front_locale')) {
+                throw new Exception(console_trans('locale.cannot_disable_default_locale'));
+            }
+
+            if ($request->get('status') == 0 && session('locale') == $item->code) {
+                session()->forget('locale');
+            }
+
+            $item->active = $request->get('status');
+            $item->saveOrFail();
+
+            return json_success(console_trans('common.updated_success'));
+        } catch (Exception $e) {
+            return json_fail($e->getMessage());
+        }
+    }
+}

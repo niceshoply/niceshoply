@@ -1,0 +1,18 @@
+{
+    "code": "alipay",
+    "name": {
+        "zh-cn": "支付宝",
+        "en": "Alipay"
+    },
+    "description": {
+        "zh-cn": "支付宝插件，App 端通过 WebView 打开 H5 收银台完成支付。",
+        "en": "Alipay plugin; mobile App opens H5 checkout in WebView."
+    },
+    "type": "billing",
+    "version": "v1.0.0",
+    "icon": "/images/logo.png",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "code": "referral",
+    "name": {
+        "zh-cn": "邀请有礼",
+        "en": "Referral Rewards"
+    },
+    "description": {
+        "zh-cn": "邀请有礼：每位会员生成专属邀请码/链接，新用户注册时携带 ref 参数绑定邀请关系。支持注册双向积分奖励、被邀请人首单支付后给邀请人额外积分，可选发放优惠券。含邀请统计与奖励记录。",
+        "en": "Referral rewards: each member gets a unique invite code/link; new users bind via ref on registration. Supports dual points on signup, extra inviter points on invitee's first paid order, optional coupon rewards, with stats and reward logs."
+    },
+    "type": "marketing",
+    "version": "v1.0.0",
+    "icon": "bi-people",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

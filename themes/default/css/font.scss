@@ -1,0 +1,46 @@
+/*
+ * ============================================================
+ * 【文件说明】字体引入文件 —— Jost 字体定义
+ * 【对应模板】所有页面（通过 app.scss 全局引入）
+ * ============================================================
+ *
+ * 【文件作用】
+ *   引入 Jost 字体（一款现代无衬线字体），供全站正文及标题使用。
+ *   字体文件存放在 /vendor/font/jost/ 目录下。
+ *
+ * 【字体变体说明】
+ *   - Jost-Regular.ttf  对应 font-weight: normal（400）：正常字重，用于正文
+ *   - Jost-Medium.ttf   对应 font-weight: 700：粗体，用于标题、强调文字
+ *   - Jost-SemiBold.ttf（已注释）对应 font-weight: 900：超粗体，暂未启用
+ *
+ * 【font-display: swap 说明】
+ *   字体加载期间先显示系统默认字体，加载完成后切换，避免页面文字不可见（FOIT）
+ *
+ * 【自定义建议】
+ *   - 如需更换品牌字体，修改 @font-face 中的 font-family 名称和 src 路径
+ *   - 同步修改 bootstrap/bootstrap.scss 中的 $font-family-base 变量
+ *   - 可添加更多字重变体以支持更丰富的排版层次
+ * ============================================================
+ */
+
+@font-face {font-family: 'Jost';
+  src: url('/vendor/font/jost/Jost-Regular.ttf') format("truetype");
+  font-style: normal;
+  font-weight: 500;
+  font-weight: normal;
+  font-display: swap;
+}
+
+@font-face {font-family: 'Jost';
+  src: url('/vendor/font/jost/Jost-Medium.ttf') format("truetype");
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+}
+
+// @font-face {font-family: 'Jost';
+//   src: url('/vendor/font/jost/Jost-SemiBold.ttf') format("truetype");
+//   font-style: normal;
+//   font-display: swap;
+//   font-weight: 900;
+// }

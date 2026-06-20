@@ -1,0 +1,18 @@
+{
+    "code": "risk_control",
+    "name": {
+        "zh-cn": "营销风控反作弊",
+        "en": "Risk Control"
+    },
+    "description": {
+        "zh-cn": "营销风控反作弊：维护 IP/邮箱/手机号黑名单，监测同 IP 高频注册、命中黑名单等风险并记录风险事件(含等级与命中规则)，可设置同 IP 注册频率阈值自动标记高风险，后台审阅事件与黑白名单管理。",
+        "en": "Risk control / anti-fraud: maintain IP/email/phone blacklists, detect high-frequency registrations per IP and blacklist hits, log risk events (level + matched rule) with a configurable per-IP registration threshold, and review events plus manage the blacklist in admin."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-shield-exclamation",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

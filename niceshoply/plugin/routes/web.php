@@ -1,0 +1,36 @@
+<?php
+/**
+ * Copyright (c) Since 2024 NiceShoply - All Rights Reserved
+ *
+ * @link       https://www.niceshoply.com
+ * @author     NiceShoply <team@niceshoply.com>
+ * @license    https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ */
+
+use Illuminate\Support\Facades\Route;
+use NiceShoply\Plugin\Controllers\MarketplaceController;
+use NiceShoply\Plugin\Controllers\PluginController;
+use NiceShoply\Plugin\Controllers\PluginMarketController;
+use NiceShoply\Plugin\Controllers\SettingController;
+use NiceShoply\Plugin\Controllers\ThemeMarketController;
+
+Route::post('/plugins/enabled', [PluginController::class, 'updateStatus'])->name('plugins.update_status');
+Route::post('/plugins/seeders', [PluginController::class, 'runSeeders'])->name('plugins.run_seeders');
+Route::post('/plugins/reset', [PluginController::class, 'reset'])->name('plugins.reset');
+Route::get('/plugins/settings', [SettingController::class, 'index'])->name('plugins.settings');
+Route::put('/plugins/settings', [SettingController::class, 'update'])->name('plugins.settings.update');
+Route::resource('/plugins', PluginController::class);
+
+Route::get('/plugin-market', [PluginMarketController::class, 'index'])->name('plugin-market.index');
+Route::get('/plugin-market/{slug}', [PluginMarketController::class, 'show'])->name('plugin-market.show');
+Route::get('/theme-market', [ThemeMarketController::class, 'index'])->name('theme-market.index');
+Route::get('/theme-market/{slug}', [ThemeMarketController::class, 'show'])->name('theme-market.show');
+
+Route::get('/marketplaces/{id}/download', [MarketplaceController::class, 'download'])->name('marketplaces.download');
+Route::post('/marketplaces/quick_checkout', [MarketplaceController::class, 'quickCheckout'])->name('marketplaces.quick_checkout');
+Route::put('/marketplaces/domain_token', [MarketplaceController::class, 'updateDomainToken'])->name('marketplaces.domain_token');
+Route::get('/marketplaces/get_token', [MarketplaceController::class, 'getToken'])->name('marketplaces.get_token');
+Route::get('/marketplaces/token_issue_url', [MarketplaceController::class, 'tokenIssueUrl'])->name('marketplaces.token_issue_url');
+Route::get('/marketplaces/token_callback', [MarketplaceController::class, 'tokenCallback'])->name('marketplaces.token_callback');
+Route::post('/marketplaces/clear_cache', [MarketplaceController::class, 'clearCache'])->name('marketplaces.clear_cache');
+Route::post('/marketplaces/refresh_branding_license', [MarketplaceController::class, 'refreshBrandingLicense'])->name('marketplaces.refresh_branding_license');

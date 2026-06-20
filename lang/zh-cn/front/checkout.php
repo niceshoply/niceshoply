@@ -1,0 +1,33 @@
+<?php
+/**
+ * Copyright (c) Since 2024 NiceShoply - All Rights Reserved
+ *
+ * @link       https://www.niceshoply.com
+ * @author     NiceShoply <team@niceshoply.com>
+ * @license    https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ */
+
+return [
+    'billing_address'         => '账单地址',
+    'billing_methods'         => '支付方式',
+    'cancel_create'           => '取消',
+    'checkout'                => '结账',
+    'create_address'          => '创建地址',
+    'failed'                  => '用户名或密码错误。',
+    'my_order'                => '我的订单',
+    'no_billing_methods'      => '没有支付方式，请联系管理员',
+    'no_shipping_methods'     => '没有配送方式，请联系管理员',
+    'order_comment'           => '订单备注',
+    'password'                => '密码错误。',
+    'place_order'             => '提交订单',
+    'please_create_address'   => '请创建地址',
+    'same_shipping_address'   => '账单地址同收货地址',
+    'shipping_address'        => '收货地址',
+    'shipping_methods'        => '配送方式',
+    'shipping_quote_error'    => '请在插件 :classname 实现方法: public function getQuotes($checkoutService)\"',
+    'throttle'                => '您尝试的登录次数过多，请 :seconds 秒后再试。',
+    'warehouse_ship_from'     => '该商品将从 :warehouse 发货。',
+    'warehouse_fallback_ship' => '当前仓库缺货，将从 :warehouse 就近仓库发货。',
+    'warehouse_out_of_stock'  => '该商品目前所有仓库均缺货。',
+    'order_rate_limit'        => '下单过于频繁，请稍后再试。',
+];

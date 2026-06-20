@@ -1,0 +1,896 @@
+/*
+ * ============================================================
+ * 【文件说明】商品详情页样式文件
+ * 【对应模板】resources/views/product.blade.php（或 page-product 相关模板）
+ * ============================================================
+ *
+ * 【关键 CSS 类】
+ *   body.page-product                    - 商品详情页作用域
+ *   .page-product-top                    - 页面顶部区域（图片+商品信息的左右布局）
+ *   .product-images                      - 商品图片区域（桌面端 sticky 粘性定位）
+ *     .sub-product-img                   - 缩略图列（桌面端竖向 100px 宽滑动条）
+ *       .thumbnail-item                  - 缩略图项，active 时显示主题色边框
+ *       .sub-product-btn                 - 缩略图列上/下翻页按钮（hover 时显示）
+ *     .main-product-img                  - 主图区域（可点击放大）
+ *     .mobile-product-slideshow          - 移动端图片轮播（Swiper）
+ *       .mobile-product-pagination       - 移动端分页器（固定在图片底部）
+ *   .product-info                        - 商品信息区（右侧）
+ *     .product-title                     - 商品标题，桌面端 24px
+ *     .product-price                     - 价格区块（含分隔线）
+ *       .price                           - 现价（$price 红色，桌面端 26px）
+ *       .old-price                       - 原价（灰色删除线）
+ *     .stock-wrap                        - 库存状态标签
+ *       .in-stock                        - 有货状态（绿色）
+ *       .out-stock                       - 缺货状态（灰色）
+ *     .product-param                     - 商品参数列表（键值对显示）
+ *     .product-variant-box               - 规格选择区域
+ *       .variant-value-name              - 规格值选项按钮（active 时主题色边框+阴影）
+ *         .variant-image-container       - 规格图片容器（30x30px）
+ *         .variant-text                  - 规格文字说明
+ *       .variant-value-name.disabled     - 已售罄规格（删除线，灰色）
+ *     .product-info-bottom               - 数量选择+购买按钮区域
+ *       .product-info-btns .btn.buy-now  - 立即购买按钮（灰色背景）
+ *     .add-wishlist                      - 加入心愿单链接
+ *   .product-description                 - 商品详情描述区
+ *
+ * 【Bundle 套装商品样式】
+ *   .bundle-items-display  - 套装商品列表容器（浅灰背景）
+ *   .bundle-product-item   - 套装中的单个商品项
+ *   .bundle-total-price    - 套装总价（红色，带顶部分隔线）
+ *
+ * 【商品选项（Options）样式 —— 含在 body.page-product 作用域内】
+ *   .product-options       - 商品附加选项区域（如刻字、礼品包装等）
+ *   .option-group          - 单个选项组（带灰色背景卡片）
+ *     .has-error           - 未填写必填项时的错误状态（红色边框）
+ *     .has-success         - 已选择时的成功状态（绿色边框）
+ *   .option-radio-item     - 单选类型选项按钮（hover/选中时主题色边框）
+ *   .option-checkbox-item  - 多选类型选项按钮（hover/选中时绿色边框）
+ *   .option-image img      - 选项图片（120x120px，圆角）
+ *   .current-selection-summary - 当前选项汇总卡片（渐变背景）
+ *   .total-price-display   - 总价显示区（左侧主题色竖线强调）
+ *   .option-error-message  - 选项错误提示（主题红色，fadeIn 动画）
+ *
+ * 【自定义建议】
+ *   - 所有 border-color 高亮均使用 $primary 变量
+ *   - 移动端/桌面端断点为 992px，可按需调整
+ *   - 缩略图列宽度（100px）和高度（560px）可按设计调整
+ * ============================================================
+ */
+
+body.page-product {
+  @media (max-width: 992px) {
+    .breadcrumb-wrap {
+      display: none;
+    }
+  }
+
+  .page-product-top {
+    margin-bottom: 20px;
+
+    @media (min-width: 992px) {
+      margin-bottom: 40px;
+    }
+
+    .product-left-col {
+      @media (max-width: 992px) {
+        padding: 0;
+      }
+    }
+
+    .product-images {
+      display: flex;
+
+      @media (min-width: 992px) {
+        position: sticky;
+        top: 20px;
+        align-self: flex-start;
+      }
+
+      @media (max-width: 991px) {
+        margin-bottom: 10px;
+        flex-direction: column;
+      }
+
+              .sub-product-img {
+          width: 100%;
+          position: relative;
+
+          @media (min-width: 992px) {
+            width: 100px;
+            height: 560px;
+            flex: 0 0 100px;
+            margin-right: 20px;
+
+            &:hover {
+              .swiper .sub-product-btn {
+                display: block;
+              }
+            }
+
+            // Hover scroll area indicators
+            &::before,
+            &::after {
+              content: '';
+              position: absolute;
+              left: 0;
+              right: 0;
+              height: 30px;
+              background: linear-gradient(to bottom, rgba(0,0,0,0.1), transparent);
+              pointer-events: none;
+              opacity: 0;
+              transition: opacity 0.3s ease;
+              z-index: 10;
+            }
+
+            &::before {
+              top: 0;
+              background: linear-gradient(to bottom, rgba(0,0,0,0.1), transparent);
+            }
+
+            &::after {
+              bottom: 0;
+              background: linear-gradient(to top, rgba(0,0,0,0.1), transparent);
+            }
+
+            &:hover::before,
+            &:hover::after {
+              opacity: 1;
+            }
+          }
+
+        .swiper {
+          @media (min-width: 992px) {
+            height: 100%;
+          }
+
+          .swiper-slide {
+            display: flex;
+            justify-content: center;
+
+            .thumbnail-item {
+              width: 100%;
+              height: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              border: 2px solid transparent;
+              border-radius: 4px;
+              transition: all 0.3s ease;
+              cursor: pointer;
+              
+              img {
+                border: 1px solid #eee;
+                border-radius: 2px;
+                transition: border-color 0.3s ease;
+              }
+            }
+
+            @media (min-width: 992px) {
+              width: 100px;
+              height: 100px;
+              
+              .thumbnail-item {
+                &:hover {
+                  border-color: $primary;
+                }
+                
+                &.active {
+                  border-color: $primary;
+                  background-color: rgba($primary, 0.1);
+                }
+              }
+            }
+          }
+
+          .sub-product-btn {
+            display: none;
+            > div {
+              position: absolute;
+              left: 0;
+              width: 100%;
+              height: 30px;
+              background-color: rgba(0, 0, 0, 0.3);
+              color: #fff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              cursor: pointer;
+              z-index: 9;
+              font-size: 20px;
+              &:hover {
+                background-color: rgba(0, 0, 0, 0.5);
+              }
+
+              &.sub-product-prev {
+                top: 0;
+              }
+
+              &.sub-product-next {
+                bottom: 0;
+              }
+            }
+          }
+
+          .sub-product-pagination {
+            @media (min-width: 992px) {
+              display: none;
+            }
+          }
+        }
+      }
+
+      .main-product-img {
+        cursor: pointer;
+        
+        @media (max-width: 991px) {
+          margin-top: 15px;
+        }
+      }
+      
+      // 手机版slideshow样式
+      .mobile-product-slideshow {
+        .swiper {
+          .swiper-slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            .video-play-overlay {
+              cursor: pointer;
+              transition: transform 0.3s ease;
+              
+              &:hover {
+                transform: scale(1.1);
+              }
+            }
+          }
+        }
+        
+        .mobile-product-pagination {
+          position: absolute;
+          bottom: 15px;
+          left: 50%;
+          transform: translateX(-50%);
+          z-index: 1001;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          
+          .swiper-pagination-bullet {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.6);
+            opacity: 1;
+            margin: 0 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            
+            &.swiper-pagination-bullet-active {
+              background-color: $primary;
+              transform: scale(1.2);
+            }
+          }
+        }
+      }
+    }
+
+    .product-info {
+      @media (min-width: 992px) {
+        padding-left: 20px;
+      }
+
+      .product-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+
+        @media (min-width: 992px) {
+          font-size: 24px;
+        }
+      }
+
+      .product-price {
+        border-bottom: 1px solid #e6e6e6;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+
+        @media (min-width: 992px) {
+          margin-bottom: 20px;
+          padding-bottom: 20px;
+        }
+
+        .price {
+          font-size: 20px;
+          font-weight: bold;
+          color: $price;
+
+          @media (min-width: 992px) {
+            font-size: 26px;
+          }
+        }
+
+        .old-price {
+          font-size: 16px;
+          color: #777;
+          text-decoration: line-through;
+        }
+      }
+
+      .stock-wrap {
+        > div {
+          font-weight: bold;
+          font-size: 14px;
+          &.in-stock {
+            color: #3FC158;
+            background-color: #EEF8EE;
+          }
+
+          &.out-stock {
+            color: #777;
+            background-color: #e3e3e3;
+          }
+        }
+      }
+
+      .sub-product-title {
+        color: #666;
+        line-height: 1.8;
+        font-size: 14px;
+        margin-top: 10px;
+      }
+
+      .product-param {
+        list-style: none;
+        padding: 0;
+        margin: 10px 0;
+        font-size: 14px;
+
+        @media (min-width: 992px) {
+          margin: 20px 0;
+        }
+
+        li {
+          color: #333;
+          line-height: 1.8;
+          padding: 2px 0;
+          span.title {
+            color: #888;
+          }
+        }
+      }
+
+      .product-variant-box {
+        margin-bottom: 20px;
+
+        .product-variant {
+          margin-bottom: 6px;
+
+          .variant-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 6px;
+          }
+
+          .variant-values {
+            .variant-value-name {
+              display: inline-flex;
+              align-items: center;
+              margin-right: 10px;
+              margin-bottom: 10px;
+              cursor: pointer;
+              border: 1px solid #ddd;
+              padding: 5px 14px;
+              border-radius: 2px;
+              gap: 8px;
+              min-height: 40px;
+
+              .variant-image-container {
+                width: 30px;
+                height: 30px;
+                border-radius: 2px;
+                overflow: hidden;
+                flex-shrink: 0;
+
+                .variant-value-image {
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                }
+              }
+
+              .variant-text {
+                font-size: 14px;
+                line-height: 1.2;
+              }
+
+              &.disabled {
+                // cursor: not-allowed;
+                color: #999;
+                border-color: #ddd;
+                border-style: dashed;
+                text-decoration: line-through;
+
+                .variant-image-container {
+                  opacity: 0.5;
+                }
+              }
+
+              &.active {
+                border-color: $primary;
+                color: $primary;
+                border-style: solid;
+                box-shadow: 0 2px 4px $primary;
+              }
+
+              &:hover {
+                border-color: $primary;
+                box-shadow: 0 2px 4px $primary;
+              }
+            }
+          }
+        }
+      }
+
+      .product-info-bottom {
+        margin-bottom: 20px;
+
+        @media (min-width: 992px) {
+          height: 50px;
+          display: flex;
+          align-items: center;
+        }
+
+        .quantity-wrap {
+          @media (max-width: 992px) {
+            height: 40px;
+            margin-bottom: 10px;
+          }
+        }
+
+        .product-info-btns {
+          height: inherit;
+
+          @media (min-width: 992px) {
+            margin-left: 20px;
+          }
+
+          @media (max-width: 992px) {
+            height: 40px;
+            display: flex;
+          }
+
+          .btn {
+            height: inherit;
+            padding: 0 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 0;
+
+            @media (max-width: 992px) {
+              width: 50%;
+            }
+
+            &.buy-now {
+              background-color: #E6E8EB;
+              color: #333;
+
+              &:hover {
+                background-color: #D9DCE1;
+              }
+            }
+          }
+        }
+      }
+
+      .add-wishlist {
+        font-weight: bold;
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .product-description {
+    margin-bottom: 40px;
+  }
+
+  // Bundle items styles
+  .bundle-items-display {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 15px 0;
+  }
+  
+  .bundle-title {
+    color: #495057;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  .bundle-products {
+    gap: 10px;
+  }
+  
+  .bundle-product-item {
+    background-color: white;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 8px;
+    margin: 2px 0;
+  }
+  
+  .bundle-product-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #212529;
+    line-height: 1.2;
+  }
+  
+  .bundle-separator {
+    font-weight: bold;
+    color: #6c757d;
+    font-size: 18px;
+  }
+  
+  .bundle-total-price {
+    color: #dc3545;
+    font-size: 16px;
+    border-top: 1px solid #dee2e6;
+    padding-top: 10px;
+  }
+
+  // Product options styles
+  .product-options {
+    margin-bottom: 20px;
+
+    .options-title {
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    .option-group {
+      border: 1px solid #e9ecef;
+      border-radius: 8px;
+      padding: 15px;
+      background-color: #f8f9fa;
+      margin-bottom: 15px;
+
+      &.has-error {
+        border-color: $price !important;
+        background-color: #fff5f5 !important;
+        box-shadow: 0 0 0 0.2rem rgba(229, 62, 62, 0.25) !important;
+
+        .option-label {
+          color: $price !important;
+        }
+
+        .option-select {
+          border-color: $price !important;
+        }
+
+        .option-radio-item,
+        .option-checkbox-item {
+          background-color: #fff !important;
+        }
+      }
+
+      &.has-success {
+        border-color: #28a745 !important;
+        background-color: #f8fff9 !important;
+
+        .option-label::after {
+          content: " ✓";
+          color: #28a745;
+          font-weight: bold;
+          margin-left: 5px;
+        }
+      }
+    }
+
+    .option-label {
+      font-weight: 500;
+      color: #495057;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    // 下拉选择框样式
+    .option-select {
+      width: 100%;
+
+      option:disabled {
+        color: #6c757d;
+        background-color: #f8f9fa;
+      }
+    }
+
+    // 单选按钮组样式
+    .radio-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+
+      @media (max-width: 576px) {
+        gap: 6px;
+      }
+    }
+
+    .option-radio-item {
+      border: 2px solid #dee2e6;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background-color: white;
+      min-width: 120px;
+      text-align: center;
+
+      @media (max-width: 576px) {
+        min-width: calc(33.333% - 4px);
+        padding: 6px;
+        font-size: 11px;
+      }
+
+      &:hover {
+        border-color: $primary;
+        box-shadow: 0 2px 4px rgba(233, 30, 99, 0.1);
+      }
+
+      &:has(input:checked) {
+        background-color: #e7f3ff;
+        border-color: $primary;
+      }
+
+      &.selected label {
+        color: $primary;
+      }
+
+      // 缺货单选按钮样式
+      &.out-of-stock {
+        background-color: #f8f9fa !important;
+        border-color: #dee2e6 !important;
+        cursor: not-allowed !important;
+        opacity: 0.6;
+
+        &:hover {
+          border-color: #dee2e6 !important;
+          box-shadow: none !important;
+        }
+
+        label {
+          cursor: not-allowed;
+          color: #6c757d;
+        }
+
+        .out-of-stock-text {
+          color: $price;
+          font-weight: 500;
+        }
+      }
+
+      label {
+        cursor: pointer;
+        user-select: none;
+        display: block;
+        width: 100%;
+        margin: 0;
+        padding: 8px 12px;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+      }
+
+      .form-check-input {
+        display: none;
+      }
+    }
+
+    // 多选复选框组样式
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+
+      @media (max-width: 576px) {
+        gap: 6px;
+      }
+    }
+
+    .option-checkbox-item {
+      border: 2px solid #dee2e6;
+      border-radius: 6px;
+      padding: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background-color: white;
+      min-width: 120px;
+      text-align: center;
+
+      @media (max-width: 576px) {
+        min-width: calc(33.333% - 4px);
+        padding: 6px;
+        font-size: 11px;
+      }
+
+      &:hover {
+        border-color: #28a745;
+        box-shadow: 0 2px 4px rgba(40,167,69,0.1);
+      }
+
+      &:has(input:checked) {
+        background-color: #d4edda;
+        border-color: #28a745;
+      }
+
+      &.selected label {
+        color: #1976d2;
+      }
+
+      // 缺货复选框样式
+      &.out-of-stock {
+        background-color: #f8f9fa !important;
+        border-color: #dee2e6 !important;
+        cursor: not-allowed !important;
+        opacity: 0.6;
+
+        &:hover {
+          border-color: #dee2e6 !important;
+          box-shadow: none !important;
+        }
+
+        label {
+          cursor: not-allowed;
+          color: #6c757d;
+        }
+
+        .out-of-stock-text {
+          color: $price;
+          font-weight: 500;
+        }
+      }
+
+      label {
+        cursor: pointer;
+        user-select: none;
+        display: block;
+        width: 100%;
+        margin: 0;
+        padding: 8px 12px;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+      }
+
+      .form-check-input {
+        display: none;
+      }
+    }
+
+    // 选项图片样式
+    .option-image img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    // 当前选择摘要样式
+    .current-selection-summary {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+
+      .card {
+        border: none;
+        background: transparent;
+      }
+
+      .card-title {
+        color: #495057;
+        font-weight: 600;
+        margin-bottom: 15px;
+      }
+    }
+
+    .selected-option-item {
+      display: flex;
+      align-items: center;
+      padding: 8px 12px;
+      background: white;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      }
+
+      .badge {
+        font-size: 0.75em;
+        padding: 4px 8px;
+        border-radius: 6px;
+        background-color: #6c757d !important;
+        color: white !important;
+      }
+
+      .option-value {
+        color: #495057;
+        font-weight: 500;
+      }
+    }
+
+    .total-price-display {
+      background: white;
+      padding: 12px;
+      border-radius: 8px;
+      border-left: 4px solid $primary;
+    }
+
+    .current-total-price {
+      font-size: 1.1em !important;
+      font-weight: 600 !important;
+      padding: 8px 16px !important;
+    }
+
+    // 选项描述样式
+    .option-description {
+      padding: 10px;
+      background-color: #f8f9fa;
+      border-radius: 4px;
+      border-left: 3px solid $primary;
+
+      small {
+        color: #6c757d;
+        font-style: italic;
+      }
+    }
+
+    // 价格调整样式
+    .price-adjustment {
+      font-size: 0.9em;
+      color: #28a745;
+      font-weight: 500;
+    }
+
+    // 缺货文本样式
+    .out-of-stock-text {
+      color: $price;
+      font-size: 0.8em;
+      font-weight: 500;
+      margin-left: 5px;
+    }
+
+    // 错误提示消息样式
+    .option-error-message {
+      color: $price;
+      font-size: 0.875em;
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      animation: fadeIn 0.3s ease-in;
+
+      i {
+        margin-right: 6px;
+        font-size: 1em;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { 
+        opacity: 0; 
+        transform: translateY(-5px); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0); 
+      }
+    }
+  }
+}

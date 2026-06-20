@@ -1,0 +1,18 @@
+{
+    "code": "store_pickup",
+    "name": {
+        "zh-cn": "门店自提",
+        "en": "Store Pickup"
+    },
+    "description": {
+        "zh-cn": "门店自提：后台维护自提门店(地址/电话/营业时间)，结算时每个启用门店作为一个 0 运费的自提配送方式供会员选择，免运费到店取货。",
+        "en": "Store pickup: manage pickup stores (address/phone/hours) in admin; each active store appears as a zero-fee pickup shipping option at checkout."
+    },
+    "type": "shipping",
+    "version": "v1.0.0",
+    "icon": "bi-shop",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

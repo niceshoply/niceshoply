@@ -1,0 +1,133 @@
+{nice:extends layout="app"}
+{nice:section name="body-class" value="page-categories"}
+
+@section('title', \NiceShoply\Common\Libraries\MetaInfo::getInstance($category)->getTitle())
+@section('description', \NiceShoply\Common\Libraries\MetaInfo::getInstance($category)->getDescription())
+@section('keywords', \NiceShoply\Common\Libraries\MetaInfo::getInstance($category)->getKeywords())
+
+{nice:section name="content"}
+
+  {nice:if $category->image}
+    <div class="mn-cat-hero">
+      <img src="{{ image_origin($category->image) }}" alt="{{ $category->fallbackName() }}">
+      <div class="c-content">
+        <h1 class="c-title">{{ $category->fallbackName() }}</h1>
+      </div>
+    </div>
+  {/nice:if}
+
+  {nice:hook "category.show.top"}
+
+  <div class="mn-container">
+    <div class="mn-breadcrumb">
+      <a href="{{ front_route('home.index') }}">{{ __('front/common.home') }}</a>
+      <span class="sep">/</span>
+      {nice:if $category->parent}
+        <a href="{{ $category->parent->url }}">{{ $category->parent->fallbackName() }}</a>
+        <span class="sep">/</span>
+      {/nice:if}
+      <span class="current">{{ $category->fallbackName() }}</span>
+    </div>
+
+    {nice:if !$category->image}
+      <h1 class="mn-section-title mb-3">{{ $category->fallbackName() }}</h1>
+    {/nice:if}
+
+    <div class="mn-filter-bar">
+      <div class="mn-filter-left">
+        <button class="mn-filter-btn d-md-none" id="toggleFilterSidebar">
+          <i class="bi bi-funnel"></i> {{ __('front/product.filter') }}
+        </button>
+        <div class="d-none d-md-flex gap-2">
+          <select class="mn-filter-pill order-select" onchange="filterProductData()">
+            <option value="">{{ __('front/common.sort') }}</option>
+            <option value="ps.price|asc" {{ request('sort') == 'ps.price' && request('order') == 'asc' ? 'selected' : '' }}>{{ __('/front/category.price') }} ↑</option>
+            <option value="ps.price|desc" {{ request('sort') == 'ps.price' && request('order') == 'desc' ? 'selected' : '' }}>{{ __('/front/category.price') }} ↓</option>
+            <option value="products.sales|desc" {{ request('sort') == 'products.sales' && request('order') == 'desc' ? 'selected' : '' }}>{{ __('/front/category.sales') }}</option>
+            <option value="pt.name|asc" {{ request('sort') == 'pt.name' && request('order') == 'asc' ? 'selected' : '' }}>{{ __('/front/category.name') }} (A-Z)</option>
+          </select>
+          <select class="mn-filter-pill per-page-select" onchange="filterProductData()">
+            {nice:foreach $per_page_items as $val}
+              <option value="{{ $val }}" {{ request('per_page') == $val ? 'selected' : '' }}>{{ $val }} / {{ __('front/common.page', ['default' => 'page']) }}</option>
+            {/nice:foreach}
+          </select>
+        </div>
+      </div>
+      <div class="filter-right">
+        <span class="mn-result-count">{{ $products->total() }} {{ __('front/common.results', ['default' => 'Results']) }}</span>
+      </div>
+    </div>
+
+    <div class="mn-category-body">
+      <div class="mn-filter-sidebar-desktop d-none d-md-block">
+        {nice:include "shared.filter_sidebar"}
+      </div>
+
+      <div class="mn-category-content">
+        {nice:include "categories.partials._subcategories" category=$category}
+
+        <div class="row gx-3 gx-lg-4 gy-5">
+          {nice:foreach $products as $product}
+            <div class="col-6 col-md-4 col-lg-3">
+              {nice:include "shared.product"}
+            </div>
+          {/nice:foreach}
+        </div>
+
+        {nice:if $products->isEmpty()}
+          {nice:include "shared.no-data"}
+        {/nice:if}
+
+        <div class="mn-pagination">
+          {nice:if $products->hasPages()}
+            {nice:if $products->onFirstPage()}
+              <span class="page-item disabled"><i class="bi bi-chevron-left"></i></span>
+            {nice:else}
+              <a href="{{ $products->previousPageUrl() }}" class="page-item"><i class="bi bi-chevron-left"></i></a>
+            {/nice:if}
+
+            {nice:foreach $products->onEachSide(2)->links()->elements as $element}
+              {nice:if is_string($element)}
+                <span class="page-item">...</span>
+              {/nice:if}
+              {nice:if is_array($element)}
+                {nice:foreach $element as $page => $url}
+                  <a href="{{ $url }}" class="page-item {{ $page == $products->currentPage() ? 'active' : '' }}">{{ $page }}</a>
+                {/nice:foreach}
+              {/nice:if}
+            {/nice:foreach}
+
+            {nice:if $products->hasMorePages()}
+              <a href="{{ $products->nextPageUrl() }}" class="page-item"><i class="bi bi-chevron-right"></i></a>
+            {nice:else}
+              <span class="page-item disabled"><i class="bi bi-chevron-right"></i></span>
+            {/nice:if}
+          {/nice:if}
+        </div>
+
+        {nice:include "categories.partials._description" category=$category}
+      </div>
+    </div>
+  </div>
+
+  <div class="d-md-none">
+    {nice:include "shared.filter_sidebar"}
+  </div>
+
+  {nice:hook "category.show.bottom"}
+
+{/nice:section}
+
+{nice:push name="footer"}
+  <script>
+    function filterProductData() {
+      let url = inno.removeURLParameters(window.location.href, 'price', 'sort', 'order');
+      let order = $('.order-select').val();
+      let perPage = $('.per-page-select').val();
+      layer.load(2, { shade: [0.3, '#fff'] });
+      if (order) { let k = order.split('|'); url = inno.updateQueryStringParameter(url, 'sort', k[0]); url = inno.updateQueryStringParameter(url, 'order', k[1]); }
+      if (perPage) { url = inno.updateQueryStringParameter(url, 'per_page', perPage); }
+      location = url;
+    }
+  </script>
+{/nice:push}

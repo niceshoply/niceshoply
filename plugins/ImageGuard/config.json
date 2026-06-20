@@ -1,0 +1,18 @@
+{
+    "code": "image_guard",
+    "name": {
+        "zh-cn": "图片优化/水印",
+        "en": "Image Optimize / Watermark"
+    },
+    "description": {
+        "zh-cn": "图片优化与水印：基于 GD 为图片批量添加文字水印(位置/透明度/字号/颜色可配)并按质量压缩,支持处理 storage/public 下指定目录、单图预览与 image:watermark 命令,保护商品主图版权并减小体积。",
+        "en": "Image optimize & watermark (GD-based): batch-add text watermarks (position/opacity/size/color) and recompress images, process a folder under storage/public, single-image preview and an image:watermark command — protect product imagery and reduce size."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-images",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

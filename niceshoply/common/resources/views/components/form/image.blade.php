@@ -1,0 +1,81 @@
+<x-console::form.row :title="$title">
+  <div class="single-image-upload-wrapper">
+    <div class="is-up-file" data-type="{{ $type }}">
+    <div class="img-upload-item bg-light wh-80 rounded border d-flex justify-content-center align-items-center me-2 mb-2 position-relative cursor-pointer overflow-hidden">
+      <div class="position-absolute tool-wrap {{ !$value ? 'd-none' : '' }} d-flex top-0 start-0 w-100 bg-primary bg-opacity-75"><div class="show-img w-100 text-center"><i class="bi bi-eye text-white"></i></div><div class="w-100 delete-img text-center"><i class="bi bi-trash text-white"></i></div></div>
+      <div class="position-absolute bg-white d-none img-loading"><div class="spinner-border opacity-50"></div></div>
+
+      <div class="img-info rounded h-100 w-100 d-flex justify-content-center align-items-center">
+        @if ($value)
+        <img src="{{ image_resize($value) }}" data-origin-img="{{ image_origin($value) }}" class="img-fluid">
+        @else
+        <i class="bi bi-plus fs-1 text-secondary opacity-75"></i>
+        @endif
+      </div>
+      <input type="hidden" value="{{ $value }}" name="{{ $name }}">
+    </div>
+  </div>
+  @if ($description)
+    <div class="mt-2 text-muted small">
+      <i class="bi bi-info-circle me-1"></i>{!! $description !!}
+    </div>
+  @endif
+  {{ $slot }}
+  </div>
+</x-console::form.row>
+
+
+@pushOnce('footer')
+<div class="modal fade" id="modal-show-img">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-body text-center p-4" style="min-height: 200px; display: flex; align-items: center; justify-content: center;"></div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('.single-image-upload-wrapper .is-up-file .img-upload-item').click(function () {
+    const _self = $(this);
+
+    window.inno.fileManagerIframe((file) => {
+      let val = file.path;
+      let url = file.url; // Thumbnail for display
+      let originUrl = file.origin_url || file.url; // Original image for preview
+      _self.find('input').val(val);
+      _self.find('.tool-wrap').removeClass('d-none');
+      _self.find('.img-info').html('<img src="' + url + '" class="img-fluid" data-origin-img="' + originUrl + '">');
+      
+      _self.find('input').trigger('change');
+    }, {
+      multiple: false,
+      type: 'image'
+    });
+  });
+
+  $('.single-image-upload-wrapper .is-up-file .delete-img').on('click', function (e) {
+    e.stopPropagation();
+    let _self = $(this).parent().parent();
+    _self.find('input').val('');
+    _self.find('.tool-wrap').addClass('d-none');
+    _self.find('.img-info').html('<i class="bi bi-plus fs-1 text-secondary opacity-75"></i>');
+  });
+
+  $('.single-image-upload-wrapper .is-up-file .show-img').on('click', function (e) {
+    e.stopPropagation();
+    const imgElement = $(this).closest('.img-upload-item').find('.img-info img');
+    let src = imgElement.data('origin-img') || imgElement.attr('src');
+    if (!src) {
+      console.error('Image source not found');
+      return;
+    }
+    let img = '<img src="' + src + '" class="img-fluid" style="max-width: 100%; max-height: 70vh; height: auto; border-radius: 4px;">';
+    $('#modal-show-img .modal-body').html(img);
+    $('#modal-show-img').modal('show');
+  });
+</script>
+@endPushOnce

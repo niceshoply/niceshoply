@@ -1,0 +1,18 @@
+{
+    "code": "bargain",
+    "name": {
+        "zh-cn": "砍价",
+        "en": "Bargain"
+    },
+    "description": {
+        "zh-cn": "砍价活动：发起砍价任务，邀请好友随机助力砍价，砍至底价后按砍后价结算购买，支持限时与每人砍价上限。",
+        "en": "Bargain campaigns: start a bargain task and invite friends to cut the price randomly. Buy at the cut price once it reaches the floor. Supports time limit and per-helper caps."
+    },
+    "type": "marketing",
+    "version": "v1.0.0",
+    "icon": "bi-scissors",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

@@ -1,0 +1,25 @@
+<?php
+/**
+ * Copyright (c) Since 2024 NiceShoply - All Rights Reserved
+ *
+ * @link       https://www.niceshoply.com
+ * @author     NiceShoply <team@niceshoply.com>
+ * @license    https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ */
+
+return [
+    'add_to_cart' => 'Sepete Ekle',
+    'cart'        => 'Sepet',
+    'cart_total'  => 'Sepet Toplamı',
+    'continue'    => 'Alışverişe Devam Et',
+    'empty_cart'  => 'Sepetiniz boş',
+    'go_checkout' => 'Ödeme Yap',
+    'price'       => 'Fiyat',
+    'product'     => 'Ürün',
+    'quantity'    => 'Adet',
+    'select_all'  => 'Tümünü seç',
+    'selected'    => 'Seçili',
+    'subtotal'    => 'Ara Toplam',
+    'total'       => 'Toplam',
+    'view_cart'   => 'Enter shopping cart',
+];

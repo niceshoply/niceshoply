@@ -1,0 +1,12 @@
+{
+    "code": "product_feed",
+    "name": {"zh-cn": "商品 Feed", "en": "Product Feed"},
+    "description": {
+        "zh-cn": "生成 Google Shopping / Meta Catalog / 通用 CSV 商品 Feed，支持后台一键生成与 product:feed 定时命令。",
+        "en": "Generate Google Shopping, Meta Catalog and generic CSV product feeds with console UI and product:feed command."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-rss",
+    "author": {"name": "NiceShoply", "email": "team@niceshoply.com"}
+}

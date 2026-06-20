@@ -1,0 +1,18 @@
+{
+    "code": "buy_x_get_y",
+    "name": {
+        "zh-cn": "满件优惠",
+        "en": "Buy X Get Y"
+    },
+    "description": {
+        "zh-cn": "满件优惠(第N件折扣/买X送Y/第二件半价)：按规则对指定商品(或全部)每满(买X+赠Y)件，对其中 Y 件最低价单品按折扣率优惠(100=免费)，以负向费用项在结算实时抵扣。支持作用范围与折扣率配置。",
+        "en": "Buy X Get Y / Nth-item discount / 2nd at 50%: for a scoped product (or all), every (buy X + get Y) units discounts Y cheapest units by a percentage (100 = free), applied as a discount fee at checkout. Configurable scope and discount rate."
+    },
+    "type": "marketing",
+    "version": "v1.0.0",
+    "icon": "bi-gift",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

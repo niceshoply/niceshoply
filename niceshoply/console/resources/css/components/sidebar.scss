@@ -1,0 +1,106 @@
+// ShopNova Admin red design - sidebar navigation
+.sidebar {
+  // 分组标题（divider）
+  .nav-group-title {
+    font-size: 12px;
+    color: #9ca3af;
+    padding: 0 14px 8px;
+    margin-top: 18px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .accordion-button {
+    border: none;
+    background: transparent;
+    padding: 0.66rem 0.85rem;
+    border-radius: 14px;
+    color: #4b5563;
+    font-size: 13px;
+    transition: 0.2s;
+
+    .icon {
+      display: inline-block;
+      width: 1.55rem;
+      color: inherit;
+    }
+
+    &:hover {
+      background: #fff5f5;
+      color: var(--red);
+    }
+
+    // 父级展开（含子菜单且当前激活）
+    &:not(.collapsed) {
+      color: var(--red);
+      font-weight: 700;
+      background: var(--red-soft);
+    }
+
+    &::after {
+      color: #c4c9d2;
+    }
+  }
+
+  // 无子菜单的一级链接激活态：红色圆角实心
+  .accordion-button:not([data-bs-toggle]) {
+    &:not(.collapsed) {
+      background: var(--red);
+      color: #fff;
+      box-shadow: 0 10px 22px rgba(213, 0, 0, 0.22);
+    }
+  }
+
+  .accordion-item {
+    border: none;
+    background: transparent;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.5rem 0.85rem 0.5rem 2.1rem;
+    margin: 2px 0;
+    border-radius: 12px;
+    color: #6b7280;
+    font-size: 13px;
+    transition: 0.2s;
+
+    .nav-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 99px;
+      background: currentColor;
+      opacity: 0.45;
+      flex: 0 0 7px;
+    }
+
+    &:hover {
+      color: var(--red);
+      background-color: #fff5f5;
+    }
+
+    &.active {
+      color: #fff;
+      background-color: var(--red);
+      box-shadow: 0 10px 22px rgba(213, 0, 0, 0.22);
+
+      .nav-dot {
+        opacity: 1;
+        background: #fff;
+      }
+    }
+  }
+
+  .icon {
+    display: inline-block;
+    width: 1.5rem;
+  }
+
+  .dropdown-divider {
+    border-top: 1px solid var(--line);
+    margin: 0;
+  }
+}

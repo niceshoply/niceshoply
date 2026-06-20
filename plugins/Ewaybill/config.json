@@ -1,0 +1,18 @@
+{
+    "code": "ewaybill",
+    "name": {
+        "zh-cn": "电子面单",
+        "en": "E-Waybill"
+    },
+    "description": {
+        "zh-cn": "电子面单：对接快递鸟电子面单接口，按订单收货信息一键申请快递单号(LogisticCode)并保存打印数据，支持多快递公司与寄件人模板。需开通快递鸟电子面单服务与对应快递网点月结账号。",
+        "en": "E-Waybill: integrates Kdniao e-waybill API to request a tracking number (LogisticCode) from an order's shipping info and store print data, supporting multiple carriers and a sender template. Requires Kdniao e-waybill service and carrier account."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-upc-scan",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

@@ -1,0 +1,22 @@
+{nice:extends layout="app"}
+{nice:section name="body-class" value="page-news"}
+
+{nice:section name="content"}
+
+  <div class="mn-container">
+    <div class="mn-breadcrumb">
+      <a href="{{ front_route('home.index') }}">{{ __('front/common.home') }}</a>
+      <span class="sep">/</span>
+      <span class="current">{{ __('front/article.articles') }}</span>
+    </div>
+
+    <h1 class="mn-section-title mb-4">{{ __('front/article.articles') }}</h1>
+
+    {nice:hook "article.index.top"}
+
+    {nice:include "shared.articles"}
+
+    {nice:hook "article.index.bottom"}
+  </div>
+
+{/nice:section}

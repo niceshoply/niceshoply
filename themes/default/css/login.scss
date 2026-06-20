@@ -1,0 +1,150 @@
+/*
+ * ============================================================
+ * 【文件说明】登录/注册页面样式文件
+ * 【对应模板】resources/views/login.blade.php（登录、注册、忘记密码页）
+ * ============================================================
+ *
+ * 【关键 CSS 类】
+ *   body.page-login                   - 登录页 body 作用域（底部外边距 0）
+ *   .login-register-box               - 登录/注册表单容器（居中，最大宽 540px，浅灰背景）
+ *     &.iframe                        - 当嵌入 iframe 时的紧凑模式（减少外边距）
+ *     .login-title                    - 表单主标题（居中，24px）
+ *     .login-sub-title                - 表单副标题（居中，16px，灰色 #666）
+ *     .form-group input               - 表单输入框（无边框，高度 44px，直角）
+ *     .btn-submit                     - 提交按钮+链接区域（水平排列）
+ *       .form-submit                  - 提交按钮（宽度 50%）
+ *       a                             - 忘记密码等链接（深色加粗）
+ *   .auth-method-switch               - 登录方式切换按钮组（邮箱/手机号）
+ *     .btn-outline-primary.active     - 激活状态（$primary 背景色+白色文字）
+ *     .btn-outline-primary:not(.active) - 未激活状态（$primary 文字，白色背景）
+ *
+ * 【自定义建议】
+ *   - .login-register-box 的背景色（#F3F3F3）可改为白色或品牌色背景
+ *   - .btn-submit 布局可调整，如全宽按钮（去掉 width: 50%）
+ *   - .auth-method-switch 的激活颜色使用 $primary 变量自动同步主题色
+ * ============================================================
+ */
+
+// ============================================================
+// 【文件说明】登录/注册页面样式文件
+// 【对应模板】
+//   views/account/login.blade.php    — 登录页（body.page-login）
+//   views/account/register.blade.php — 注册页（body.page-register，共用同一套样式）
+//   views/account/forgotten.blade.php — 找回密码页（共用 .login-register-box）
+//   views/account/password.blade.php  — 修改密码页（共用 .login-register-box）
+// ============================================================
+//
+// 【关键 CSS 类】
+//
+//   body.page-login                - 登录页 body 作用域（移除底部外边距）
+//
+//   .login-register-box            - 登录/注册表单卡片容器
+//                                     max-width: 540px，居中，灰色背景(#F3F3F3)
+//                                     桌面端: padding 36px，顶部 margin 70px
+//                                     移动端: padding 16px，顶部 margin 30px
+//                                     .iframe 模式: 减小顶部 margin（用于 iframe 内嵌）
+//
+//   .login-title                   - 表单大标题（居中，24px）
+//   .login-sub-title               - 表单副标题/描述（居中，16px，灰色）
+//
+//   .form-group input              - 表单输入框（无边框，高度 44px，圆角 0）
+//
+//   .btn-submit                    - 提交区域（桌面端 flex 布局：左按钮 + 右链接）
+//     .form-submit                 - 提交按钮（宽度 50%）
+//     a                            - 辅助链接（深色、加粗，如"忘记密码？""立即注册"）
+//
+//   .auth-method-switch            - 登录方式切换按钮组（账号/手机号 Tab）
+//     .btn-outline-primary.active  - 当前选中方式（$primary 背景 + 白色文字）
+//     .btn-outline-primary:not(.active) - 未选中方式（白色背景 + $primary 文字）
+//
+// 【自定义建议】
+//   - 修改表单卡片背景色：更改 .login-register-box 的 background-color
+//   - 修改最大宽度：调整 max-width（当前 540px），适合双列布局可改为 960px
+//   - 若需全屏登录页（无头尾）：在控制器中传递 $iframe=true 参数，并在 layouts/app.blade.php
+//     中通过 request('iframe') 判断隐藏 header/footer（已实现）
+//   - 表单输入框样式可与 _variables.scss 中的颜色变量联动
+// ============================================================
+
+body.page-login {
+  margin-bottom: 0 !important;
+}
+
+.login-register-box {
+  max-width: 540px;
+  background-color: #F3F3F3;
+  margin: 30px auto;
+  padding: 16px;
+
+  @media (min-width: 992px) {
+    padding: 36px;
+    margin: 70px auto;
+  }
+
+  &.iframe {
+    margin: 10px 0 0;
+  }
+
+  .login-title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .login-sub-title {
+    text-align: center;
+    font-size: 16px;
+    color: #666666;
+    margin-bottom: 30px;
+  }
+
+  .form-group {
+    input {
+      border: none;
+      height: 44px;
+      font-size: 15px;
+      border-radius: 0;
+    }
+  }
+
+  .btn-submit {
+    margin-top: 30px;
+
+    @media (min-width: 400px) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .form-submit {
+      width: 50%;
+      display: block;
+    }
+
+    a {
+      color: #222;
+      display: block;
+      font-weight: bold;
+    }
+  }
+
+  // Auth method switch styles
+  .auth-method-switch {
+    .btn-outline-primary {
+      &.active {
+        background-color: $primary;
+        border-color: $primary;
+        color: #fff !important;
+      }
+
+      &:not(.active) {
+        color: $primary;
+        background-color: #fff;
+
+        &:hover {
+          background-color: #fff;
+          color: $primary;
+        }
+      }
+    }
+  }
+}

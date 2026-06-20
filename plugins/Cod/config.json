@@ -1,0 +1,18 @@
+{
+    "code": "cod",
+    "name": {
+        "zh-cn": "货到付款",
+        "en": "Cash on Delivery"
+    },
+    "description": {
+        "zh-cn": "货到付款(COD)：会员下单后无需在线支付，订单保持待付款状态，商家发货/收货后在后台标记收款。可配置说明文案与可用金额上限。",
+        "en": "Cash on Delivery (COD): orders are placed without online payment and stay unpaid until the merchant marks them paid on delivery. Configurable notice and max order amount."
+    },
+    "type": "billing",
+    "version": "v1.0.0",
+    "icon": "bi-cash-coin",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

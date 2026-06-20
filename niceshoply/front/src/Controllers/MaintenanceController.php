@@ -1,0 +1,24 @@
+<?php
+/**
+ * Copyright (c) Since 2024 NiceShoply - All Rights Reserved
+ *
+ * @link       https://www.niceshoply.com
+ * @author     NiceShoply <team@niceshoply.com>
+ * @license    https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ */
+
+namespace NiceShoply\Front\Controllers;
+
+use App\Http\Controllers\Controller;
+
+class MaintenanceController extends Controller
+{
+    /**
+     * @return mixed
+     * @throws \Exception
+     */
+    public function index(): mixed
+    {
+        return nice_view('maintenance');
+    }
+}

@@ -1,0 +1,552 @@
+// =============================================================
+// ShopNova Admin - Red #d50000 design system theme layer
+// 该文件在 app.scss 中最后引入，用于在不改动数百个业务视图的前提下
+// 让整个后台继承红色设计稿外观（玻璃顶栏 / 全高侧边栏 / 圆角卡片 / 柔和阴影）。
+// =============================================================
+
+:root {
+  --red: #d50000;
+  --red-dark: #a90000;
+  --red-soft: #fff1f1;
+  --red-mid: #ff5252;
+  --white: #fff;
+  --bg: #f7f7f8;
+  --ink: #1f2937;
+  --muted: #6b7280;
+  --line: #eceff3;
+  --green: #10b981;
+  --amber: #f59e0b;
+  --blue: #3b82f6;
+  --shadow: 0 16px 40px rgba(31, 41, 55, 0.08);
+  --shadow-soft: 0 8px 20px rgba(213, 0, 0, 0.08);
+  --radius: 22px;
+  --sidebar-w: 256px;
+
+  // Element Plus 主色全套色阶对齐红色（影响所有 el 组件：按钮/开关/链接/标签/分页/单选复选等）
+  --el-color-primary: #d50000;
+  --el-color-primary-light-3: #e04d4d;
+  --el-color-primary-light-5: #ea8080;
+  --el-color-primary-light-7: #f4b3b3;
+  --el-color-primary-light-8: #f9cccc;
+  --el-color-primary-light-9: #fde6e6;
+  --el-color-primary-dark-2: #aa0000;
+}
+
+$red: #d50000;
+$red-soft: #fff1f1;
+$line: #eceff3;
+$muted: #6b7280;
+
+// ---------- 全局底色与背景光晕 ----------
+body {
+  color: var(--ink);
+  background: linear-gradient(180deg, #fff 0, #fbfbfb 34%, #f7f7f8 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 14% 4%, rgba(213, 0, 0, 0.06), transparent 32%),
+    radial-gradient(circle at 86% 0%, rgba(213, 0, 0, 0.05), transparent 34%);
+}
+
+// ---------- 布局骨架 ----------
+.main-content {
+  display: flex;
+  height: 100vh;
+  padding-top: 0;          // 顶栏移入内容区，取消原固定头部留白
+  overflow: hidden;
+
+  // 全高左侧侧边栏
+  .sidebar-box {
+    width: var(--sidebar-w);
+    flex: 0 0 var(--sidebar-w);
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(16px);
+    border-right: 1px solid var(--line);
+    height: 100vh;
+
+    @media (max-width: 992px) {
+      width: 100%;
+      flex: 0 0 auto;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-right: 0;
+    }
+
+    .sidebar-body {
+      max-height: 100vh;
+      padding: 18px 14px 48px;
+
+      @media (max-width: 992px) {
+        max-height: calc(100vh - 49px);
+        padding-top: 12px;
+        background-color: #fff;
+      }
+    }
+  }
+
+  #content {
+    flex: 1;
+    min-width: 0;
+    padding: 0 24px 96px;
+    overflow-y: auto;
+    background: transparent;
+  }
+}
+
+// ---------- 侧边栏品牌区 ----------
+.console-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 4px 6px 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  color: inherit;
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .brand-logo {
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--red), #ff6b6b);
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-weight: 900;
+    font-size: 20px;
+    box-shadow: 0 12px 26px rgba(213, 0, 0, 0.24);
+    overflow: hidden;
+    flex: 0 0 42px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    // 已配置图片 Logo 时，去掉字母占位渐变背景
+    &.brand-logo--image {
+      background: transparent;
+      box-shadow: none;
+    }
+  }
+
+  .brand-text {
+    min-width: 0;
+
+    h1 {
+      font-size: 16px;
+      margin: 0;
+      letter-spacing: 0.2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    p {
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+  }
+}
+
+// ---------- 玻璃顶栏（topbar，复用 .header-box 类名） ----------
+.main-content .header-box {
+  position: sticky;
+  top: 14px;
+  left: auto;
+  width: auto;
+  height: 64px;
+  margin: 16px 0 4px;
+  padding: 0 14px 0 18px;
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(31, 41, 55, 0.05);
+  z-index: 20;
+
+  @media (max-width: 992px) {
+    top: 0;
+    height: 56px;
+    margin: 10px 0 4px;
+    border-radius: 16px;
+  }
+
+  .topbar-search {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    width: min(420px, 40vw);
+    background: #f5f6f8;
+    border: 1px solid #eef0f3;
+    border-radius: 14px;
+    padding: 10px 14px;
+    color: #9ca3af;
+    font-size: 13px;
+
+    input {
+      border: 0;
+      background: transparent;
+      outline: none;
+      width: 100%;
+      color: var(--ink);
+      font-size: 13px;
+    }
+  }
+
+  .right-tool {
+    align-items: center;
+    gap: 4px;
+
+    .header-item {
+      border-radius: 999px;
+
+      &:hover {
+        background-color: var(--red-soft);
+      }
+
+      .dropdown-toggle {
+        color: #4b5563;
+      }
+    }
+  }
+
+  .user-avatar i {
+    color: var(--red);
+  }
+}
+
+// ---------- 页头（page-title-box → eyebrow + 大标题 + 副标题） ----------
+.page-title-box {
+  margin-top: 22px;
+  margin-bottom: 6px;
+
+  .page-title-main {
+    min-width: 0;
+  }
+
+  .page-title {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  // 设计稿同款 eyebrow 胶囊
+  .page-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--red);
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--red-soft);
+    border-radius: 999px;
+    padding: 6px 12px;
+    margin-bottom: 10px;
+  }
+
+  .page-subtitle {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+    max-width: 760px;
+  }
+}
+
+body.page-home .page-title-box {
+  display: none !important;
+}
+
+// ---------- 统计卡片条（设计稿 stat 卡） ----------
+.stat-strip {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin-bottom: 18px;
+
+  @media (max-width: 1280px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stat-card {
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 18px;
+    box-shadow: var(--shadow-soft);
+
+    &::after {
+      content: "";
+      position: absolute;
+      right: -16px;
+      top: -18px;
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: var(--red-soft);
+      z-index: 0;
+    }
+
+    > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 900;
+      margin: 10px 0 4px;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+    }
+
+    .stat-trend {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--green);
+
+      &.muted {
+        color: var(--muted);
+      }
+
+      &.down {
+        color: var(--red);
+      }
+    }
+  }
+}
+
+// ---------- 卡片 ----------
+.card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  background: rgba(255, 255, 255, 0.98);
+
+  .card-header {
+    font-weight: 800;
+    font-size: 15px;
+  }
+}
+
+// ---------- 按钮 ----------
+.btn {
+  font-weight: 700;
+}
+
+.btn-primary,
+.btn.btn-primary {
+  background: var(--red);
+  border-color: var(--red);
+  box-shadow: 0 12px 24px rgba(213, 0, 0, 0.18);
+
+  &:hover,
+  &:focus,
+  &:active {
+    background: var(--red-dark) !important;
+    border-color: var(--red-dark) !important;
+    color: #fff !important;
+  }
+}
+
+.btn-outline-primary {
+  color: var(--red);
+  border-color: var(--red);
+
+  &:hover,
+  &:active {
+    background: var(--red) !important;
+    border-color: var(--red) !important;
+    color: #fff !important;
+  }
+}
+
+.btn-soft-primary {
+  background: var(--red-soft);
+  color: var(--red);
+  border: 0;
+
+  &:hover {
+    background: #ffe2e2;
+    color: var(--red-dark);
+  }
+}
+
+.btn-link,
+a {
+  &.text-primary {
+    color: var(--red) !important;
+  }
+}
+
+// ---------- 链接 / 文本主色 ----------
+.text-primary {
+  color: var(--red) !important;
+}
+
+a:hover {
+  color: var(--red);
+}
+
+// ---------- 徽章 ----------
+.badge.bg-primary,
+.badge.text-bg-primary {
+  background-color: var(--red) !important;
+}
+
+.badge.bg-soft,
+.badge-soft {
+  background: var(--red-soft);
+  color: var(--red);
+}
+
+// ---------- 表格（轻量化，避免破坏现有布局） ----------
+.table {
+  thead tr th,
+  thead tr td {
+    color: #9ca3af;
+    font-weight: 800;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  > :not(caption) > * > * {
+    border-bottom-color: var(--line);
+  }
+
+  tbody tr:hover td {
+    background-color: var(--red-soft);
+  }
+}
+
+// ---------- 表单控件 ----------
+.form-control,
+.form-select {
+  border-color: #e6e9ee;
+
+  &:focus {
+    border-color: var(--red);
+    box-shadow: 0 0 0 0.18rem rgba(213, 0, 0, 0.12);
+  }
+}
+
+.form-check-input:checked {
+  background-color: var(--red);
+  border-color: var(--red);
+}
+
+.form-switch .form-check-input:checked {
+  background-color: var(--red);
+  border-color: var(--red);
+}
+
+// ---------- 分页 ----------
+.page-item.active .page-link,
+.pagination .active a,
+.pagination .active span {
+  background-color: var(--red) !important;
+  color: #fff !important;
+}
+
+.page-link:hover {
+  color: var(--red);
+}
+
+// ---------- 标签页 ----------
+.nav-tabs .nav-link.active,
+.form-tab .nav-link.active {
+  color: var(--red) !important;
+  border-color: var(--red);
+}
+
+.console-text-primary,
+.console-item-active {
+  color: var(--red) !important;
+}
+
+// ---------- 底部固定操作条 ----------
+.form-buttom-btns,
+.form-bottom-btns {
+  left: calc(var(--sidebar-w) + 16px);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(213, 0, 0, 0.12);
+
+  @media (max-width: 992px) {
+    left: 10px;
+    right: 10px;
+  }
+
+  > button.btn-back:hover {
+    color: var(--red);
+    border-color: var(--red);
+  }
+}
+
+// ---------- Element Plus 主色对齐（色阶变量已在 :root 覆盖，这里补强个别组件） ----------
+.el-switch.is-checked .el-switch__core {
+  background-color: var(--red) !important;
+  border-color: var(--red) !important;
+}
+
+// el-button primary（含 plain）跟随红色色阶
+.el-button--primary {
+  --el-button-bg-color: var(--red);
+  --el-button-border-color: var(--red);
+  --el-button-hover-bg-color: var(--el-color-primary-light-3);
+  --el-button-hover-border-color: var(--el-color-primary-light-3);
+  --el-button-active-bg-color: var(--red-dark);
+  --el-button-active-border-color: var(--red-dark);
+}
+
+// 设置页二级导航激活态
+.settings-nav a.nav-link.active {
+  background-color: var(--red-soft);
+  color: var(--red);
+}
+
+// 设置页右侧主 Tab：禁止 fade 叠层导致内容发灰/半透明
+#app-form > .row > .col-md-9 .tab-content > .tab-pane {
+  &:not(.active) {
+    display: none !important;
+    opacity: 0 !important;
+  }
+
+  &.active {
+    display: block;
+    opacity: 1 !important;
+  }
+}
+
+// 设置页主内容区使用不透明白底，避免玻璃态叠在渐变背景上发虚
+#app-form > .row > .col-md-9 > .card {
+  background: #fff;
+}

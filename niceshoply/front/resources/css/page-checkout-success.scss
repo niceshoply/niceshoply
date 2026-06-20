@@ -1,0 +1,70 @@
+/*
+ * ============================================================
+ * 【文件说明】结算成功页面样式文件
+ * 【对应模板】resources/views/checkout-success.blade.php（下单成功感谢页）
+ * ============================================================
+ *
+ * 【关键 CSS 类】
+ *   body.page-checkout-success        - 结算成功页 body 作用域
+ *   .checkout-success-box             - 成功信息卡片容器（居中，最大宽 730px，带边框）
+ *   .order-success-icon               - 成功图标区域（居中，图片最大 200px）
+ *   .checkout-success-title           - 成功标题（居中，桌面端 30px 加粗）
+ *   .checkout-success-table           - 订单信息表格（th/td 垂直内边距 10px）
+ *
+ * 【自定义建议】
+ *   - 可修改 .checkout-success-box 的 border-color（#ECF0F4）调整卡片边框色
+ *   - .checkout-success-title 的字号（桌面 30px，手机 18px）可按需调整
+ *   - 可为成功图标区域添加动画（如弹跳入场效果）以提升体验
+ * ============================================================
+ */
+
+body.page-checkout-success {
+  .checkout-success-box {
+    border: 1px solid #ECF0F4;
+    padding: 20px 10px;
+    max-width: 730px;
+    margin: 0 auto;
+
+    @media (min-width: 768px) {
+      padding: 30px;
+    }
+
+    .order-success-icon {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+
+      img {
+        max-width: 170px;
+
+        @media (min-width: 768px) {
+          max-width: 200px;
+        }
+      }
+    }
+
+    .checkout-success-table {
+      th, td {
+        padding: 10px 0;
+      }
+    }
+
+    .checkout-success-title {
+      margin-bottom: 20px;
+      text-align: center;
+
+      @media (min-width: 768px) {
+        margin-bottom: 30px;
+      }
+
+      span {
+        font-size: 18px;
+        font-weight: bold;
+
+        @media (min-width: 768px) {
+          font-size: 30px;
+        }
+      }
+    }
+  }
+}

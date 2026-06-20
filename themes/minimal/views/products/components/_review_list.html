@@ -1,0 +1,12 @@
+{nice:foreach $reviews as $review}
+  <div class="mn-review-item">
+    <div class="review-header">
+      <span class="review-author">{{ $review->customer?->name ?? __('front/common.anonymous') }}</span>
+      <span class="review-date">{{ $review->created_at }}</span>
+    </div>
+    <div class="review-rating">
+      <x-front-review :rating="$review->rating"/>
+    </div>
+    <p class="review-content">{{ $review['content'] }}</p>
+  </div>
+{/nice:foreach}

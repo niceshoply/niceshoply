@@ -1,0 +1,18 @@
+{
+    "code": "analytics_ads",
+    "name": {
+        "zh-cn": "统计与广告回传",
+        "en": "Analytics & Ads"
+    },
+    "description": {
+        "zh-cn": "数据统计与广告像素：一键接入 Google Analytics 4、百度统计、Meta Pixel、TikTok Pixel，自动注入跟踪代码并在下单成功页触发购买转化事件。",
+        "en": "Analytics & ad pixels: integrate Google Analytics 4, Baidu Tongji, Meta Pixel and TikTok Pixel. Auto-injects tracking code and fires purchase conversion on order success."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-graph-up",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

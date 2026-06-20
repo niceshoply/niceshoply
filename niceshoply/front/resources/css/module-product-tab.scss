@@ -1,0 +1,56 @@
+/*
+ * ============================================================
+ * 【文件说明】首页商品 Tab 切换模块样式
+ * 【对应模板】resources/views/components/module-product-tab.blade.php（首页商品分类Tab）
+ * ============================================================
+ *
+ * 【关键 CSS 类】
+ *   .module-product-tab           - 商品Tab模块外层容器
+ *   .module-product-tab .nav-tabs - Tab 导航栏，居中排列，无边框
+ *   .module-product-tab .nav-link - Tab 标签项，胶囊形（border-radius: 50px）
+ *                                   悬停背景为浅粉色（#FFEBF2）
+ *   .module-product-tab .nav-link.active - 激活状态：浅粉背景 + $primary 主题色文字
+ *
+ * 【自定义建议】
+ *   - .nav-link.active 的 background-color（#FFEBF2）和文字颜色均与 $primary 相关
+ *   - 如需更改激活 Tab 样式，修改 #FFEBF2（建议保持与主题色同色系的浅色调）
+ *   - 可调整 border-radius 将胶囊形改为矩形（设为 0 或 4px）
+ * ============================================================
+ */
+
+.module-product-tab {
+  .nav-tabs {
+    display: flex;
+    justify-content: center;
+    border: none;
+    margin-bottom: 20px;
+    margin-top: -6px;
+
+    @media (min-width: 992px) {
+      margin-bottom: 40px;
+    }
+
+    .nav-link {
+      border: none !important;
+      color: #7E7E7E;
+      border-radius: 50px;
+      margin: 0;
+      font-size: 12px;
+      font-weight: bold;
+
+      @media (min-width: 992px) {
+        margin: 0 10px;
+        font-size: 14px;
+      }
+
+      &:hover {
+        background-color: #FFEBF2;
+      }
+
+      &.active {
+        background-color: #FFEBF2;
+        color: $primary;
+      }
+    }
+  }
+}

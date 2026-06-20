@@ -1,0 +1,18 @@
+{
+    "code": "notify_center",
+    "name": {
+        "zh-cn": "通知中心",
+        "en": "Notify Center"
+    },
+    "description": {
+        "zh-cn": "统一通知中心：站内信(完全自包含) + 短信通知(基于 overtrue/easy-sms 可选)。自动监听下单、付款、发货等订单事件向会员推送通知。",
+        "en": "Unified notification center: in-app messages (fully self-contained) + optional SMS via overtrue/easy-sms. Auto-listens to order placed/paid/shipped events to notify members."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-bell",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

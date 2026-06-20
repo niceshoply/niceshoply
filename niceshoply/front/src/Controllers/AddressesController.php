@@ -1,0 +1,88 @@
+<?php
+/**
+ * Copyright (c) Since 2024 NiceShoply - All Rights Reserved
+ *
+ * @link       https://www.niceshoply.com
+ * @author     NiceShoply <team@niceshoply.com>
+ * @license    https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ */
+
+namespace NiceShoply\Front\Controllers;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use NiceShoply\Common\Models\Address;
+use NiceShoply\Common\Repositories\AddressRepo;
+use NiceShoply\Common\Resources\AddressListItem;
+
+class AddressesController extends Controller
+{
+    /**
+     * @param  Request  $request
+     * @return mixed
+     * @throws \Throwable
+     */
+    public function store(Request $request): mixed
+    {
+        $data                = $request->all();
+        $data['customer_id'] = current_customer_id();
+        $data['guest_id']    = current_guest_id();
+
+        $address = AddressRepo::getInstance()->create($data);
+        $result  = new AddressListItem($address);
+
+        return create_json_success($result);
+    }
+
+    /**
+     * @param  Request  $request
+     * @param  Address  $address
+     * @return mixed
+     */
+    public function update(Request $request, Address $address): mixed
+    {
+        $currentCustomerId = current_customer_id();
+        $currentGuestId    = current_guest_id();
+
+        if ($currentCustomerId && $address->customer_id !== $currentCustomerId) {
+            return json_fail('Unauthorized', null, 403);
+        }
+
+        if (! $currentCustomerId && $address->guest_id !== $currentGuestId) {
+            return json_fail('Unauthorized', null, 403);
+        }
+
+        $data                = $request->all();
+        $data['customer_id'] = $currentCustomerId;
+        $data['guest_id']    = $currentGuestId;
+
+        $address = AddressRepo::getInstance()->update($address, $data);
+        $result  = new AddressListItem($address);
+
+        return update_json_success($result);
+    }
+
+    /**
+     * Delete address
+     *
+     * @param  Address  $address
+     * @return mixed
+     */
+    public function destroy(Address $address): mixed
+    {
+        $currentCustomerId = current_customer_id();
+        $currentGuestId    = current_guest_id();
+
+        if ($currentCustomerId && $address->customer_id !== $currentCustomerId) {
+            return json_fail('Unauthorized', null, 403);
+        }
+
+        if (! $currentCustomerId && $address->guest_id !== $currentGuestId) {
+            return json_fail('Unauthorized', null, 403);
+        }
+
+        AddressRepo::getInstance()->destroy($address);
+
+        return delete_json_success();
+    }
+}

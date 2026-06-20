@@ -1,0 +1,85 @@
+/*
+ * ============================================================
+ * 【文件说明】商品评价（评分）样式文件
+ * 【对应模板】resources/views/components/product-review.blade.php（或商品详情页评价区块）
+ * ============================================================
+ *
+ * 【关键 CSS 类】
+ *   .rate                  - 评分区域容器（下方圆角 12px）
+ *   .rating                - 星级评分组件（flex row-reverse，用于 CSS 纯样式评分交互）
+ *   .rating > input        - 实际 radio 输入框（隐藏不显示）
+ *   .rating > label        - 星星图标（☆ 符号，30px，玫红色 #e31052）
+ *   .rating > label::before - 实心星（★ 字符，默认透明，hover/选中后显示）
+ *   .rating > label:hover:before,
+ *   .rating > label:hover ~ label:before - hover 时高亮当前及之前所有星星
+ *   .rating > input:checked ~ label:before - 已选中状态的星星高亮
+ *   .buttons               - 提交按钮区域，相对定位（top: 36px）
+ *   .rating-submit         - 评分提交按钮（圆角 8px，白色文字）
+ *
+ * 【交互说明】
+ *   利用 flex row-reverse + input:checked ~ label 实现纯 CSS 星级选择交互，
+ *   无需 JavaScript 即可完成星星的 hover 预览和点击选择效果。
+ *
+ * 【自定义建议】
+ *   - 修改 .rating > label 的 color（#e31052）可更改星星颜色
+ *   - 修改 font-size（30px）可调整星星大小
+ *   - .rating-submit 需配合 Bootstrap 的 .btn-primary 使用
+ * ============================================================
+ */
+
+.rate {
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px
+}
+
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.rating>input {
+    display: none
+}
+
+.rating>label {
+    position: relative;
+    width: 1em;
+    font-size: 30px;
+    font-weight: 300;
+    color: #e31052;
+    cursor: pointer
+}
+
+.rating>label::before {
+    content: "\2605";
+    position: absolute;
+    opacity: 0
+}
+
+.rating>label:hover:before,
+.rating>label:hover~label:before {
+    opacity: 1 !important
+}
+
+.rating>input:checked~label:before {
+    opacity: 1
+}
+
+.rating:hover>input:checked~label:before {
+    opacity: 0.4
+}
+
+.buttons {
+    top: 36px;
+    position: relative
+}
+
+.rating-submit {
+    border-radius: 8px;
+    color: #fff;
+    height: auto
+}
+
+.rating-submit:hover {
+    color: #fff
+}

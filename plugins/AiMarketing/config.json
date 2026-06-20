@@ -1,0 +1,18 @@
+{
+    "code": "ai_marketing",
+    "name": {
+        "zh-cn": "AI 营销",
+        "en": "AI Marketing"
+    },
+    "description": {
+        "zh-cn": "AI 营销文案工作台：复用系统内置 6 大模型(DeepSeek/豆包/混元/通义/Kimi/OpenAI)，一键生成商品标题/详情/卖点、SEO 标题描述、营销短信/邮件/社媒文案，并记录生成日志。",
+        "en": "AI marketing copy workbench: reuses built-in 6 models (DeepSeek/Doubao/Hunyuan/Qianwen/Kimi/OpenAI) to generate product titles/descriptions, SEO meta, SMS/email/social copy, with generation logs."
+    },
+    "type": "intelli",
+    "version": "v1.0.0",
+    "icon": "bi-magic",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

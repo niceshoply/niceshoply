@@ -1,0 +1,19 @@
+{-- Newsletter Subscription --}
+<section class="mn-newsletter">
+  <div class="mn-container">
+    <div class="nl-eyebrow">{{ __('front/common.newsletter', ['default' => 'Newsletter']) }}</div>
+    <div class="nl-title">{{ __('front/common.newsletter_title', ['default' => 'Join the list — be the first to know']) }}</div>
+    <div class="nl-form">
+      <input type="email" class="nl-input" placeholder="{{ __('front/common.enter_email', ['default' => 'Enter your email address']) }}">
+      <button class="nl-submit" aria-label="Subscribe"><i class="bi bi-arrow-right"></i></button>
+    </div>
+    <div class="mn-social">
+      {nice:if system_setting('instagram', '')}<a href="{{ system_setting('instagram') }}" target="_blank" aria-label="Instagram"><i class="bi bi-instagram"></i></a>{/nice:if}
+      {nice:if system_setting('youtube', '')}<a href="{{ system_setting('youtube') }}" target="_blank" aria-label="YouTube"><i class="bi bi-youtube"></i></a>{/nice:if}
+      {nice:if system_setting('facebook', '')}<a href="{{ system_setting('facebook') }}" target="_blank" aria-label="Facebook"><i class="bi bi-facebook"></i></a>{/nice:if}
+      {nice:if system_setting('twitter', '')}<a href="{{ system_setting('twitter') }}" target="_blank" aria-label="X"><i class="bi bi-twitter-x"></i></a>{/nice:if}
+      {nice:if system_setting('pinterest', '')}<a href="{{ system_setting('pinterest') }}" target="_blank" aria-label="Pinterest"><i class="bi bi-pinterest"></i></a>{/nice:if}
+      {nice:if system_setting('tiktok', '')}<a href="{{ system_setting('tiktok') }}" target="_blank" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>{/nice:if}
+    </div>
+  </div>
+</section>

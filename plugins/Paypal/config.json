@@ -1,0 +1,18 @@
+{
+    "code": "paypal",
+    "name": {
+        "zh-cn": "PayPal 支付",
+        "en": "PayPal"
+    },
+    "description": {
+        "zh-cn": "PayPal 是全球领先的在线支付平台，支持 200+ 国家和 25 种货币。本插件基于 PayPal Orders v2 API，采用「跳转支付」模式：买家在 PayPal 完成授权后回跳商城自动扣款，并支持 Webhook 异步确认与签名校验，保障资金安全。",
+        "en": "PayPal is a leading global online payment platform supporting 200+ countries and 25 currencies. This plugin uses the PayPal Orders v2 API with a redirect checkout flow: buyers approve on PayPal then return to the store for automatic capture, with webhook signature verification for secure asynchronous confirmation."
+    },
+    "type": "billing",
+    "version": "v1.0.0",
+    "icon": "/image/logo.png",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

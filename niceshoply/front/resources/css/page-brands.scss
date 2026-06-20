@@ -1,0 +1,68 @@
+/*
+ * ============================================================
+ * 【文件说明】品牌列表页样式文件
+ * 【对应模板】resources/views/brands.blade.php（品牌大全页面）
+ * ============================================================
+ *
+ * 【关键 CSS 类】
+ *   body.page-brands              - 品牌页 body 作用域
+ *   .brand-group                  - 字母索引分组区域（A-Z 快速跳转按钮组）
+ *     .btn                        - 字母按钮，带浅灰边框（hover 时背景加深）
+ *   .brands-wrap                  - 品牌列表整体容器，顶部间距 30px
+ *     .item                       - 单个字母分组（如"A"下的所有品牌）
+ *     .item ul                    - 品牌 Logo 列表（flex 换行，负外边距布局）
+ *     .item ul li                 - 单个品牌项，左右内边距 10px，底部间距 20px
+ *     .item ul li a               - 品牌链接（垂直居中列布局）
+ *       .img                      - 品牌 Logo 图片容器（99px 宽，带边框）
+ *
+ * 【自定义建议】
+ *   - 可修改 .img 的宽度调整品牌 Logo 显示大小（当前 99px）
+ *   - 可为 .item ul li a:hover 添加阴影或边框高亮效果
+ *   - .brand-group .btn.active 样式可添加以高亮当前字母
+ * ============================================================
+ */
+
+body.page-brands {
+  .brand-group {
+    width: 100%;
+
+    .btn {
+      border: 1px solid #e8e8e8;
+      &:hover {
+        background-color: #f4f4f4;
+      }
+    }
+  }
+
+  .brands-wrap {
+    margin-top: 30px;
+
+    .item {
+      ul {
+        padding-left: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 -10px;
+
+        li {
+          padding: 0 10px;
+          margin-bottom: 20px;
+
+          a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            .img {
+              width: 99px;
+              border: 1px solid #e8e8e8;
+              margin-bottom: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

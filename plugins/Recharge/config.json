@@ -1,0 +1,18 @@
+{
+    "code": "recharge",
+    "name": {
+        "zh-cn": "储值充值",
+        "en": "Wallet Recharge"
+    },
+    "description": {
+        "zh-cn": "储值充值：会员选择充值套餐(可设赠送)，复用现有支付网关(微信/支付宝等)生成充值订单，支付成功后自动把充值额+赠送额入账到会员余额，含充值记录。",
+        "en": "Wallet recharge: members pick a top-up package (with optional bonus), pay via existing gateways (WeChat/Alipay) through a recharge order; balance (amount + bonus) is auto-credited on payment success, with records."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-wallet-fill",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

@@ -1,0 +1,269 @@
+/*
+ * ============================================================
+ * 【文件说明】资讯/博客页面样式文件
+ * 【对应模板】resources/views/news.blade.php（文章列表页）
+ *           resources/views/news-details.blade.php（文章详情页）
+ * ============================================================
+ *
+ * 【关键 CSS 类】
+ *
+ * — 文章列表页 —
+ *   body.page-news                    - 文章列表页 body 作用域
+ *   .newest-box                       - 最新文章列表容器（桌面端有右内边距）
+ *     .newest-item                    - 单篇文章横向列表项（图片+文字）
+ *       .item-img                     - 文章封面图（桌面端 150px，手机端 90px）
+ *       .item-title                   - 文章标题（20px/16px，hover 变 $primary 色）
+ *       .item-summary                 - 文章摘要（灰色，行高 1.7）
+ *
+ * — 通用组件（列表页+详情页共用）—
+ *   .newes-tags                       - 文章标签列表容器（flex 换行）
+ *     a                               - 标签链接（蓝色边框，hover 时 $primary 背景色）
+ *   .newes-sidebar                    - 资讯侧边栏
+ *     .search-box                     - 搜索框区域
+ *     .sidebar-item                   - 侧边栏单个功能块（分类、最新文章等）
+ *     .sidebar-title                  - 侧边栏块标题（18px 加粗）
+ *     .sidebar-list ul a              - 侧边栏文章链接（带底部分隔线，hover 红色）
+ *
+ * — 文章详情页 —
+ *   body.page-news-details            - 文章详情页 body 作用域
+ *   .newest-box                       - 文章正文区域容器（带边框圆角）
+ *     .newes-title                    - 文章大标题（24px/20px）
+ *     .newes-top                      - 作者/日期/阅读量等元数据行（灰色，图标 $primary 色）
+ *
+ * 【自定义建议】
+ *   - .item-title a:hover 颜色使用 $primary，修改主题色即可
+ *   - .newes-tags a:hover 使用 $primary 填充背景色
+ *   - 侧边栏链接 hover 色（红色 #f00）可改为 $primary 统一风格
+ * ============================================================
+ */
+
+// ============================================================
+// 【文件说明】文章（博客/新闻）页面样式文件
+// 【对应模板】
+//   views/articles/index.blade.php   — 文章列表页（body.page-news）
+//   views/articles/show.blade.php    — 文章详情页（body.page-news-details）
+//   views/catalogs/show.blade.php    — 文章分类页（body.page-news）
+//   views/shared/articles.blade.php  — 文章列表局部模板（共用样式）
+// ============================================================
+//
+// 【关键 CSS 类】
+//
+// — 文章列表页（body.page-news）—
+//   .newest-box               - 文章列表主容器（桌面端右边距 50px，与侧边栏间隔）
+//   .newest-item              - 单篇文章行（横向 flex：左图 + 右文字信息，底部分隔线）
+//     .item-img               - 文章封面缩略图容器（桌面 150px / 移动 90px，flex 不收缩）
+//     .item-title             - 文章标题（桌面 20px 加粗 / 移动 16px，链接深色 hover 变主色）
+//     .item-summary           - 文章摘要（灰色，行高 1.7，桌面端 15px）
+//
+// — 文章标签组 —
+//   .newes-tags               - 标签列表横向 flex 容器（带图标前缀）
+//   .newes-tags a             - 单个标签（浅蓝色背景，圆角 4px，hover 变主色）
+//
+// — 文章侧边栏 —
+//   .newes-sidebar            - 右侧侧边栏
+//   .search-box               - 搜索框区域（底部 40px margin）
+//   .sidebar-item             - 侧边栏模块（底部 30px margin）
+//   .sidebar-title            - 模块标题（18px 加粗）
+//   .sidebar-list ul a        - 侧边栏列表链接（全宽，底部分隔线，hover 变红色）
+//
+// — 文章详情页（body.page-news-details）—
+//   .newest-box               - 详情内容容器（带边框和圆角，桌面端最小高度 500px）
+//   .newes-title              - 文章大标题（桌面 24px / 移动 20px 加粗）
+//   .newes-top                - 文章元信息行（发布时间/作者/浏览量等，灰色）
+//
+// 【自定义建议】
+//   - 修改封面图尺寸：调整 .item-img 的 width/flex-basis
+//   - 将列表从横向改为竖向（卡片式）：修改 .newest-item 为 flex-direction: column
+//   - 侧边栏宽度由模板中的 Bootstrap col 控制，可在 articles/index.blade.php 中调整
+//   - 文章详情页内的富文本内容样式需额外定义（如 .newes-content img/p/h2 等）
+// ============================================================
+
+body.page-news {
+  .newest-box {
+    @media (min-width: 992px) {
+      padding-right: 50px;
+    }
+
+    .newest-item {
+      background-color: #fff;
+      margin-bottom: 20px;
+      display: flex;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 20px;
+
+      .item-img {
+        width: 150px;
+        flex: 0 0 150px;
+        margin-right: 20px;
+
+        @media (max-width: 768px) {
+          width: 90px;
+          flex: 0 0 90px;
+          margin-right: 10px;
+        }
+      }
+
+      .item-title {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        a {
+          color: #222;
+          &:hover {
+            color: $primary;
+          }
+        }
+
+        @media (max-width: 768px) {
+          font-size: 16px;
+          margin-bottom: 6px;
+        }
+      }
+
+      .item-summary {
+        color: #666;
+        line-height: 1.7;
+        margin-bottom: 10px;
+
+        @media (min-width: 768px) {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
+
+.newes-tags {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  
+  @media (max-width: 768px) {
+    align-items: flex-start;
+  }
+  
+  i {
+    color: #666;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  > div {
+    gap: 6px;
+    flex-wrap: wrap;
+    
+    @media (max-width: 768px) {
+      gap: 4px;
+    }
+  }
+
+  a {
+    color: #444;
+    margin-right: 10px;
+    margin-bottom: 6px;
+    display: inline-block;
+    padding: 1px 4px;
+    border: 1px solid #cad8ff;
+    border-radius: 4px;
+    font-size: 12px;
+    transition: all 0.3s;
+    background-color: #e5f0fe;
+    
+    @media (max-width: 768px) {
+      margin-right: 6px;
+      margin-bottom: 4px;
+      font-size: 11px;
+      padding: 2px 6px;
+    }
+    
+    &:hover {
+      color: #fff;
+      background-color: $primary;
+      border-color: $primary;
+    }
+  }
+}
+
+.newes-sidebar {
+  .search-box {
+    margin-bottom: 40px;
+  }
+
+  .sidebar-item {
+    margin-bottom: 30px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .sidebar-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .sidebar-list {
+    ul {
+      padding-left: 0;
+      list-style: none;
+      a {
+        color: #333;
+        font-size: 16px;
+        display: block;
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+        transition: all 0.3s;
+        &:hover {
+          color: #f00;
+        }
+      }
+    }
+  }
+}
+
+body.page-news-details {
+  .newest-box {
+    border: 1px solid #eee;
+    padding: 20px;
+    border-radius: 6px;
+    @media (min-width: 992px) {
+      min-height: 500px;
+    }
+
+    @media (max-width: 768px) {
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+
+    .newes-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 20px;
+
+      @media (max-width: 768px) {
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
+    }
+
+    .newes-top {
+      display: flex;
+      color: #666;
+      margin-bottom: 30px;
+
+      > div {
+        margin-right: 10px;
+
+        @media (min-width: 992px) {
+          margin-right: 40px;
+        }
+
+        i {
+          margin-right: 4px;
+          color: $primary;
+        }
+      }
+    }
+  }
+}

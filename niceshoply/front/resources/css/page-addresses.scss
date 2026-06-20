@@ -1,0 +1,83 @@
+/*
+ * ============================================================
+ * 【文件说明】收货地址管理页面样式文件
+ * 【对应模板】resources/views/addresses.blade.php（用户收货地址列表/编辑页）
+ * ============================================================
+ *
+ * 【关键 CSS 类】
+ *   body.page-addresses               - 地址管理页 body 作用域
+ *   .address-card                     - 单个地址卡片（带边框，圆角 4px，底部间距 20px）
+ *   .address-card-header              - 卡片头部（标题+操作按钮水平排列，带底部分隔线）
+ *     .address-card-title             - 地址名称/收件人（如"家"、"公司"等）
+ *     .address-card-actions           - 操作链接区（编辑、删除、设为默认等）
+ *   .address-card-body                - 地址详细内容区（内边距 15px，长地址自动换行）
+ *
+ * 【自定义建议】
+ *   - 可为默认地址的 .address-card 添加高亮边框（如左侧主题色竖线）
+ *   - .address-card-header 内可添加徽章标记默认地址
+ *   - 添加 .address-card:hover 的过渡效果可提升交互体验
+ * ============================================================
+ */
+
+// ============================================================
+// 【文件说明】用户中心 — 收货地址管理页面样式文件
+// 【对应模板】views/account/addresses.blade.php
+// ============================================================
+//
+// 【关键 CSS 类】
+//
+//   body.page-addresses            - 地址管理页 body 作用域
+//
+//   .address-card                  - 单个地址信息卡片（带边框 #e9ecef，圆角 4px，底部 20px margin）
+//
+//   .address-card-header           - 卡片头部（flex 横向：左侧标题 + 右侧操作按钮组，带底部分隔线）
+//     .address-card-title          - 收件人姓名（h5，无外边距）
+//     .address-card-actions        - 操作按钮区（flex，左侧间距 10px）
+//
+//   .address-card-body             - 卡片内容区（内边距 15px，地址信息段落 margin 0）
+//                                    word-break: break-all 防止长地址溢出
+//
+// 【自定义建议】
+//   - 默认地址可在 .address-card 上添加特殊边框颜色（如 border-color: $primary）
+//   - 修改卡片圆角：调整 border-radius 值
+//   - 列数控制在模板中（addresses.blade.php）的 Bootstrap col-12 col-md-6 决定
+//   - 操作按钮（编辑/删除）样式由 Bootstrap .btn-link 控制，可自定义
+// ============================================================
+
+body.page-addresses {
+  .address-card {
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    margin-bottom: 20px;
+
+    .address-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 15px;
+      border-bottom: 1px solid #e9ecef;
+
+      .address-card-title {
+        margin: 0;
+      }
+
+      .address-card-actions {
+        display: flex;
+        align-items: center;
+
+        a {
+          margin-left: 10px;
+        }
+      }
+    }
+
+    .address-card-body {
+      padding: 15px;
+      word-break: break-all;
+
+      p {
+        margin: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,178 @@
+// ============================================================
+// 【文件说明】Bootstrap 5 主题定制文件（Bootstrap 变量覆盖 + 引入入口）
+// 【加载方式】由 app.scss 通过 @import 引入，编译为 build/front/css/bootstrap.css
+// ============================================================
+//
+// 【自定义 Bootstrap 变量说明】
+//   （所有变量均在 @import '~bootstrap/scss/bootstrap' 之前声明，以覆盖默认值）
+//
+//   $primary: #E91E63           — 全站主色（粉红/品牌色），影响按钮、链接、边框等所有使用主色的组件
+//   $font-size-base: 0.84rem    — 全局基础字体大小（略小于 Bootstrap 默认的 1rem/16px）
+//   $border-radius: 0.275rem    — 全局圆角大小（略小于默认 0.375rem，整体感更方正）
+//   $enable-negative-margins    — 启用负外边距（如 mt-n1），用于某些特殊布局
+//
+//   字体相关：
+//     $font-family-base         — 使用 "Jost"（Google Fonts）+ Arial 降级字体
+//
+//   表单/输入框：
+//     $input-bg: #fff            — 输入框背景白色
+//     $input-btn-focus-box-shadow — 聚焦时主色半透明光晕阴影
+//     $form-select-focus-box-shadow: none — 关闭 select 聚焦时的阴影
+//
+//   表格：
+//     $table-border-color: #e9ecef — 表格边框色（浅灰）
+//     $table-bg: transparent       — 表格背景透明
+//
+//   按钮圆角：
+//     $btn-border-radius-sm/lg    — 小/大按钮圆角统一为 0.175rem / 0.275rem
+//
+//   Bootstrap Icons 字体：
+//     引用自 /vendor/bootstrap-icons/ 目录下的 woff2/woff 字体文件
+//
+//   分页组件：
+//     $pagination-*               — 一套简洁的分页样式（无边框、灰色背景、小圆角）
+//     .pagination-wrap            — 强制居中对齐
+//     .pagination                 — 每页按钮最小宽度 30px，margin 间距 5px
+//
+//   验证状态：
+//     $form-validation-states     — 仅保留 invalid（无效）状态（移除了 valid 绿色勾）
+//
+// 【@import 说明】
+//   @import 'bootstrap-icons' — 引入 Bootstrap Icons CSS（配合上方字体变量）
+//   @import '~bootstrap/scss/bootstrap' — 引入完整 Bootstrap 5 SCSS 源码（应用以上所有变量）
+//
+// 【自定义建议】
+//   - 修改主色：只需改 $primary 值，全站按钮/链接颜色自动更新
+//   - 若需减小打包体积，将最后一行替换为按需引入（如只引入 variables/grid/utilities 等）
+//   - 中文字体适配：在 $font-family-base 末尾追加 "PingFang SC", "Microsoft YaHei" 等中文字体
+//   - 已注释的 $container-max-widths 可取消注释以自定义响应式容器宽度
+// ============================================================
+
+/*
+ * ============================================================
+ * 【文件说明】Bootstrap 5 自定义配置与引入文件
+ * 【对应模板】所有前台页面（通过 app.scss 全局引入）
+ * ============================================================
+ *
+ * 【文件作用】
+ *   在引入 Bootstrap 5 之前，先通过 SCSS 变量覆盖 Bootstrap 的默认样式，
+ *   实现对 Bootstrap 组件的全局主题定制。
+ *
+ * 【关键自定义变量说明】
+ *   $primary               - Bootstrap 主色（与 _variables.scss 中的 $primary 同步），
+ *                            影响 .btn-primary、.badge、.form-check 等组件
+ *   $font-size-base        - 全局基础字号（0.84rem，略小于 Bootstrap 默认的 1rem）
+ *   $border-radius         - 圆角半径（0.275rem，偏小圆角风格）
+ *   $enable-negative-margins - 启用负外边距工具类（如 .mt-n1、.mb-n2）
+ *   $input-btn-focus-box-shadow - 按钮/输入框聚焦阴影（使用主题色半透明效果）
+ *   $input-bg              - 表单输入框背景色（#fff 白色）
+ *   $form-select-focus-box-shadow - 下拉框聚焦时无阴影（设为 none）
+ *   $table-border-color    - 表格边框颜色（#e9ecef 浅灰）
+ *   $font-family-base      - 全局字体族（"Jost" > Arial > sans-serif）
+ *   $btn-border-radius-sm/lg, $border-radius-lg - 各尺寸按钮的圆角（统一为 0.275rem）
+ *   $bootstrap-icons-font-src - Bootstrap Icons 字体文件路径（从本地 vendor 目录加载）
+ *   $pagination-*          - 分页组件样式（无边框、浅灰背景、方形、hover 主题色）
+ *
+ * 【自定义组件样式（写在 @import 之前或之后均可）】
+ *   .pagination-wrap        - 分页容器（居中对齐）
+ *   .pagination > li        - 分页项（加粗，水平间距 5px）
+ *   .accordion-button:not(.collapsed) - 手风琴展开状态（$primary 背景色）
+ *   $form-validation-states - 仅保留 invalid 验证状态（红色）
+ *
+ * 【引入顺序】
+ *   1. 变量覆盖定义
+ *   2. @import 'bootstrap-icons'   - Bootstrap Icons 图标字体
+ *   3. @import '~bootstrap/scss/bootstrap' - Bootstrap 5 核心 SCSS
+ *
+ * 【自定义建议】
+ *   - 此文件是对 Bootstrap 进行深度定制的最佳入口
+ *   - 添加新的 $变量 覆盖可影响所有使用该变量的 Bootstrap 组件
+ *   - $font-family-base 与 font.scss 中的字体名称保持一致
+ *   - 如需调整容器最大宽度，取消注释 $container-max-widths 部分并自定义
+ * ============================================================
+ */
+
+$primary: #E91E63;
+
+$font-size-base: 0.84rem;
+$border-radius: 0.275rem;
+
+// Enable negative margins
+$enable-negative-margins: true;
+// $body-bg: #f7f8f4;
+
+$input-btn-focus-box-shadow: 0 0 11px 0 rgba($color: $primary, $alpha: .1);
+$input-bg: #fff;
+
+$form-select-focus-box-shadow: none;
+// $input-focus-box-shadow: none;
+
+$table-border-color: #e9ecef;
+$table-bg: transparent;
+
+$font-family-base: "Jost", Arial, sans-serif;
+
+$border-radius: 0.275rem;
+$btn-border-radius-sm: 0.175rem;
+$btn-border-radius-lg: 0.275rem;
+$border-radius-lg: 0.275rem;
+
+$bootstrap-icons-font: "bootstrap-icons" !default;
+$bootstrap-icons-font-src: url("/vendor/bootstrap-icons/bootstrap-icons.woff2?08efbba7c53d8c5413793eecb19b20bb") format("woff2"),
+url("/vendor/bootstrap-icons/bootstrap-icons.woff?08efbba7c53d8c5413793eecb19b20bb") format("woff") !default;
+
+@font-face {
+  font-display: block;
+  font-family: $bootstrap-icons-font;
+  src: $bootstrap-icons-font-src;
+}
+
+$pagination-border-width: 0;
+$pagination-bg: #f4f4f5;
+$pagination-color: #606266;
+$pagination-border-radius: 2px;
+$pagination-disabled-bg: $pagination-bg;
+$pagination-disabled-color: #c0c4cc;
+$pagination-hover-color: $primary;
+$pagination-padding-x: 4px;
+$pagination-padding-y: .3rem;
+$pagination-focus-color: #606266;
+
+.pagination-wrap {
+  justify-content: center;
+}
+
+.pagination {
+  > li {
+    margin: 0 5px;
+    font-weight: bold;
+    a, span {
+      text-align: center;
+      border-radius: 2px !important;
+      min-width: 30px;
+    }
+  }
+}
+ 
+.accordion-button:not(.collapsed) {
+  background-color:$primary; 
+  color: rgb(12, 11, 11); 
+}
+
+$form-validation-states: (
+  "invalid": (
+    "color": #dc3545,
+    "icon": url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e")
+  )
+);
+
+// $container-max-widths: (
+//   sm: 540px,
+//   md: 720px,
+//   lg: 960px,
+//   xl: 1180px,
+//   xxl: 1380px
+// );
+
+@import 'bootstrap-icons/font/bootstrap-icons';
+@import 'bootstrap/scss/bootstrap';

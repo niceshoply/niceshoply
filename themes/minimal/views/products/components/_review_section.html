@@ -1,0 +1,53 @@
+{nice:if current_customer() && !system_setting('bought_review')}
+  {nice:if !$reviewed}
+    {nice:include "shared.review"}
+  {nice:else}
+    <div class="mn-review-done">
+      <i class="bi bi-check-circle" style="font-size:22px;color:var(--mn-fg-soft);"></i>
+      <span>{{ __('front/product.have_reviewed') }}</span>
+    </div>
+  {/nice:if}
+{nice:else}
+  <div class="mn-review-action">
+    {nice:if !current_customer()}
+      <a class="mn-btn" href="javascript:inno.openLogin()">{{ __('front/product.please_login_first') }}</a>
+    {nice:else}
+      <a class="mn-btn" href="{{ account_route('orders.index') }}" target="_blank">{{ __('front/product.visit_order_to_review') }}</a>
+    {/nice:if}
+  </div>
+{/nice:if}
+
+<div class="mn-review-list review-list-container">
+  {nice:include "products.components._review_list" reviews=$reviews}
+</div>
+
+{nice:if $reviews->hasMorePages()}
+  <div class="text-center" style="margin-top:24px;">
+    <button class="mn-btn load-more-reviews" data-page="2" data-product-id="{{ $product->id }}">
+      {{ __('front/common.load_more') }}
+    </button>
+  </div>
+{/nice:if}
+
+{nice:push name="footer"}
+  <script>
+    $(document).ready(function () {
+      $('.load-more-reviews').on('click', function () {
+        const button = $(this);
+        const page = button.data('page');
+        button.prop('disabled', true).html('<i class="bi bi-arrow-repeat spin"></i> {{ __("front/common.loading") }}');
+        axios.get(`{{ front_route('products.reviews', ['product' => $product->id]) }}`, { params: { page: page } }).then(function (response) {
+          if (response.success) {
+            $('.review-list-container').append(response.data.html);
+            if (response.data.has_more) { button.data('page', page + 1).prop('disabled', false).text('{{ __("front/product.load_more") }}'); }
+            else { button.remove(); }
+          }
+        }).catch(function (error) {
+          console.error('Failed to load reviews:', error);
+          button.prop('disabled', false).text('{{ __("front/product.load_more") }}');
+          inno.msg('{{ __("front/product.load_failed") }}');
+        });
+      });
+    });
+  </script>
+{/nice:push}

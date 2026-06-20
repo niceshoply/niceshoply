@@ -1,0 +1,18 @@
+{
+    "code": "sms_marketing",
+    "name": {
+        "zh-cn": "短信营销",
+        "en": "SMS Marketing"
+    },
+    "description": {
+        "zh-cn": "短信营销活动：创建短信模板活动，向有手机号的会员分批群发营销短信，支持退订名单过滤、发送进度统计与 sms:campaign 定时命令。复用 NotifyCenter 的 easy-sms 通道，需先配置通知中心短信网关。",
+        "en": "SMS marketing campaigns: create template-based campaigns, batch-send to members with mobile numbers, honor opt-out list, track progress, and run via sms:campaign. Reuses NotifyCenter easy-sms; configure SMS gateway in Notify Center first."
+    },
+    "type": "marketing",
+    "version": "v1.0.0",
+    "icon": "bi-chat-dots",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

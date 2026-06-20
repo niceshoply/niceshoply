@@ -1,0 +1,18 @@
+includes:
+    - phpstan-baseline.neon
+
+parameters:
+    # NiceShoply 主应用静态分析配置。
+    # 仅分析自有业务代码（niceshoply 模块包 + plugins 插件），
+    # 不分析 app/ 脚手架与 vendor/、innoshop/（只读上游镜像）。
+    level: 1
+    paths:
+        - niceshoply
+        - plugins
+    excludePaths:
+        # 测试与脚手架资源目录不纳入静态分析
+        - niceshoply/*/tests/*
+        - niceshoply/devtools/stubs/*
+        - niceshoply/*/resources/*
+    treatPhpDocTypesAsCertain: false
+    reportUnmatchedIgnoredErrors: false

@@ -1,0 +1,18 @@
+{
+    "code": "email_marketing",
+    "name": {
+        "zh-cn": "邮件营销",
+        "en": "Email Marketing"
+    },
+    "description": {
+        "zh-cn": "邮件营销：维护邮件订阅列表(含前台订阅/退订)，后台创建邮件活动(主题+富文本正文)，向全体会员或订阅者群发，复用系统邮件配置，含发送进度、退订链接与发送记录，提供 email:campaign 命令处理定时活动。",
+        "en": "Email marketing: manage a subscriber list (front-end opt-in/out), create campaigns (subject + HTML body), broadcast to customers or subscribers via the system mailer, with progress, unsubscribe links and logs; ships an email:campaign command for scheduled sends."
+    },
+    "type": "marketing",
+    "version": "v1.0.0",
+    "icon": "bi-envelope-paper",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

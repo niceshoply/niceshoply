@@ -1,0 +1,227 @@
+/*
+ * ============================================================
+ * 【文件说明】页脚（Footer）样式文件
+ * 【对应模板】resources/views/components/footer.blade.php
+ * ============================================================
+ *
+ * 【关键 CSS 类】
+ *   footer                      - 页脚容器，深色背景（#222222），顶部有外边距
+ *   footer::before              - 左上角装饰背景图（footer-1.svg）
+ *   footer::after               - 右下角装饰背景图（footer-2.svg）
+ *   .footer-box                 - 页脚内容容器，z-index: 1 层级高于背景装饰
+ *   .footer-top-links           - 页脚上方链接区块（含品牌介绍和多列导航链接）
+ *     .about                    - 品牌介绍列（桌面端有额外右边距）
+ *     .footer-link-title        - 每列链接区块的标题（白色粗体）
+ *     .footer-link-icon         - 移动端标题旁的展开/收起图标（桌面端隐藏）
+ *     .footer-item              - 每个链接分组容器
+ *     .footer-item-content      - 链接内容区（移动端默认隐藏，桌面端显示）
+ *   .bottom-box                 - 页脚底部（版权信息、支付图标、额外链接）
+ *     .left-links               - 底部左侧链接（移动端居中对齐）
+ *     .copyright-text           - 版权文字（右对齐，移动端居中）
+ *     .payment-icon             - 支付方式图标列表（右对齐）
+ *
+ * 【链接 hover 效果】
+ *   footer a 使用 ::after 伪元素实现下划线从右向左展开的动画效果
+ *   hover 时链接颜色变为 $primary（主题色）
+ *
+ * 【自定义建议】
+ *   - 修改 footer 的 background-color 可更改页脚背景色
+ *   - 可替换 ::before/::after 中的背景图以更换装饰图形
+ *   - 调整 .footer-top-links padding 可控制页脚内容区域的上下间距
+ *   - 移动端折叠/展开功能依赖 JS 控制 .footer-item-content 的 display
+ * ============================================================
+ */
+
+footer {
+  position: relative;
+  background-color: #222222;
+  overflow: hidden;
+  margin-top: 20px;
+
+  @media (min-width: 768px) {
+    margin-top: 50px;
+  }
+
+  &::after, &::before {
+    content: '';
+    position: absolute;
+    width: 20%;
+    height: 300px;
+    background-image: url('/images/icons/footer-1.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: top;
+  }
+
+  &::before {
+    top: 0;
+    left: 0;
+    width: 50%;
+    background-image: url('/images/icons/footer-1.svg');
+
+    @media (min-width: 768px) {
+      top: -5%;
+      width: 30%;
+    }
+  }
+
+  &::after {
+    bottom: 0;
+    right: 0;
+    width: 36%;
+    background-position: bottom;
+    background-image: url('/images/icons/footer-2.svg');
+
+    @media (min-width: 768px) {
+      bottom: -5%;
+      width: 15%;
+    }
+  }
+
+  .footer-box {
+    color: #aaa;
+    position: relative;
+    z-index: 1;
+
+    a {
+      color: #aaa;
+      position: relative;
+
+      &:hover {
+        &::after {
+          width: 100%;
+          left: 0;
+        }
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 0;
+        border-bottom: 1px solid;
+        transition: width .3s;
+      }
+    }
+
+    .footer-top-links {
+      padding: 10px 0;
+
+      @media (min-width: 768px) {
+        padding: 40px 0;
+      }
+
+      .about {
+        @media (min-width: 992px) {
+          padding-right: 60px;
+        }
+
+        .about-text {
+          padding-top: 6px;
+        }
+      }
+
+      .footer-link-title {
+        font-weight: bold;
+        color: #fff;
+        font-size: 15px;
+        display: flex;
+        justify-content: space-between;
+
+        @media (min-width: 768px) {
+          font-size: 18px;
+          margin-bottom: 20px;
+        }
+
+        .footer-link-icon {
+          &.active {
+            i {
+              &:before {
+                content: "\F63B";
+              }
+            }
+          }
+
+          @media (min-width: 768px) {
+            display: none;
+          }
+        }
+      }
+
+      .footer-item {
+        padding-top: 10px;
+        padding-bottom: 10px;
+
+        .footer-item-content {
+          display: none;
+          padding-right: 26px;
+
+          @media (min-width: 768px) {
+            display: block;
+          }
+        }
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+          margin-right: 20px;
+          font-size: 14px;
+          font-weight: bold;
+          padding: 6px 0;
+          a {
+            &:hover {
+              color: $primary;
+              // text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+
+
+    .bottom-box {
+      border-top: 1px solid #4A4A4A;
+      padding: 26px 0;
+
+      @media (max-width: 768px) {
+        padding: 10px 0;
+      }
+
+      .left-links {
+        @media (max-width: 768px) {
+          text-align: center;
+        }
+      }
+
+      .copyright-text {
+        text-align: right;
+
+        @media (max-width: 768px) {
+          text-align: center;
+          margin-top: 10px;
+        }
+      }
+
+      .payment-icon {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        @media (max-width: 768px) {
+          justify-content: center;
+          margin-top: 10px;
+        }
+
+        img {
+          margin-left: 10px;
+          max-width: 50px;
+        }
+      }
+    }
+  }
+}

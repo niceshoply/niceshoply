@@ -1,0 +1,34 @@
+@pushonce('header')
+  <script src="{{ asset('vendor/tinymce/5.9.1/tinymce.min.js') }}"></script>
+@endpushonce
+
+<x-console::form.row :title="$title" :required="$required" width="1000" :translate="$translate" :elID="$elID">
+  @if (!$multiple)
+    <textarea rows="4" type="text" name="{{ $name }}" class="tinymce" placeholder="{{ $title }}"
+      @if ($elID) id="{{ $elID }}" @endif data-is-rich-text="true">{{ $value }}</textarea>
+    {{ $slot }}
+  @else
+    <ul class="nav nav-tabs w-max-1000 mb-2" id="myTab" role="tablist">
+      @foreach (locales() as $locale)
+        <li class="nav-item" role="presentation">
+          <button class="nav-link {{ $loop->first ? 'active' : '' }}" id="{{ $locale['code'] }}" data-bs-toggle="tab"
+            data-bs-target="#{{ $name }}-{{ $locale['code'] }}-pane" type="button">
+            <img src="{{ asset('images/flag/' . $locale['code'] . '.png') }}" class="me-2" style="width: 20px;">
+            {{ $locale['name'] }}
+          </button>
+        </li>
+      @endforeach
+    </ul>
+
+    <div class="tab-content w-max-1000" id="">
+      @foreach (locales() as $locale)
+        <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}"
+          id="{{ $name }}-{{ $locale['code'] }}-pane" role="tabpanel"
+          aria-labelledby="{{ $locale['code'] }}">
+          <textarea rows="4" type="text" name="translations[{{ $locale['code'] }}][{{ $name }}]"
+            class="tinymce" placeholder="{{ $title }}" data-is-rich-text="true">{{ $value[$locale['code']] ?? '' }}</textarea>
+        </div>
+      @endforeach
+    </div>
+  @endif
+</x-console::form.row>

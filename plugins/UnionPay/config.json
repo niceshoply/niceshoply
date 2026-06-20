@@ -1,0 +1,18 @@
+{
+    "code": "union_pay",
+    "name": {
+        "zh-cn": "银联支付",
+        "en": "UnionPay"
+    },
+    "description": {
+        "zh-cn": "银联支付（基于 yansongda/pay v3 的 unipay），支持网关网页(PC)与手机(WAP)支付及异步回调验签后标记订单已支付。需开通银联商户资质并安装 yansongda/pay。",
+        "en": "UnionPay (powered by yansongda/pay v3 unipay): supports web (PC) and WAP gateway payment with signed async callbacks marking the order paid. Requires UnionPay merchant qualification and yansongda/pay."
+    },
+    "type": "billing",
+    "version": "v1.0.0",
+    "icon": "bi-bank",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

@@ -1,0 +1,62 @@
+<?php
+/**
+ * Copyright (c) Since 2024 NiceShoply - All Rights Reserved
+ *
+ * @link       https://www.niceshoply.com
+ * @author     NiceShoply <team@niceshoply.com>
+ * @license    https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ */
+
+return [
+    'add_to_cart'                    => 'Sepete Ekle',
+    'add_wishlist'                   => 'İstek Listesine Ekle',
+    'apply'                          => 'uygulamak',
+    'attribute'                      => 'Özellik',
+    'availability'                   => 'Envanter durumu',
+    'brand'                          => 'Marka',
+    'bundle_includes'                => 'Kombinasyon şunları içerir:',
+    'buy_now'                        => 'Hemen Al',
+    'category'                       => 'Kategoriler',
+    'clear_all_filters'              => 'Tüm filtreleri temizle',
+    'clear_all_filters_confirm'      => 'Tüm filtreleri temizlediğinizden emin misiniz?',
+    'clear_filter'                   => 'Filtreleri temizle',
+    'clear_filters'                  => 'Filtreleri temizle',
+    'current_selection'              => 'Mevcut seçim',
+    'custom_options'                 => 'Uzantı seçeneklerini özelleştirin',
+    'default'                        => 'temerrüt',
+    'description'                    => 'Açıklama',
+    'filter'                         => 'elemek',
+    'from'                           => 'Kaynak',
+    'have_reviewed'                  => 'Öğeyi zaten incelediniz',
+    'in_stock'                       => 'Stokta Var',
+    'input_some_text_here'           => 'Yorumunuzu Buraya Girin',
+    'input_your_review'              => 'Yorumunuzu Girin',
+    'max_price'                      => 'Maksimum fiyat',
+    'min_price'                      => 'En düşük fiyat',
+    'model'                          => 'Model',
+    'name_asc'                       => 'İsim A\'dan Z\'ye',
+    'name_desc'                      => 'İsim Z-A',
+    'option_group_required'          => '\":name\" seçenek grubu zorunludur',
+    'optional'                       => 'Opsiyonel',
+    'out_of_stock'                   => 'Stok',
+    'out_stock'                      => 'Stokta Yok',
+    'please_login_first'             => 'Yorum Yapmak İçin Lütfen Giriş Yapın',
+    'please_select_required_options' => 'Lütfen gerekli tüm seçenekleri seçin',
+    'price'                          => 'Fiyat',
+    'price_adjustment'               => 'Fiyat ayarlamaları',
+    'price_asc'                      => 'Fiyatlar düşükten yükseğe değişir',
+    'price_desc'                     => 'Fiyatlar yüksekten düşüğe değişir',
+    'products'                       => 'Ürünler',
+    'related_product'                => 'İlgili Ürünler',
+    'required_option'                => 'Zorunlu seçenek',
+    'review'                         => 'Yorum',
+    'sku_code'                       => 'SKU Kodu',
+    'sort_by'                        => 'Sıralama ölçütü',
+    'submit_review'                  => 'Yorumu Gönder',
+    'to'                             => 'Hedef',
+    'total_price'                    => 'Toplam ürün fiyatı',
+    'view_details'                   => 'Detayları Görüntüle',
+    'view_more_products'             => 'Daha fazla ürün gör',
+    'visit_order_to_review'          => 'Yorum Yapmak İçin Siparişinizi Ziyaret Edin',
+    'your_review'                    => 'Yorumunuz',
+];

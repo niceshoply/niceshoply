@@ -1,0 +1,61 @@
+/*
+ * ============================================================
+ * 【文件说明】前台样式主入口文件
+ * 【对应模板】所有前台页面均通过此文件加载样式（编译为 app.css）
+ * ============================================================
+ *
+ * 【文件作用】
+ *   本文件是 SCSS 的构建入口，通过 @import 按顺序引入所有模块样式文件。
+ *   最终编译成一个 app.css 文件供前台页面使用。
+ *
+ * 【引入顺序说明】
+ *   1. _variables   - 全局 SCSS 变量（主题色等），必须最先引入
+ *   2. global       - 全局通用工具类与基础样式
+ *   3. header/footer - 页头/页脚样式
+ *   4. home         - 首页专属样式
+ *   5. font         - 字体引入
+ *   6. news         - 资讯页样式
+ *   7. module-*     - 可复用模块组件样式（轮播、文章列表、商品Tab）
+ *   8. product-item - 商品卡片通用样式
+ *   9. login        - 登录/注册页样式
+ *   10. breadcrumb  - 面包屑导航样式
+ *   11. page-*      - 各页面专属样式（个人中心、分类、商品详情、购物车等）
+ *   12. product-review - 商品评价样式
+ *   13. social      - 社交登录按钮样式
+ *   14. filter-sidebar - 筛选侧边栏样式
+ *
+ * 【自定义建议】
+ *   - 开发新主题时，可在此处追加自定义主题的 @import
+ *   - 若只需覆盖部分样式，建议新建 theme.scss 并在最后 @import
+ *   - 注意保持 _variables 始终在第一位引入
+ * ============================================================
+ */
+
+@import './_variables';
+
+@import './global';
+
+@import './header';
+@import './footer';
+@import './home';
+@import './font';
+@import './news';
+@import './module-swiper';
+@import './product-item';
+@import './module-product-tab';
+@import './module-news';
+@import './login';
+@import './breadcrumb';
+@import './page-account';
+@import './page-categories';
+@import './page-product';
+@import './page-cart';
+@import './page-checkout';
+@import './page-order';
+@import './page-addresses';
+@import './page-brands';
+@import './page-checkout-success';
+@import './product-review';
+@import './page-wallet';
+@import './social';
+@import './filter-sidebar';

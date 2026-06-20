@@ -1,0 +1,606 @@
+<?php
+/**
+ * Copyright (c) Since 2024 NiceShoply - All Rights Reserved
+ *
+ * @link       https://www.niceshoply.com
+ * @author     NiceShoply <team@niceshoply.com>
+ * @license    https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ */
+
+namespace NiceShoply\Plugin;
+
+use Exception;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
+use NiceShoply\Console\Middleware\SetConsoleLocale;
+use NiceShoply\Plugin\Core\Plugin;
+use NiceShoply\Plugin\Core\PluginManager;
+
+class PluginServiceProvider extends ServiceProvider
+{
+    /**
+     * config path.
+     */
+    private string $basePath = __DIR__.'/../';
+
+    /**
+     * Plugin base path.
+     * @var string
+     */
+    private string $pluginBasePath = '';
+
+    /**
+     * Register the application services.
+     *
+     * @return void
+     */
+    public function register(): void
+    {
+        $this->app->singleton('plugin', function () {
+            return new PluginManager;
+        });
+    }
+
+    /**
+     * Flag to prevent duplicate boot execution (important for Laravel Octane)
+     *
+     * @var bool
+     */
+    private static bool $booted = false;
+
+    /**
+     * Boot Plugin Service Provider
+     *
+     * @throws Exception
+     */
+    public function boot(): void
+    {
+        // Prevent duplicate boot execution (especially important for Laravel Octane)
+        if (self::$booted) {
+            return;
+        }
+        self::$booted = true;
+
+        $this->registerMigrations();
+
+        if (! installed()) {
+            return;
+        }
+
+        $this->registerBladeInsertDirectives();
+        $this->registerBladeUpdateDirectives();
+
+        if (! Schema::hasTable('plugins')) {
+            return;
+        }
+
+        $this->registerConsoleRoutes();
+        $this->loadViewTemplates();
+        $this->registerMarketplaceSettingsHook();
+
+        $this->pluginBasePath = base_path('plugins');
+        $this->bootAllPlugins();
+        $this->bootEnabledPlugins();
+    }
+
+    /**
+     * Register admin console routes.
+     *
+     * @return void
+     */
+    private function registerConsoleRoutes(): void
+    {
+        $adminName = console_name();
+        Route::prefix($adminName)
+            ->middleware(['web', 'admin_auth:admin', SetConsoleLocale::class])
+            ->name("$adminName.")
+            ->group(function () {
+                $this->loadRoutesFrom(realpath(__DIR__.'/../routes/web.php'));
+            });
+    }
+
+    /**
+     * Load templates
+     *
+     * @return void
+     */
+    private function loadViewTemplates(): void
+    {
+        $this->loadViewsFrom(nice_path('plugin/resources/views'), 'plugin');
+    }
+
+    /**
+     * Register migrations.
+     *
+     * @return void
+     */
+    private function registerMigrations(): void
+    {
+        $this->loadMigrationsFrom($this->basePath.'database/migrations');
+    }
+
+    /**
+     * Load all plugins and boot them.
+     *
+     * @return void
+     */
+    protected function bootAllPlugins(): void
+    {
+        $allPlugins = app('plugin')->getPlugins();
+        $commands   = [];
+        foreach ($allPlugins as $plugin) {
+            $pluginCode = $plugin->getDirname();
+            $this->loadPluginMigrations($pluginCode);
+            $this->loadPluginViews($pluginCode);
+            $this->loadPluginTranslations($pluginCode);
+            $this->loadPluginHelpers($pluginCode);
+            $commands = array_merge($commands, $this->loadPluginCommands($pluginCode));
+        }
+        $this->runPluginCommands($commands);
+    }
+
+    /**
+     * Load enabled plugins and boot them.
+     *
+     * @return void
+     * @throws Exception
+     */
+    protected function bootEnabledPlugins(): void
+    {
+        $enabledPlugins = app('plugin')->getEnabledPlugins();
+        foreach ($enabledPlugins as $plugin) {
+            $pluginCode = $plugin->getDirname();
+            $this->loadPluginRoutes($pluginCode);
+            $this->loadPluginMiddlewares($pluginCode);
+            $this->bootPlugin($plugin);
+        }
+    }
+
+    /**
+     * Call Plugin Boot::init()
+     *
+     * @param  Plugin  $plugin
+     */
+    private function bootPlugin(Plugin $plugin): void
+    {
+        $filePath   = $plugin->getBootFile();
+        $pluginCode = $plugin->getDirname();
+        if (file_exists($filePath)) {
+            require_once $filePath;
+            $className = "Plugin\\$pluginCode\\Boot";
+            if (class_exists($className) && method_exists($className, 'init')) {
+                try {
+                    (new $className)->init();
+                } catch (\Exception $e) {
+                    Log::error("Failed to boot plugin: {$pluginCode} - {$e->getMessage()}");
+                }
+            }
+        }
+    }
+
+    /**
+     * Register common commands.
+     *
+     * @param  $pluginCode
+     * @return array
+     */
+    private function loadPluginCommands($pluginCode): array
+    {
+        $commandsPath = "$this->pluginBasePath/$pluginCode/Commands";
+        if (! is_dir($commandsPath)) {
+            return [];
+        }
+
+        return $this->getClassesFromPathRecursive($commandsPath);
+    }
+
+    /**
+     * Get classes from path recursively (for commands in subdirectories).
+     *
+     * @param  string  $path
+     * @return array
+     */
+    private function getClassesFromPathRecursive(string $path): array
+    {
+        if (! file_exists($path)) {
+            return [];
+        }
+
+        $classes  = [];
+        $iterator = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator($path, \RecursiveDirectoryIterator::SKIP_DOTS)
+        );
+
+        foreach ($iterator as $file) {
+            if ($file->isFile() && $file->getExtension() === 'php') {
+                $filePath     = $file->getPathname();
+                $relativePath = str_replace($this->pluginBasePath, '', $filePath);
+                $relativePath = ltrim($relativePath, '/');
+
+                // Extract plugin code and subdirectory path
+                $parts = explode('/', $relativePath);
+                if (count($parts) >= 3 && $parts[1] === 'Commands') {
+                    $pluginCode = $parts[0];
+                    $subPath    = implode('/', array_slice($parts, 2, -1)); // Exclude filename
+                    $baseName   = basename($filePath, '.php');
+
+                    // Build namespace: Plugin\{PluginCode}\Commands\{SubPath}\{ClassName}
+                    $namespacePath = "Plugin\\{$pluginCode}\\Commands";
+                    if ($subPath) {
+                        $namespacePath .= '\\'.str_replace('/', '\\', $subPath);
+                    }
+                    $className = $namespacePath.'\\'.$baseName;
+
+                    if (class_exists($className)) {
+                        $classes[] = $className;
+                    }
+                }
+            }
+        }
+
+        return $classes;
+    }
+
+    /**
+     * @param  $commands
+     * @return void
+     */
+    private function runPluginCommands($commands): void
+    {
+        if (empty($commands)) {
+            return;
+        }
+
+        if ($this->app->runningInConsole()) {
+            $this->commands($commands);
+        }
+    }
+
+    /**
+     * Load plugin migrations
+     *
+     * @param  $pluginCode
+     */
+    private function loadPluginMigrations($pluginCode): void
+    {
+        $pluginPath = $this->pluginBasePath.'/'.$pluginCode.'/';
+
+        if (is_dir($pluginPath.'Migrations')) {
+            $this->loadMigrationsFrom($pluginPath.'Migrations');
+        }
+
+        if (is_dir($pluginPath.'Database/Migrations')) {
+            $this->loadMigrationsFrom($pluginPath.'Database/Migrations');
+        }
+    }
+
+    /**
+     * Load and register routes for console and shop
+     *
+     * @param  $pluginCode
+     * @throws Exception
+     */
+    private function loadPluginRoutes($pluginCode): void
+    {
+        $this->loadPluginRootRoutes($pluginCode);
+        $this->loadPluginMainRoutes($pluginCode);
+        $this->loadPluginFrontRoutes($pluginCode);
+        $this->loadPluginFrontApiRoutes($pluginCode);
+        $this->loadPluginConsoleRoutes($pluginCode);
+        $this->loadPluginConsoleApiRoutes($pluginCode);
+    }
+
+    /**
+     * Register callback routes
+     *
+     * @param  $pluginCode
+     */
+    private function loadPluginRootRoutes($pluginCode): void
+    {
+        $pluginBasePath    = $this->pluginBasePath;
+        $callbackRoutePath = "$pluginBasePath/$pluginCode/Routes/root.php";
+        if (file_exists($callbackRoutePath)) {
+            Route::middleware('front')
+                ->name('front.')
+                ->group(function () use ($callbackRoutePath) {
+                    $this->loadRoutesFrom($callbackRoutePath);
+                });
+        }
+    }
+
+    /**
+     * Register callback routes
+     *
+     * @param  $pluginCode
+     */
+    private function loadPluginMainRoutes($pluginCode): void
+    {
+        $pluginBasePath    = $this->pluginBasePath;
+        $callbackRoutePath = "$pluginBasePath/$pluginCode/Routes/main.php";
+        if (file_exists($callbackRoutePath)) {
+            Route::middleware('front')
+                ->group(function () use ($callbackRoutePath) {
+                    $this->loadRoutesFrom($callbackRoutePath);
+                });
+        }
+    }
+
+    /**
+     * Register frontend shop routes
+     *
+     * @param  $pluginCode
+     * @throws Exception
+     */
+    private function loadPluginFrontRoutes($pluginCode): void
+    {
+        $pluginBasePath = $this->pluginBasePath;
+        $frontRoutePath = "$pluginBasePath/$pluginCode/Routes/front.php";
+        if (file_exists($frontRoutePath)) {
+            $locales = locales();
+            if (hide_url_locale() || $locales->isEmpty()) {
+                Route::middleware('front')
+                    ->name('front.')
+                    ->group(function () use ($frontRoutePath) {
+                        $this->loadRoutesFrom($frontRoutePath);
+                    });
+            } else {
+                foreach ($locales as $locale) {
+                    Route::middleware('front')
+                        ->prefix($locale->code)
+                        ->name($locale->code.'.front.')
+                        ->group(function () use ($frontRoutePath) {
+                            $this->loadRoutesFrom($frontRoutePath);
+                        });
+                }
+            }
+        }
+    }
+
+    /**
+     * Register frontend api routes.
+     *
+     * @param  $pluginCode
+     * @return void
+     */
+    protected function loadPluginFrontApiRoutes($pluginCode): void
+    {
+        $pluginBasePath    = $this->pluginBasePath;
+        $frontApiRoutePath = "$pluginBasePath/$pluginCode/Routes/front-api.php";
+        if (file_exists($frontApiRoutePath)) {
+            Route::prefix('api/v1')
+                ->middleware('api')
+                ->name('api.')
+                ->group(function () use ($frontApiRoutePath) {
+                    $this->loadRoutesFrom($frontApiRoutePath);
+                });
+        }
+    }
+
+    /**
+     * Register console routes
+     *
+     * @param  $pluginCode
+     */
+    private function loadPluginConsoleRoutes($pluginCode): void
+    {
+        $pluginBasePath = $this->pluginBasePath;
+        $adminRoutePath = "$pluginBasePath/$pluginCode/Routes/console.php";
+        if (file_exists($adminRoutePath)) {
+            $adminName = console_name();
+            Route::prefix($adminName)
+                ->name("$adminName.")
+                ->middleware(['console', 'admin_auth:admin'])
+                ->group(function () use ($adminRoutePath) {
+                    $this->loadRoutesFrom($adminRoutePath);
+                });
+        }
+    }
+
+    /**
+     * @param  $pluginCode
+     * @return void
+     */
+    private function loadPluginConsoleApiRoutes($pluginCode): void
+    {
+        $pluginBasePath      = $this->pluginBasePath;
+        $consoleApiRoutePath = "$pluginBasePath/$pluginCode/Routes/console-api.php";
+        if (! file_exists($consoleApiRoutePath)) {
+            return;
+        }
+
+        Route::prefix('api/v1/console')
+            ->middleware('console_api')
+            ->name('api.console.')
+            ->group(function () use ($consoleApiRoutePath) {
+                $this->loadRoutesFrom($consoleApiRoutePath);
+            });
+    }
+
+    /**
+     * Load plugin languages.
+     *
+     * @param  $pluginCode
+     * @return void
+     */
+    private function loadPluginTranslations($pluginCode): void
+    {
+        $pluginBasePath = $this->pluginBasePath;
+        $this->loadTranslationsFrom("$pluginBasePath/$pluginCode/Lang", $pluginCode);
+    }
+
+    /**
+     * Load plugin view path
+     *
+     * @param  $pluginCode
+     */
+    private function loadPluginViews($pluginCode): void
+    {
+        $pluginViewPath = $this->pluginBasePath."/$pluginCode/Views";
+        if (file_exists($pluginViewPath)) {
+            $this->loadViewsFrom($pluginViewPath, $pluginCode);
+        }
+    }
+
+    /**
+     * Register plugin middlewares
+     */
+    private function loadPluginMiddlewares($pluginCode): void
+    {
+        $pluginBasePath = $this->pluginBasePath;
+        $middlewarePath = "$pluginBasePath/$pluginCode/Middleware";
+
+        $router             = $this->app['router'];
+        $frontMiddlewares   = $this->getClassesFromPath("$middlewarePath/Front");
+        $consoleMiddlewares = $this->getClassesFromPath("$middlewarePath/Console");
+
+        if ($frontMiddlewares) {
+            foreach ($frontMiddlewares as $shopMiddleware) {
+                $router->pushMiddlewareToGroup('front', $shopMiddleware);
+            }
+        }
+
+        if ($consoleMiddlewares) {
+            foreach ($consoleMiddlewares as $adminMiddleware) {
+                $router->pushMiddlewareToGroup('console', $adminMiddleware);
+            }
+        }
+    }
+
+    /**
+     * Load plugin helpers.
+     *
+     * @param  $pluginCode
+     * @return void
+     */
+    private function loadPluginHelpers($pluginCode): void
+    {
+        $pluginBasePath = $this->pluginBasePath;
+        $helpersPath    = "$pluginBasePath/$pluginCode/helpers.php";
+        if (file_exists($helpersPath)) {
+            require_once $helpersPath;
+        }
+    }
+
+    /**
+     * Get middlewares from plugin path.
+     *
+     * @param  $path
+     * @return array
+     */
+    private function getClassesFromPath($path): array
+    {
+        if (! file_exists($path)) {
+            return [];
+        }
+
+        $middlewares = [];
+        $files       = glob("$path/*");
+        foreach ($files as $file) {
+            $baseName      = basename($file, '.php');
+            $namespacePath = 'Plugin'.dirname(str_replace($this->pluginBasePath, '', $file)).'/';
+            $className     = str_replace('/', '\\', $namespacePath.$baseName);
+
+            if (class_exists($className)) {
+                $middlewares[] = $className;
+            }
+        }
+
+        return $middlewares;
+    }
+
+    /**
+     * Add a Blade hook tag without needing @endhook.
+     * Use @hookinsert('example_hook_name') to directly output the hook content to the page.
+     */
+    private function registerBladeInsertDirectives(): void
+    {
+        Blade::directive('hookinsert', function ($parameter) {
+            $parameter  = trim($parameter, '()');
+            $parameters = explode(',', $parameter);
+
+            $name        = trim($parameters[0], "'");
+            $definedVars = $this->parseParameters($parameters);
+
+            return ' <?php
+                $__definedVars = (get_defined_vars()["__data"]);
+                if (empty($__definedVars))
+                {
+                    $__definedVars = [];
+                }
+                '.$definedVars.'
+                $output = \NiceShoply\Plugin\Core\Blade\Hook::getSingleton()->getHook("'.$name.'",["data"=>$__definedVars],function($data) { return null; });
+                if ($output)
+                echo $output;
+                ?>';
+        });
+    }
+
+    /**
+     * Add a Blade wrapper hook tag
+     * Use @hookupdate('example_hook_name') to @endhookupdate, package a section of code and output it using a hook.
+     */
+    private function registerBladeUpdateDirectives(): void
+    {
+        Blade::directive('hookupdate', function ($parameter) {
+            $parameter  = trim($parameter, '()');
+            $parameters = explode(',', $parameter);
+            $name       = trim($parameters[0], "'");
+
+            return ' <?php
+                    $__hook_name="'.$name.'";
+                    ob_start();
+                ?>';
+        });
+
+        Blade::directive('endhookupdate', function () {
+            return ' <?php
+                $__definedVars = (get_defined_vars()["__data"]);
+                if (empty($__definedVars))
+                {
+                    $__definedVars = [];
+                }
+                $__hook_content = ob_get_clean();
+                $output = \NiceShoply\Plugin\Core\Blade\Hook::getSingleton()->getWrapper("$__hook_name",["data"=>$__definedVars],function($data) { return null; },$__hook_content);
+                unset($__hook_name);
+                unset($__hook_content);
+                if ($output)
+                echo $output;
+                ?>';
+        });
+    }
+
+    /**
+     * Register marketplace settings hook
+     *
+     * @return void
+     */
+    private function registerMarketplaceSettingsHook(): void
+    {
+        $hook = new \NiceShoply\Plugin\Hooks\MarketplaceSettingsHook;
+        $hook->init();
+    }
+
+    /**
+     * Parse parameters from Blade
+     *
+     * @param  $parameters
+     * @return string
+     */
+    protected function parseParameters($parameters): string
+    {
+        $definedVars = '';
+        foreach ($parameters as $paraItem) {
+            $paraItem = trim($paraItem);
+            if (Str::startsWith($paraItem, '$')) {
+                $paraKey = trim($paraItem, '$');
+                $definedVars .= '$__definedVars["'.$paraKey.'"] = $'.$paraKey.';';
+            }
+        }
+
+        return $definedVars;
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "code": "global_im",
+    "name": {"zh-cn": "海外 IM 营销", "en": "Global IM"},
+    "description": {
+        "zh-cn": "WhatsApp / Telegram 客服与营销触达：Webhook 接收消息、后台回复、出站消息日志。",
+        "en": "WhatsApp and Telegram customer messaging: webhooks, console replies, outbound message logs."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-chat-dots",
+    "author": {"name": "NiceShoply", "email": "team@niceshoply.com"}
+}

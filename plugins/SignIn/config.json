@@ -1,0 +1,18 @@
+{
+    "code": "sign_in",
+    "name": {
+        "zh-cn": "每日签到",
+        "en": "Daily Sign-In"
+    },
+    "description": {
+        "zh-cn": "每日签到：会员每日签到领取积分，支持连续签到阶梯奖励与补签开关，自动通过积分插件入账并记录签到日历。",
+        "en": "Daily sign-in: members earn points by checking in daily, with consecutive-streak bonus tiers; points are credited via the Points plugin and a sign-in calendar is kept."
+    },
+    "type": "marketing",
+    "version": "v1.0.0",
+    "icon": "bi-calendar-check",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

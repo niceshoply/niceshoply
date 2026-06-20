@@ -1,0 +1,79 @@
+{nice:if $product->video}
+  {nice:php}
+    $videoData = $product->video ?? [];
+    $videoType = $videoData['type'] ?? 'custom';
+    $videoUrl = '';
+    $isIframe = false;
+    switch($videoType) {
+      case 'custom': $videoUrl = $videoData['custom'] ?? ''; break;
+      case 'iframe': $videoUrl = $videoData['iframe'] ?? ''; $isIframe = true; break;
+      case 'local': $videoUrl = $videoData['url'] ?? ''; break;
+      default: $videoUrl = $videoData['url'] ?? ''; break;
+    }
+  {/nice:php}
+
+  {nice:if $videoUrl}
+    <div class="ls-video-wrap video-wrap position-absolute top-0 start-0 w-100 h-100 bg-dark d-none" style="z-index:1000;">
+      {nice:if !$isIframe}
+        <video id="product-video" class="video-js vjs-big-play-centered w-100 h-100" controls loop muted>
+          <source src="{{ $videoUrl }}" type="video/mp4" />
+        </video>
+      {nice:else}
+        <div id="product-video" class="w-100 h-100 d-flex align-items-center justify-content-center"></div>
+      {/nice:if}
+      <div class="close-video position-absolute top-0 end-0 m-3 d-none" style="cursor:pointer;z-index:1001;">
+        <i class="bi bi-x-circle fs-3 text-white bg-dark bg-opacity-50 rounded-circle p-2"></i>
+      </div>
+    </div>
+
+    {nice:push name="footer"}
+    {nice:if !$isIframe}
+      <script>
+        if (typeof window.pVideo === 'undefined') window.pVideo = null;
+        $(function () { initVideoPlayer(); });
+        function initVideoPlayer() {
+          if (!$('#product-video').length) return;
+          window.pVideo = videojs("product-video");
+          window.pVideo.on('loadedmetadata', function() { showPlayButton(); });
+          window.pVideo.on('pause', function() { showPlayButton(); });
+          bindVideoEvents();
+        }
+        function bindVideoEvents() {
+          $(document).on('click', '.open-video', function(e) { playVideo(); }).on('click', '.close-video', closeVideo);
+        }
+        function playVideo() {
+          $('.video-wrap').removeClass('d-none');
+          if (!window.pVideo) { initVideoPlayer(); setTimeout(function() { if (window.pVideo) { var p = window.pVideo.play(); if (p) p.then(() => { window.pVideo.currentTime(0); hidePlayButton(); $('#product-video').fadeIn(); showCloseButton(); }).catch(() => showPlayButton()); } }, 500); return; }
+          var p = window.pVideo.play();
+          if (p) p.then(() => { window.pVideo.currentTime(0); hidePlayButton(); $('#product-video').fadeIn(); showCloseButton(); }).catch(() => showPlayButton());
+          else { window.pVideo.currentTime(0); hidePlayButton(); $('#product-video').fadeIn(); showCloseButton(); }
+        }
+        function closeVideo() { if (!window.pVideo) return; window.pVideo.pause(); $('#product-video').fadeOut(); $('.video-wrap').addClass('d-none'); hideCloseButton(); }
+        function showPlayButton() { $('.video-wrap .open-video').removeClass('d-none'); }
+        function hidePlayButton() { $('.video-wrap .open-video').addClass('d-none'); }
+        function showCloseButton() { $('.close-video').removeClass('d-none'); }
+        function hideCloseButton() { $('.close-video').addClass('d-none'); }
+      </script>
+    {nice:else}
+      <script>
+        if (typeof window.iframeVideoContent === 'undefined') window.iframeVideoContent = '{!! $videoUrl !!}';
+        $(function() { initIframeVideo(); });
+        function initIframeVideo() {
+          $('#product-video').html(iframeVideoContent);
+          var $iframe = $('#product-video iframe');
+          $iframe.attr({ width: '100%', height: '100%' }).css({ 'max-width': '100%', 'max-height': '100%', 'object-fit': 'contain' });
+          showCloseButton(); bindVideoEvents();
+        }
+        function bindVideoEvents() {
+          $(document).on('click', '.open-video', function() { initIframeVideo(); $('.video-wrap').removeClass('d-none'); hidePlayButton(); showCloseButton(); }).on('click', '.close-video', closeIframeVideo);
+        }
+        function closeIframeVideo() { $('#product-video').fadeOut().html(''); $('.video-wrap').addClass('d-none'); hideCloseButton(); showPlayButton(); }
+        function showPlayButton() { $('.video-wrap .open-video').removeClass('d-none'); }
+        function hidePlayButton() { $('.video-wrap .open-video').addClass('d-none'); }
+        function showCloseButton() { $('.close-video').removeClass('d-none'); }
+        function hideCloseButton() { $('.close-video').addClass('d-none'); }
+      </script>
+    {/nice:if}
+    {/nice:push}
+  {/nice:if}
+{/nice:if}

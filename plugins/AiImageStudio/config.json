@@ -1,0 +1,18 @@
+{
+    "code": "ai_image_studio",
+    "name": {
+        "zh-cn": "AI 商品图",
+        "en": "AI Image Studio"
+    },
+    "description": {
+        "zh-cn": "AI 商品图：对接 OpenAI 兼容的图像生成接口（DALL·E / 通义万相 / 豆包等兼容服务），按提示词文生图生成商品主图/场景图/营销海报底图，支持尺寸与数量，生成结果存入 storage 并在图库管理，可复制 URL 用于商品。",
+        "en": "AI Image Studio: integrates an OpenAI-compatible image generation API (DALL·E / compatible services) to create product hero/scene/poster images from prompts, with size and count options; results are saved to storage and managed in a gallery."
+    },
+    "type": "intelli",
+    "version": "v1.0.0",
+    "icon": "bi-image",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

@@ -1,0 +1,5 @@
+{
+  "require": {
+    "yansongda/pay": "^3.7"
+  }
+}

@@ -1,0 +1,78 @@
+<div class="ls-articles-layout">
+  <div class="ls-articles-main">
+    {nice:if $articles->count()}
+      <div class="ls-articles-grid">
+        {nice:foreach $articles as $article}
+          <div class="ls-article-list-item">
+            <a href="{{ $article->url }}" class="article-thumb">
+              <img src="{{ image_resize($article->image, 280, 200) }}" alt="{{ $article->translation?->title ?? '' }}">
+            </a>
+            <div class="article-info">
+              <h3 class="article-title"><a href="{{ $article->url }}">{{ $article->translation?->title ?? '' }}</a></h3>
+              {nice:if $article->tags->count()}
+                <div class="article-tags">
+                  {nice:foreach $article->tags as $tag}
+                    <a href="{{ $tag->url }}" class="ls-tag">{{ $tag->translation?->name ?? '' }}</a>
+                  {/nice:foreach}
+                </div>
+              {/nice:if}
+              <p class="article-summary">{{ sub_string($article->translation?->summary ?? '', 180) }}</p>
+              <div class="article-meta">
+                <span><i class="bi bi-clock"></i> {{ $article->created_at->format('Y-m-d') }}</span>
+                <span><i class="bi bi-eye"></i> {{ $article->viewed }}</span>
+              </div>
+            </div>
+          </div>
+        {/nice:foreach}
+      </div>
+    {nice:else}
+      {nice:include "shared.no-data"}
+    {/nice:if}
+  </div>
+
+  <aside class="ls-article-sidebar">
+    <div class="ls-sidebar-section">
+      <div class="ls-search-box">
+        <input type="text" class="ls-search-input" value="{{ request('keyword') }}" placeholder="{{ __('front/article.keyword') }}">
+        <button class="ls-search-btn"><i class="bi bi-search"></i></button>
+      </div>
+    </div>
+
+    {nice:if isset($catalogs) && $catalogs}
+      <div class="ls-sidebar-section">
+        <div class="ls-sidebar-title ls-tracking-wider">{{ __('front/article.news_classification') }}</div>
+        <ul class="ls-sidebar-list">
+          {nice:foreach $catalogs as $catalog}
+            <li><a href="{{ $catalog->url }}" class="ls-sidebar-link">{{ $catalog->translation?->title ?? '' }}</a></li>
+          {/nice:foreach}
+        </ul>
+      </div>
+    {/nice:if}
+
+    {nice:if isset($tags) && $tags}
+      <div class="ls-sidebar-section">
+        <div class="ls-sidebar-title ls-tracking-wider">{{ __('front/article.news_tag') }}</div>
+        <ul class="ls-sidebar-list">
+          {nice:foreach $tags as $tag}
+            <li><a href="{{ $tag->url }}" class="ls-sidebar-link">{{ $tag->translation?->name ?? '' }}</a></li>
+          {/nice:foreach}
+        </ul>
+      </div>
+    {/nice:if}
+  </aside>
+</div>
+
+{nice:push name="footer"}
+  <script>
+    $(function () {
+      $('.ls-search-btn').click(function () {
+        var keyword = $(this).siblings('.ls-search-input').val();
+        if (keyword) { window.location.href = inno.updateQueryStringParameter(window.location.href, 'keyword', keyword); return; }
+        window.location.href = inno.removeURLParameters(window.location.href, 'keyword');
+      });
+      $('.ls-search-input').keydown(function (e) {
+        if (e.keyCode === 13) $(this).siblings('.ls-search-btn').trigger('click');
+      });
+    });
+  </script>
+{/nice:push}

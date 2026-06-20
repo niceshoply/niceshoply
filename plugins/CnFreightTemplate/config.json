@@ -1,0 +1,18 @@
+{
+    "code": "cn_freight_template",
+    "name": {
+        "zh-cn": "国内运费模板",
+        "en": "China Freight Template"
+    },
+    "description": {
+        "zh-cn": "国内运费计算模板，支持按重量(首重+续重)、按件数(首件+续件)、按订单金额(固定)三种计费方式，支持满额包邮与偏远地区加价。",
+        "en": "Domestic freight calculation supporting weight-based (first + additional), piece-based, and flat-amount modes, with free-shipping threshold and remote-area surcharge."
+    },
+    "type": "shipping",
+    "version": "v1.0.0",
+    "icon": "bi-truck",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

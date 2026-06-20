@@ -1,0 +1,18 @@
+{
+    "code": "live_chat",
+    "name": {
+        "zh-cn": "在线客服",
+        "en": "Live Chat"
+    },
+    "description": {
+        "zh-cn": "在线客服挂件：一键接入美洽、Tawk.to、Crisp 等客服系统，或粘贴自定义挂件代码，自动注入到前台页面。",
+        "en": "Live chat widget: integrate Meiqia, Tawk.to, Crisp or paste a custom widget snippet, auto-injected into the storefront."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-chat-dots",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

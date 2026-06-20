@@ -1,0 +1,18 @@
+{
+    "code": "search_plus",
+    "name": {
+        "zh-cn": "搜索增强",
+        "en": "Search Plus"
+    },
+    "description": {
+        "zh-cn": "搜索增强：默认数据库驱动开箱可用(商品名/简介模糊匹配 + 同义词扩展 + 热搜词 + 搜索建议 + 无结果热销推荐)，可选切换 Meilisearch 驱动(HTTP 接入，支持重建索引)。自动记录搜索词形成热搜榜。",
+        "en": "Search Plus: works out of the box with a database driver (fuzzy name/summary match + synonym expansion + hot keywords + suggestions + no-result best-seller fallback), optionally switch to Meilisearch (HTTP, with reindex). Logs queries into a hot-search board."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "bi-search-heart",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}

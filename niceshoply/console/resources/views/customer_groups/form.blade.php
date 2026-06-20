@@ -1,0 +1,35 @@
+@extends('console::layouts.app')
+
+@section('title', __('console/menu.customer_groups'))
+
+<x-console::form.right-btns/>
+
+@section('content')
+  <div class="card h-min-600">
+    <div class="card-header">
+      <h5 class="card-title mb-0">{{ __('console/menu.customer_groups') }}</h5>
+    </div>
+    <div class="card-body">
+      <form class="needs-validation" novalidate id="app-form"
+            action="{{ $group->id ? console_route('customer_groups.update', [$group->id]) : console_route('customer_groups.store') }}"
+            method="POST">
+        @csrf
+        @method($group->id ? 'PUT' : 'POST')
+
+        <div class="row">
+          <div class="col-12 col-md-6"><x-common-form-input :multiple="true" title="{{ __('console/common.name') }}" name="name" :value="old('name', $group->translations)" /></div>
+          <div class="col-12 col-md-6"><x-common-form-input title="{{ __('console/customer.level') }}" name="level" value="{{ old('level', $group->level) }}" required /></div>
+          <div class="col-12 col-md-6"><x-common-form-textarea :multiple="true" title="{{ __('console/common.description') }}" name="description" :value="old('description', $group->translations)" /></div>
+          <div class="col-12 col-md-6"><x-common-form-input title="{{ __('console/customer.mini_cost') }}" name="mini_cost" value="{{ old('mini_cost', $group->mini_cost) }}" required /></div>
+          <div class="col-12 col-md-6"><x-common-form-input title="{{ __('console/customer.discount_rate') }}" name="discount_rate" value="{{ old('discount_rate', $group->discount_rate) }}" required /></div>
+        </div>
+
+        <button type="submit" class="d-none"></button>
+      </form>
+    </div>
+  </div>
+@endsection
+
+@push('footer')
+  <script></script>
+@endpush

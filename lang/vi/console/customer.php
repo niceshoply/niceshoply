@@ -1,0 +1,29 @@
+<?php
+/**
+ * Copyright (c) Since 2024 NiceShoply - All Rights Reserved
+ *
+ * @link       https://www.niceshoply.com
+ * @author     NiceShoply <team@niceshoply.com>
+ * @license    https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ */
+
+return [
+    'address'        => 'quản lý địa chỉ',
+    'address_id'     => 'ID địa chỉ',
+    'address_manage' => 'Quản lý địa chỉ',
+    'avatar'         => 'hình đại diện',
+    'balance_manage' => 'Quản lý số dư',
+    'basic_info'     => 'Thông tin cơ bản',
+    'code'           => 'mã',
+    'customer_info'  => 'Thông tin khách hàng',
+    'discount_rate'  => 'tỷ lệ giảm giá',
+    'email'          => 'thư điện tử',
+    'from'           => 'ng源',
+    'group'          => 'nhóm khách hàng',
+    'level'          => 'cấp độ',
+    'locale'         => 'ngôn ngữ sử dụng',
+    'login_frontend' => 'Đăng nhập tại quầy lễ tân',
+    'mini_cost'      => 'số tiền tối thiểu',
+    'name'           => 'tên',
+    'password'       => 'mật khẩu',
+];

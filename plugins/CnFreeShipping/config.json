@@ -1,0 +1,18 @@
+{
+    "code": "cn_free_shipping",
+    "name": {
+        "zh-cn": "满额包邮",
+        "en": "Free Shipping"
+    },
+    "description": {
+        "zh-cn": "满额包邮配送方式。订单小计达到设定门槛时，提供一个免运费的配送选项。",
+        "en": "Free shipping method. Offers a zero-cost shipping option when the cart subtotal reaches the configured threshold."
+    },
+    "type": "shipping",
+    "version": "v1.0.0",
+    "icon": "bi-gift",
+    "author": {
+        "name": "NiceShoply",
+        "email": "team@niceshoply.com"
+    }
+}
